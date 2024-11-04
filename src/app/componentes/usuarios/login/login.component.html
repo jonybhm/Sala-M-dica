@@ -1,0 +1,63 @@
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<mat-toolbar>
+    <span>
+        PRIMER PARCIAL
+        <span class="material-symbols-outlined">home</span>        
+    </span>
+
+    <span class="spacer"></span>
+
+    <button mat-flat-button routerLink="/altaVeterinario" routerLinkActive="active-route" class="boton">
+        <span class="material-symbols-outlined">format_list_bulleted</span>
+        ALTA VETERINARIO
+    </button>
+    
+</mat-toolbar> -->
+  
+<div class="container">
+    <h2>INICIAR SESIÓN</h2>
+</div>
+
+<div class="container">
+    <mat-form-field appearance="fill" class="form">
+        <mat-label>Nombre usuario</mat-label>
+        <input matInput  type="text" placeholder="Usuario" [(ngModel)]="usuario"> 
+        
+    </mat-form-field>
+</div>
+
+<div class="container">
+    <mat-form-field appearance="fill" class="form">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Contraseña" [(ngModel)]="claveUsuario">   
+        
+        <button mat-icon-button
+        matSuffix
+        (click)="clickEvent($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()">
+            <span class="material-icons">visibility</span>
+        </button>     
+    </mat-form-field>
+</div>
+
+<div style="display: flex; justify-content: center;">
+    <button mat-raised-button color="primary" (click)="Autocompletar('especialista')" class="boton">
+        AUTOCOMPLETAR ESPECIALISTA 
+    </button>
+    <button mat-raised-button color="primary" (click)="Autocompletar('admin')" class="boton">
+        AUTOCOMPLETAR ADMIN
+    </button>
+</div>
+<div class="container"> 
+    <button mat-flat-button color="primary" (click)="IniciarSesion('/home')" class="boton">
+        <span class="material-symbols-outlined">login</span>
+        INGRESAR 
+    </button>
+    <button mat-flat-button color="primary" (click)="Registrar('/registro')" class="boton">
+        <span class="material-symbols-outlined">id_card</span>
+        REGISTRARSE
+    </button>
+</div>
+

@@ -1,0 +1,34 @@
+
+<div class="container">
+    <h2>REGISTRAR USUARIO</h2>
+</div>
+<div class="container">
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Rol de usuario</mat-label>
+        <mat-select [(ngModel)]="rolUsuario">
+            <mat-option value="paciente" >Paciente</mat-option>
+            <mat-option value="especialista" >Especialista</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    
+</div>
+
+<div class="container">
+
+
+        <ng-container *ngIf="rolUsuario === 'especialista'">     
+            <app-registro-especialista (especialistaRegistrado)="ObtenerDatosEspecialista($event)"></app-registro-especialista>
+        </ng-container>
+
+        <ng-container *ngIf="rolUsuario === 'paciente'">      
+            <app-registro-paciente></app-registro-paciente>
+        </ng-container>
+
+</div>
+
+
+    
+  
+

@@ -1,0 +1,20 @@
+<p>Paciente Elegido!!</p>
+<div class="container-detalles">
+    <mat-form-field appearance="fill" class="form">
+        <mat-label>Nombre usuario</mat-label>
+        <input matInput  type="text" placeholder="Usuario" [(ngModel)]="usuarioNuevo"> 
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Contraseña" [(ngModel)]="claveUsuarioNueva">    
+        <button mat-icon-button
+        matSuffix
+        (click)="clickEvent($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()">
+            <span class="material-icons">visibility</span>
+        </button>     
+    </mat-form-field>
+    
+</div>

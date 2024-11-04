@@ -1,0 +1,115 @@
+<form [formGroup]="form" (ngSubmit)="onRegistrar()">
+    <p>Completar datos del Especialista</p>
+
+    <div class="container-detalles">
+        <div class="container">
+
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>Mail Usuario</mat-label>
+                <input matInput  type="text" class="form-control" id="mail" formControlName="mail" > 
+                <mat-error *ngIf="mail?.hasError('email') && (mail?.touched || mail?.dirty)">
+                    Formato incorrecto
+                </mat-error>
+                <mat-error *ngIf="mail?.hasError('required') && (mail?.touched || mail?.dirty)">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hide() ? 'password' : 'text'"  class="form-control" id="contrasena" formControlName="contrasena">    
+                <button mat-icon-button
+                matSuffix
+                (click)="clickEvent($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()">
+                <span class="material-icons">visibility</span>
+            </button>     
+            <mat-error *ngIf="contrasena?.hasError('pattern') && (contrasena?.touched || contrasena?.dirty)">
+                Sólo debe contener letras y numeros
+            </mat-error>
+            <mat-error *ngIf="contrasena?.hasError('required') && (contrasena?.touched || contrasena?.dirty)">
+                Campo requerido
+            </mat-error>
+            </mat-form-field>
+    
+            <div class="form-encuesta">
+                <label for="imagen1">Subir Imagen Perfil 1</label>
+                <input type="file" (change)="subirImagen($event,'1')" id="imagenPerfil1" formControlName="imagenPerfil1">
+            </div>
+            
+            <div class="form-encuesta">
+                <label for="imagen2">Subir Imagen Perfil 2</label>
+                <input type="file" (change)="subirImagen($event,'2')" id="imagenPerfil2" formControlName="imagenPerfil2">
+            </div>
+        </div>
+        
+        <div class="container">
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>Nombre</mat-label>
+                <input matInput  type="text" class="form-control" id="nombre" formControlName="nombre">
+                <mat-error *ngIf="nombre?.hasError('pattern') && (nombre?.touched || nombre?.dirty)">
+                    Sólo debe contener letras
+                </mat-error>
+                <mat-error *ngIf="nombre?.hasError('required') && (nombre?.touched || nombre?.dirty)">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>    
+    
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>Apellido</mat-label>
+                <input matInput  type="text" class="form-control" id="apellido" formControlName="apellido">
+                <mat-error *ngIf="apellido?.hasError('pattern')">
+                    Sólo debe contener letras
+                </mat-error>
+                <mat-error *ngIf="apellido?.hasError('required') && (apellido?.touched || apellido?.dirty)">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>  
+
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>Edad</mat-label>
+                <input matInput  type="text" class="form-control" id="edad" formControlName="edad">
+                <mat-error *ngIf="edad?.hasError('min') || edad?.hasError('max')">
+                    Debe estar entre 19 y 99.
+                </mat-error>
+                <mat-error *ngIf="edad?.hasError('required') && (edad?.touched || edad?.dirty)">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>    
+    
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>DNI</mat-label>
+                <input matInput  type="text" class="form-control" id="documento" formControlName="documento">
+                <mat-error *ngIf="documento?.hasError('pattern') || documento?.hasError('maxLength')">
+                    Sólo debe contener numeros y tener un maximo de 10 caracteres.
+                </mat-error>
+                <mat-error *ngIf="documento?.hasError('required') && (documento?.touched || documento?.dirty)">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>    
+        
+            <mat-form-field appearance="fill" class="form-encuesta">
+                <mat-label>Obra Social</mat-label>
+                <input matInput  type="text" class="form-control" id="obraSocial" formControlName="obraSocial">
+                <mat-error *ngIf="obraSocial?.hasError('pattern')">
+                    Nombre invalido
+                </mat-error>
+                <mat-error *ngIf="obraSocial?.hasError('required') && (obraSocial?.touched || obraSocial?.dirty)">
+                    Campo requerido
+                </mat-error>
+            </mat-form-field>    
+
+            
+            
+            
+        </div>
+        
+        
+    </div>
+    <div class="container"> 
+        <button mat-flat-button color="primary" type="submit" class="boton"> Registrar Especialista</button>
+        <button mat-raised-button color="primary" routerLink="/login" routerLinkActive="active-route" class="boton"> Cancelar </button>
+    </div>
+    
+</form>

@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<ng-container *ngIf="auth.currentUser">        
+    
+    <mat-toolbar>
+        
+        <ng-container *ngIf="auth.currentUser">        
+            <button mat-flat-button color="primary" (click)="logout.CerrarSesion('/login')" class="boton">
+                <span class="material-symbols-outlined">logout</span>
+                CERRAR SESIÓN
+            </button>
+        </ng-container>
+        <ng-container *ngIf="!auth.currentUser">        
+            <button mat-flat-button color="primary" routerLink="/login" routerLinkActive="active-route" class="boton">
+                <span class="material-symbols-outlined">login</span>
+                INICIAR SESION
+            </button>
+        </ng-container>  
+        <p>{{auth.currentUser!.email}}</p>    
+        
+        <span class="spacer"></span>
+        
+        
+        
+        
+        <button mat-button routerLink="/altaVeterinario" routerLinkActive="active-route" class="boton">
+            <span class="material-symbols-outlined">personal_injury</span>
+            PERFIL
+        </button>
+        <button mat-button routerLink="/veterinarios" routerLinkActive="active-route" class="boton">
+            <span class="material-symbols-outlined">outpatient_med</span>
+            TURNOS
+        </button>
+        <button mat-button routerLink="/prueba" routerLinkActive="active-route" class="boton">
+            <span class="material-symbols-outlined">outpatient_med</span>
+            PRUEBA
+        </button>
+    </mat-toolbar>
+</ng-container>
+
+
+<div class="container">
+
+    <mat-card class="carta" appearance="outlined">      
+      <mat-card-content>
+          <router-outlet />        
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
