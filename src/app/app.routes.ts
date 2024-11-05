@@ -13,7 +13,7 @@ export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: "full"},
     {path: 'login', component: LoginComponent},
     {path: 'registro', component: RegistroComponent},
-    {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard]},
+    {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard,authHabilitadoGuard]},
     {path: 'prueba', component: PruebaComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authHabilitadoGuard]},
     {path: 'usuarios', component: UsuariosComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authAdminGuard,authHabilitadoGuard]},
     

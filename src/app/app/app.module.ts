@@ -34,14 +34,16 @@ import { UsuariosComponent } from '../componentes/usuarios/usuarios/usuarios.com
 import { DetalleUsuariosComponent } from '../componentes/usuarios/usuarios/detalle-usuarios/detalle-usuarios.component';
 import { TablaUsuariosComponent } from '../componentes/usuarios/usuarios/tabla-usuarios/tabla-usuarios.component';
 import { RegistroAdminComponent } from '../componentes/usuarios/registro/registro-admin/registro-admin.component';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,
     PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
     MatDatepickerModule,
-    MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,
-    MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,
+    MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,MatProgressBar,
+    MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,MatProgressSpinnerModule,
     MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule
   ]
 })

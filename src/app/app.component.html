@@ -1,21 +1,26 @@
+@if(isLoading){
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <ng-container *ngIf="auth.currentUser">        
     
     <mat-toolbar>
-        
-        <ng-container *ngIf="auth.currentUser">        
-            <button mat-flat-button color="primary" (click)="logout.CerrarSesion('/login')" class="boton">
-                <span class="material-symbols-outlined">logout</span>
-                CERRAR SESIÓN
-            </button>
-        </ng-container>
-        <ng-container *ngIf="!auth.currentUser">        
-            <button mat-flat-button color="primary" routerLink="/login" routerLinkActive="active-route" class="boton">
-                <span class="material-symbols-outlined">login</span>
-                INICIAR SESION
-            </button>
-        </ng-container>  
-        <p>{{auth.currentUser!.email}}</p>    
+        <div class="container-detalles">
+
+            <ng-container *ngIf="auth.currentUser">        
+                <button mat-flat-button color="primary" (click)="logout.CerrarSesion('/login')" class="boton">
+                    <span class="material-symbols-outlined">logout</span>
+                    CERRAR SESIÓN
+                </button>
+            </ng-container>
+            <ng-container *ngIf="!auth.currentUser">        
+                <button mat-flat-button color="primary" routerLink="/login" routerLinkActive="active-route" class="boton">
+                    <span class="material-symbols-outlined">login</span>
+                    INICIAR SESION
+                </button>
+            </ng-container>  
+            <p>{{auth.currentUser!.email}}</p>    
+        </div>
         
         <span class="spacer"></span>
         
