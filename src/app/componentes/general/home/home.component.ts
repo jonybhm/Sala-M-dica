@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { InfoService } from '../../../servicios/git-hub-info.service';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
-
+import { addDoc,query,collection, Firestore, orderBy, collectionData,where } from '@angular/fire/firestore';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,14 +16,18 @@ export class HomeComponent implements OnInit{
   usuarioGitHub:string='';
   repos:string='';
   
+  usuarios: any[] = [];
+  usuarioSeleccionado: any;
+
   constructor(
     private info: InfoService,
     public auth: Auth, 
     public logout:LogoutService,
-
+    private firestore:Firestore,
 
   )
   {}
+
   ngOnInit(): void {
     this.sub = this.info.obtnerInfo().subscribe(infoPersonal => {
       this.informacion = infoPersonal;
@@ -31,6 +35,21 @@ export class HomeComponent implements OnInit{
       this.usuarioGitHub = this.informacion.login;
       this.repos = this.informacion.repos_url;
 
+    });
+    this.obtenerUsuariosDB();
+  }
+
+
+  obtenerUsuariosDB() 
+  {
+    const coleccion = collection(this.firestore, 'usuarios');
+    const filteredQuery = query(coleccion, orderBy("email", "asc"));
+    const observable = collectionData(filteredQuery);
+  
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.usuarios = respuesta;
+      console.log("USUARIOS:");
+      console.log(this.usuarios);
     });
   }
 }

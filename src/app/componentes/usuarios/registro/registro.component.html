@@ -5,10 +5,14 @@
 <div class="container">
     
     <mat-form-field appearance="fill">
-        <mat-label>Rol de usuario</mat-label>
+        <mat-label>Rol de usuario</mat-label> 
         <mat-select [(ngModel)]="rolUsuario">
             <mat-option value="paciente" >Paciente</mat-option>
             <mat-option value="especialista" >Especialista</mat-option>
+            <ng-container *ngIf="rolUsuarioActual === 'admin'">     
+                <mat-option value="admin">Admin</mat-option>
+            </ng-container>
+
         </mat-select>
     </mat-form-field>
 
@@ -23,7 +27,11 @@
         </ng-container>
 
         <ng-container *ngIf="rolUsuario === 'paciente'">      
-            <app-registro-paciente></app-registro-paciente>
+            <app-registro-paciente (pacienteRegistrado)="ObtenerDatosPaciente($event)"></app-registro-paciente>
+        </ng-container>
+
+        <ng-container *ngIf="rolUsuario === 'admin'">      
+            <app-registro-admin (adminRegistrado)="ObtenerDatosAdmin($event)"></app-registro-admin>
         </ng-container>
 
 </div>

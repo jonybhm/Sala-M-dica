@@ -12,12 +12,12 @@ import { SubirImagenesService } from '../../../../servicios/subir-imagenes.servi
 import { ActualizarDatosService } from '../../../../servicios/actualizar-datos.service';
 
 @Component({
-  selector: 'app-registro-paciente',
-  templateUrl: './registro-paciente.component.html',
-  styleUrl: './registro-paciente.component.scss'
+  selector: 'app-registro-admin',
+  templateUrl: './registro-admin.component.html',
+  styleUrl: './registro-admin.component.scss'
 })
-export class RegistroPacienteComponent implements OnInit {
-  @Output() pacienteRegistrado = new EventEmitter<FormGroup>();
+export class RegistroAdminComponent implements OnInit{
+  @Output() adminRegistrado = new EventEmitter<FormGroup>();
   constructor(
     public auth:Auth,
     private router: Router,
@@ -49,11 +49,10 @@ export class RegistroPacienteComponent implements OnInit {
       apellido: new FormControl('',[Validators.pattern('^[a-zA-Z]+$'),Validators.required]),
       edad: new FormControl('',[Validators.min(21),Validators.max(65),Validators.required]),
       documento: new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.maxLength(8),Validators.required]),
-      obraSocial: new FormControl('',[Validators.pattern('^[a-zA-Z]+$'),Validators.required]),
       mail: new FormControl('',[Validators.email,Validators.required]),
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
-      imagenPerfil2: new FormControl(null,[Validators.required]),
+      
       })
 }
 
@@ -73,23 +72,19 @@ get nombre()
   {
     return this.form.get('documento');
   }
-  get obraSocial() 
-  {
-    return this.form.get('obraSocial');
-  }get mail() 
+  get mail() 
   {
     return this.form.get('mail');
-  }get contrasena() 
+  }
+  get contrasena() 
   {
     return this.form.get('contrasena');
-  }get imagenPerfil1() 
+  }
+  get imagenPerfil1() 
   {
     return this.form.get('imagenPerfil1');
   }
-  get imagenPerfil2() 
-  {
-    return this.form.get('imagenPerfil2');
-  }
+  
   
   hide = signal(true);
     clickEvent(event: MouseEvent) 
@@ -100,26 +95,19 @@ get nombre()
 
     subirImagen(event: Event,imagenNumero:string) 
     {
-      switch(imagenNumero)
-      {
-        case "1":
+
           this.imagenFile1 = (event.target as HTMLInputElement).files?.[0];
-
-          break;
-        case "2":
-          this.imagenFile2 = (event.target as HTMLInputElement).files?.[0];
-
-          break;
-      }
-
-
     }
   
     onRegistrar() 
     {
       if (this.form.valid)
       {
-        this.subirImagenStorage.subirImagen(this.imagenFile1,"fotoPerfilpaciente")
+        this.adminRegistrado.emit(this.form);
+        
+        console.log("form valido y emitido");
+
+        this.subirImagenStorage.subirImagen(this.imagenFile1,"fotoPerfilAdmin")
         .then(url=>{
           this.form.get('imagenPerfil1')?.setValue(url);
           console.log(this.form.value.mail);
@@ -127,21 +115,12 @@ get nombre()
         })
         .catch(error =>{
           console.error('Error al subir la imagen:', error);
+          this.error.Toast.fire({
+            title: "Error al subir la imagen",
+            icon: 'error'
+          });
         })
-        
-        this.subirImagenStorage.subirImagen(this.imagenFile2,"fotoPerfilpaciente")
-        .then(url=>{
-          this.form.get('imagenPerfil2')?.setValue(url);
-          console.log(this.form.value.mail);
-          this.actualizarDatos.actualizarDocumento('usuarios',this.form.value.mail,{imagenPerfil2:url})  
-        })
-        .catch(error =>{
-          console.error('Error al subir la imagen:', error);
-        })
-        this.pacienteRegistrado.emit(this.form);
-        
-        console.log("form valido");
-        
+
       }
       else
       {
@@ -153,6 +132,4 @@ get nombre()
           })  
       }
     }
-
-
 }

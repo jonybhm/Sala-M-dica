@@ -1,1 +1,51 @@
-<p>usuarios works!</p>
+<div>
+    
+  
+    <div class="container-detalles">
+
+      <mat-card appearance="outlined" class="carta-detalle">
+        <mat-card-header>
+            <mat-card-title> <strong>Lista usuarios</strong> </mat-card-title>
+            
+        </mat-card-header>
+        
+        <mat-card-content>
+          <table mat-list>
+            <ng-container *ngFor="let usuario of usuarios; let i = index">
+              <mat-list-item>
+                <span matListItemLine>{{ usuario.email }}/{{ usuario.apellido }} {{ usuario.nombre }}</span>
+                <span class="spacer"></span>
+                <button mat-button (click)="seleccionar(usuario)" class="btn-detalles">Ver detalles</button>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </ng-container>
+          </table>
+        </mat-card-content>
+        
+    </mat-card>
+    
+    <br>
+
+      <mat-card appearance="outlined" class="carta-detalle">
+          <mat-card-header>
+              <mat-card-title> <strong>Detalle usuario</strong> </mat-card-title>              
+          </mat-card-header>
+          
+          <mat-card-content>
+            <app-detalle-usuarios [usuario]="usuarioSeleccionado"></app-detalle-usuarios>
+          </mat-card-content>
+          
+      </mat-card>
+      
+      <br>
+      
+      
+  </div>
+  
+</div>
+
+<div class="container">
+  <app-registro></app-registro>
+</div>
+
+

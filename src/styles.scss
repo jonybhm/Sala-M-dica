@@ -73,6 +73,17 @@ body {
   margin: 10px;
   padding: 10px;
 }
+
+.carta-detalle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  margin-bottom: 8px;  
+  margin: 10px;
+  padding: 10px;
+  overflow-y: auto;
+}
 card-paises{
   flex: 1;
   margin-left: auto;

@@ -10,12 +10,12 @@ export const authLoginGuard: CanActivateFn = (route, state) => {
 
   if(auth.currentUser) 
   {
-    console.log("puede pasar");
+    console.log("Puede acceder, usuario logeado");
     return true
   }
   else
   {
-    console.log("no puede pasar");
+    console.log("No Puede acceder, usuario NO logeado");
     error.Toast.fire(
       {
         title:'Usuario no logeado',

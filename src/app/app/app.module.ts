@@ -30,17 +30,19 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RegistroEspecialistaComponent } from '../componentes/usuarios/registro/registro-especialista/registro-especialista.component';
 import { RegistroPacienteComponent } from '../componentes/usuarios/registro/registro-paciente/registro-paciente.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UsuariosComponent } from '../componentes/usuarios/usuarios/usuarios.component';
+import { DetalleUsuariosComponent } from '../componentes/usuarios/usuarios/detalle-usuarios/detalle-usuarios.component';
+import { TablaUsuariosComponent } from '../componentes/usuarios/usuarios/tabla-usuarios/tabla-usuarios.component';
+import { RegistroAdminComponent } from '../componentes/usuarios/registro/registro-admin/registro-admin.component';
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,
-    PruebaComponent],
+    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
     MatDatepickerModule,
     MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,
     MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,
     MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule
-
-
   ]
 })
 export class AppModule { }

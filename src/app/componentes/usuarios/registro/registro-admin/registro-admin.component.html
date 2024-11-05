@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onRegistrar()">
-    <p>Completar datos del Paciente</p>
+    <p>Completar datos del Admin</p>
 
     <div class="container-detalles">
         <div class="container">
@@ -38,10 +38,7 @@
                 <input type="file" (change)="subirImagen($event,'1')" id="imagenPerfil1" formControlName="imagenPerfil1">
             </div>
             
-            <div class="form-encuesta">
-                <label for="imagen2">Subir Imagen Perfil 2</label>
-                <input type="file" (change)="subirImagen($event,'2')" id="imagenPerfil2" formControlName="imagenPerfil2">
-            </div>
+           
         </div>
         
         <div class="container">
@@ -89,17 +86,7 @@
                 </mat-error>
             </mat-form-field>    
         
-            <mat-form-field appearance="fill" class="form-encuesta">
-                <mat-label>Obra Social</mat-label>
-                <input matInput  type="text" class="form-control" id="obraSocial" formControlName="obraSocial">
-                <mat-error *ngIf="obraSocial?.hasError('pattern')">
-                    Nombre invalido
-                </mat-error>
-                <mat-error *ngIf="obraSocial?.hasError('required') && (obraSocial?.touched || obraSocial?.dirty)">
-                    Campo requerido
-                </mat-error>
-            </mat-form-field>    
-
+            
             
             
             
@@ -108,7 +95,7 @@
         
     </div>
     <div class="container"> 
-        <button mat-flat-button color="primary" type="submit" class="boton"> Registrar Paciente</button>
+        <button mat-flat-button color="primary" type="submit" class="boton"> Registrar Admin</button>
         <button mat-raised-button color="primary" routerLink="/login" routerLinkActive="active-route" class="boton"> Cancelar </button>
     </div>
     
