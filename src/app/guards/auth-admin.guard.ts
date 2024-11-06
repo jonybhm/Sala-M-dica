@@ -20,7 +20,6 @@ export const authAdminGuard: CanActivateFn = (route, state) => {
       text: 'Para ingresar debe haber iniciado sesión.',
       icon: 'info'
     });
-    router.navigate(['/login']);
     return of(false);
   }
 
@@ -42,7 +41,6 @@ export const authAdminGuard: CanActivateFn = (route, state) => {
           text: 'No tiene permisos de administrador.',
           icon: 'error'
         });
-        router.navigate(['/home']);
         return false;
       }
     }),
@@ -53,7 +51,6 @@ export const authAdminGuard: CanActivateFn = (route, state) => {
         text: 'No se pudo verificar el rol del usuario.',
         icon: 'error'
       });
-      router.navigate(['/home']);
       return of(false);
     })
   );

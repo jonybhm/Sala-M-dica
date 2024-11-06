@@ -8,11 +8,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import {MatSidenavModule} from '@angular/material/sidenav';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,CommonModule,RouterLink,
-    MatToolbarModule,MatButtonModule,MatCardModule, MatProgressBar
+    MatToolbarModule,MatButtonModule,MatCardModule, MatProgressBar, MatSidenavModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

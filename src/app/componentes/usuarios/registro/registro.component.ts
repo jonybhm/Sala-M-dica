@@ -78,7 +78,7 @@ export class RegistroComponent implements OnInit {
           icon:'success'
         }
       )
-      this.router.navigate(['/home']);
+      this.router.navigate(['/bienvenida']);
     }).catch((e) => {
       this.errorLogeo = true;
   
@@ -163,7 +163,7 @@ export class RegistroComponent implements OnInit {
           icon:'success'
         }
       )
-      this.router.navigate(['/home']);
+      this.router.navigate(['/bienvenida']);
     }).catch((e) => {
       this.errorLogeo = true;
   
@@ -245,7 +245,7 @@ export class RegistroComponent implements OnInit {
           icon:'success'
         }
       )
-      this.router.navigate(['/home']);
+      this.router.navigate(['/bienvenida']);
     }).catch((e) => {
       this.errorLogeo = true;
   

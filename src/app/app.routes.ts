@@ -8,10 +8,12 @@ import { authVerifyMailGuard } from './guards/auth-verify-mail.guard';
 import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.component';
 import { authAdminGuard } from './guards/auth-admin.guard';
 import { authHabilitadoGuard } from './guards/auth-habilitado.guard';
+import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: "full"},
+    {path: '', redirectTo: 'bienvenida', pathMatch: "full"},
     {path: 'login', component: LoginComponent},
+    {path: 'bienvenida', component: BienvenidaComponent},
     {path: 'registro', component: RegistroComponent},
     {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard,authHabilitadoGuard]},
     {path: 'prueba', component: PruebaComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authHabilitadoGuard]},

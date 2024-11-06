@@ -20,7 +20,6 @@ export const authHabilitadoGuard: CanActivateFn = (route, state) => {
       text: 'Para ingresar debe haber iniciado sesión.',
       icon: 'info'
     });
-    router.navigate(['/login']);
     return of(false);
   }
 
@@ -41,7 +40,6 @@ export const authHabilitadoGuard: CanActivateFn = (route, state) => {
           text: 'No esta habilitado por el admin.',
           icon: 'error'
         });
-        router.navigate(['/home']);
         return false;
       }
     }),
@@ -52,7 +50,6 @@ export const authHabilitadoGuard: CanActivateFn = (route, state) => {
         text: 'No se pudo verificar.',
         icon: 'error'
       });
-      router.navigate(['/home']);
       return of(false);
     })
   );

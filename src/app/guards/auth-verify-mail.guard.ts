@@ -26,7 +26,6 @@ export const authVerifyMailGuard: CanActivateFn = (route, state) => {
             text: 'Para ingresar debe haber verificado su mail.',
             icon: 'info',
           });
-          router.navigate(['/home']);
           resolve(false); // Bloquea el acceso
         }
       } 

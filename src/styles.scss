@@ -17,11 +17,17 @@ $theme: mat.define-theme((
 ));
 
 .boton {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 20px;
   margin: 10px;
 }
 .foto {
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -97,6 +103,25 @@ btn-detalles{
     display: flex;
     align-self: flex-end;
     margin-left: auto;
+  }
+
+  .sidenav-container {
+    height: 200px;
+  }
+  
+  .bottom-sidenav {
+    position: absolute;
+    bottom: 0;
+    height: 100%; /* Ajusta la altura según lo necesites */
+    width: 100%;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 html {
   @include mat.all-component-themes($theme);

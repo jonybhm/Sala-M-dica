@@ -2,39 +2,55 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 <ng-container *ngIf="auth.currentUser">        
     
     <mat-toolbar>
         <div class="container-detalles">
 
-            <ng-container *ngIf="auth.currentUser">        
-                <button mat-flat-button color="primary" (click)="logout.CerrarSesion('/login')" class="boton">
-                    <span class="material-symbols-outlined">logout</span>
-                    CERRAR SESIÓN
+            <ng-container *ngIf="auth.currentUser">     
+                   
+                <button mat-flat-button color="primary" (click)="logout.CerrarSesion('/bienvenida')" class="boton">
+                    <div class="container-detalles">
+                        <span class="material-symbols-outlined">logout</span>
+                        CERRAR SESIÓN
+                    </div>
                 </button>
             </ng-container>
             <ng-container *ngIf="!auth.currentUser">        
-                <button mat-flat-button color="primary" routerLink="/login" routerLinkActive="active-route" class="boton">
+                <button mat-flat-button color="primary" routerLink="/home" routerLinkActive="active-route" class="boton">
                     <span class="material-symbols-outlined">login</span>
                     INICIAR SESION
                 </button>
             </ng-container>  
-            <p>{{auth.currentUser!.email}}</p>    
+            <sub>{{auth.currentUser!.email}}</sub>    
         </div>
         
         <span class="spacer"></span>
         
         
         
-        
-        <button mat-button routerLink="/usuarios" routerLinkActive="active-route" class="boton">
-            <span class="material-symbols-outlined">personal_injury</span>
-            USUARIOS
-        </button>
-        <button mat-button routerLink="/turnos" routerLinkActive="active-route" class="boton">
-            <span class="material-symbols-outlined">outpatient_med</span>
-            TURNOS
-        </button>
+        <ng-container *ngIf="auth.currentUser">        
+
+            <button mat-button routerLink="/usuarios" routerLinkActive="active-route" class="boton">
+                <div class="container-detalles">
+                    <span class="material-symbols-outlined">personal_injury</span>
+                    USUARIOS
+                </div>
+            </button>
+            <button mat-button routerLink="/turnos" routerLinkActive="active-route" class="boton">
+                <div class="container-detalles">
+                    <span class="material-symbols-outlined">outpatient_med</span>
+                    TURNOS
+                </div>
+            </button>
+            <button mat-button routerLink="/prueba" routerLinkActive="active-route" class="boton">
+                <div class="container-detalles">
+                    <span class="material-symbols-outlined">outpatient_med</span>
+                    PRUEBA
+                </div>
+            </button>
+        </ng-container>
     </mat-toolbar>
 </ng-container>
 
@@ -47,5 +63,15 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <mat-sidenav-container class="sidenav-container">
+    
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <h3>Información de Contacto</h3>
+        <p>Teléfono: +123456789</p>
+        <p>Email: .com</p>
+    </div>
+  </mat-sidenav-container>
 
 

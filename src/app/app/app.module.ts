@@ -36,9 +36,11 @@ import { TablaUsuariosComponent } from '../componentes/usuarios/usuarios/tabla-u
 import { RegistroAdminComponent } from '../componentes/usuarios/registro/registro-admin/registro-admin.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BienvenidaComponent } from '../componentes/bienvenida/bienvenida.component';
+
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,
-    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent],
+    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
     MatDatepickerModule,
