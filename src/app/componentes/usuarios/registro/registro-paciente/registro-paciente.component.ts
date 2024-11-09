@@ -1,4 +1,4 @@
-import { Component,signal, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component,signal, OnInit,Output, EventEmitter,AfterViewInit  } from '@angular/core';
 
 import {Auth, createUserWithEmailAndPassword} from '@angular/fire/auth'
 import { Router} from '@angular/router';
@@ -16,7 +16,7 @@ import { ActualizarDatosService } from '../../../../servicios/actualizar-datos.s
   templateUrl: './registro-paciente.component.html',
   styleUrl: './registro-paciente.component.scss'
 })
-export class RegistroPacienteComponent implements OnInit {
+export class RegistroPacienteComponent implements OnInit{
   @Output() pacienteRegistrado = new EventEmitter<FormGroup>();
   constructor(
     public auth:Auth,
@@ -30,7 +30,7 @@ export class RegistroPacienteComponent implements OnInit {
   {}
   
   //================REGISTRO USUARIOS NUEVOS================
-  
+  grecaptcha: any;
   
   usuarioNuevo: string = "";
   claveUsuarioNueva: string = "";
@@ -153,6 +153,8 @@ get nombre()
           })  
       }
     }
+    
 
+   
 
 }

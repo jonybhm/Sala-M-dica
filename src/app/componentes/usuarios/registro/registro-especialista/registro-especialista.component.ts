@@ -2,7 +2,7 @@ import { Component,signal, OnInit,Output, EventEmitter } from '@angular/core';
 
 import {Auth, createUserWithEmailAndPassword} from '@angular/fire/auth'
 import { Router} from '@angular/router';
-import { addDoc,collection, Firestore } from '@angular/fire/firestore';
+import { addDoc,collection, Firestore, query, orderBy, collectionData,} from '@angular/fire/firestore';
 import { LogoutService } from '../../../../servicios/logout.service';
 import { ErrorService } from '../../../../servicios/error.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Subscription ,Observable,finalize } from 'rxjs';
 import { SubirImagenesService } from '../../../../servicios/subir-imagenes.service';
 import { ActualizarDatosService } from '../../../../servicios/actualizar-datos.service';
+import { OpcionesService } from '../../../../servicios/opciones.service';
 
 @Component({
   selector: 'app-registro-especialista',
@@ -25,10 +26,15 @@ export class RegistroEspecialistaComponent implements OnInit{
     private error:ErrorService,
     private firestore:Firestore, 
     private actualizarDatos:ActualizarDatosService, 
-    private subirImagenStorage:SubirImagenesService
+    private subirImagenStorage:SubirImagenesService,
+    private opcionesService: OpcionesService
   )
   {}
   
+  opciones: any[] = [];
+  sub!: Subscription;
+  mostrarInputNuevaOpcion = false;
+  nuevaEspecialidad:string="";
   //================REGISTRO USUARIOS NUEVOS================
   
   
@@ -54,7 +60,10 @@ export class RegistroEspecialistaComponent implements OnInit{
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
       
-      })
+      });
+
+      this.obtenerOpciones();
+      console.log(this.opciones);
 }
 
 get nombre() 
@@ -92,54 +101,95 @@ get nombre()
   
   
   hide = signal(true);
-    clickEvent(event: MouseEvent) 
-    {
-      this.hide.set(!this.hide());
-      event.stopPropagation();
-    }
+  clickEvent(event: MouseEvent) 
+  {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
 
-    subirImagen(event: Event,imagenNumero:string) 
-    {
+  subirImagen(event: Event,imagenNumero:string) 
+  {
 
-          this.imagenFile1 = (event.target as HTMLInputElement).files?.[0];
+        this.imagenFile1 = (event.target as HTMLInputElement).files?.[0];
+  }
+
+  onRegistrar() 
+  {
+    if (this.form.valid)
+    {
+      this.especialistaRegistrado.emit(this.form);
+      
+      console.log("form valido y emitido");
+
+      this.subirImagenStorage.subirImagen(this.imagenFile1,"fotoPerfilEspecialista")
+      .then(url=>{
+        this.form.get('imagenPerfil1')?.setValue(url);
+        console.log(this.form.value.mail);
+        this.actualizarDatos.actualizarDocumento('usuarios',this.form.value.mail,{imagenPerfil1:url})          
+      })
+      .catch(error =>{
+        console.error('Error al subir la imagen:', error);
+        this.error.Toast.fire({
+          title: "Error al subir la imagen",
+          icon: 'error'
+        });
+      })
+
     }
+    else
+    {
+      console.log("error form invalido");
+      this.error.Toast.fire(
+        {
+          title:"Form invalido",
+          icon:'error'
+        })  
+    }
+  }
   
-    onRegistrar() 
+
+
+  agregarNuevaOpcion() 
+  {
+
+    if (this.nuevaEspecialidad != "") 
     {
-      if (this.form.valid)
+      try 
       {
-        this.especialistaRegistrado.emit(this.form);
-        
-        console.log("form valido y emitido");
+        this.agregarOpcion(this.nuevaEspecialidad);
 
-        this.subirImagenStorage.subirImagen(this.imagenFile1,"fotoPerfilEspecialista")
-        .then(url=>{
-          this.form.get('imagenPerfil1')?.setValue(url);
-          console.log(this.form.value.mail);
-          this.actualizarDatos.actualizarDocumento('usuarios',this.form.value.mail,{imagenPerfil1:url})          
-        })
-        .catch(error =>{
-          console.error('Error al subir la imagen:', error);
-          this.error.Toast.fire({
-            title: "Error al subir la imagen",
-            icon: 'error'
-          });
-        })
+        this.opciones.push({ nombre: this.nuevaEspecialidad });
 
-      }
-      else
+        console.log('Especialidad agregada');
+      } 
+      catch (error) 
       {
-        console.log("error form invalido");
-        this.error.Toast.fire(
-          {
-            title:"Form invalido",
-            icon:'error'
-          })  
+        console.error('Error al agregar especialidad:', error);
       }
     }
 
-    
-    
-    
+    this.nuevaEspecialidad = "";
+  }
+
+  obtenerOpciones() 
+  {
+    const coleccion = collection(this.firestore, 'especialidades');
+    const filteredQuery = query(coleccion, orderBy("especialidad", "asc"));
+    const observable = collectionData(filteredQuery);
+  
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.opciones = respuesta;
+      
+      console.log(respuesta);
+    });
+  }
+
+  agregarOpcion(nuevaOpcion: string) 
+  {
+    const userDocRef = collection(this.firestore, 'especialidades');
+        addDoc(userDocRef, {
+          especialidad: nuevaOpcion
+        });  
+  }
     
 }

@@ -25,6 +25,19 @@ $theme: mat.define-theme((
   padding: 20px;
   margin: 10px;
 }
+
+.boton-agregar {
+  display: flex;
+  flex-direction:row;
+  justify-content: right;
+  margin-left: auto;
+  background-color: #005CBB;
+  color: #cbddff;
+  margin: 5px;
+  border-color: #005CBB;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .foto {
   height: 120px;
   width: 120px;
@@ -75,12 +88,22 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
+  width: 1000px;
   max-width: 100%;
   margin-bottom: 8px;  
   margin: 10px;
   padding: 10px;
 }
 
+.carta-router{
+  display: flex;
+  justify-content: center;
+  max-height: 100%;
+  width: 1000px;
+  margin: 10px;
+  padding: 10px;
+}
 .carta-detalle{
   display: flex;
   flex-direction: column;
@@ -106,7 +129,7 @@ btn-detalles{
   }
 
   .sidenav-container {
-    height: 200px;
+    height: 50vh;
   }
   
   .bottom-sidenav {
@@ -122,7 +145,11 @@ btn-detalles{
     justify-content: center;
     align-items: center;
     height: 100%;
+    background-color: #d7d7d7;
+
   }
+
+
 html {
   @include mat.all-component-themes($theme);
 }
@@ -130,6 +157,19 @@ html {
 .scroll {
   max-height: 300px;
   overflow-y: auto; 
+}
+
+.disponible {
+  background-color: rgb(148, 218, 148);
+  
+}
+
+.asignado {
+  background-color: rgb(88, 143, 245);
+}
+
+.columna{
+  width: 100px;
 }
 
 @font-face {

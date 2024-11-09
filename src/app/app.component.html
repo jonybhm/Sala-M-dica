@@ -34,20 +34,20 @@
 
             <button mat-button routerLink="/usuarios" routerLinkActive="active-route" class="boton">
                 <div class="container-detalles">
-                    <span class="material-symbols-outlined">personal_injury</span>
+                    <span class="material-symbols-outlined">patient_list</span>
                     USUARIOS
                 </div>
             </button>
-            <button mat-button routerLink="/turnos" routerLinkActive="active-route" class="boton">
+            <button mat-button routerLink="/miPerfil" routerLinkActive="active-route" class="boton">
                 <div class="container-detalles">
-                    <span class="material-symbols-outlined">outpatient_med</span>
-                    TURNOS
+                    <span class="material-symbols-outlined">personal_injury</span>
+                    MI PERFIL
                 </div>
             </button>
-            <button mat-button routerLink="/prueba" routerLinkActive="active-route" class="boton">
+            <button mat-button routerLink="/solicitarTurnos" routerLinkActive="active-route" class="boton">
                 <div class="container-detalles">
-                    <span class="material-symbols-outlined">outpatient_med</span>
-                    PRUEBA
+                    <span class="material-symbols-outlined">calendar_add_on</span>
+                    TURNOS
                 </div>
             </button>
         </ng-container>
@@ -57,7 +57,7 @@
 
 <div class="container">
 
-    <mat-card class="carta" appearance="outlined">      
+    <mat-card class="carta-router" appearance="outlined">      
       <mat-card-content>
           <router-outlet />        
       </mat-card-content>
@@ -66,7 +66,6 @@
 
   <mat-sidenav-container class="sidenav-container">
     
-    <!-- Contenido principal -->
     <div class="main-content">
         <h3>Información de Contacto</h3>
         <p>Teléfono: +123456789</p>

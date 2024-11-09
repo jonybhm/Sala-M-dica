@@ -1,0 +1,37 @@
+<ng-container *ngFor="let usuario of usuarios; let i = index">
+
+<div *ngIf="usuario.email === auth.currentUser?.email">
+    <div *ngIf="usuario.rol === 'especialista'">
+        <p>Detalle Especialista</p>
+        <div class="containerfoto">
+            <img class="foto" src="{{usuario.imagenPerfil1}}" alt="{{usuario.email}}" >
+        </div>
+        <p><strong>Nombre Apellido:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
+        <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+        <p><strong>Especialidad:</strong> {{ usuario.especialidad }}</p>
+        <p><strong>Habilitado:</strong></p>
+        
+    </div>
+    <div *ngIf="usuario.rol === 'paciente'">
+        <p>Detalle Paciente</p>
+        <div class="containerfoto">
+            <img class="foto" src="{{usuario.imagenPerfil1}}" alt="{{usuario.email}}" >
+            <img class="foto" src="{{usuario.imagenPerfil2}}" alt="{{usuario.email}}" >
+        </div>
+        <p><strong>Nombre Apellido:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
+        <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+        <p><strong>Obra Social:</strong> {{ usuario.obraSocial }}</p>
+    </div>
+    <div *ngIf="usuario.rol === 'admin'">
+        <p>Detalle Admin</p>
+        <div class="containerfoto">
+            <img class="foto" src="{{usuario.imagenPerfil1}}" alt="{{usuario.email}}" >
+        </div>
+        <p><strong>Nombre Apellido:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
+        <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+    </div>
+</div>
+</ng-container>

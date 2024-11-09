@@ -1,3 +1,4 @@
+
 <form [formGroup]="form" (ngSubmit)="onRegistrar()">
     <p>Completar datos del Paciente</p>
 
@@ -108,6 +109,9 @@
         
     </div>
     <div class="container"> 
+
+        <div class="g-recaptcha" data-sitekey="6LfViHgqAAAAABYV1V_B0fueWlGs8zdG0CT1Q5Mp"></div>
+
         <button mat-flat-button color="primary" type="submit" class="boton"> Registrar Paciente</button>
         <button mat-raised-button color="primary" routerLink="/bienvenida" routerLinkActive="active-route" class="boton"> Cancelar </button>
     </div>

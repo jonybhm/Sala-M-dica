@@ -37,16 +37,20 @@ import { RegistroAdminComponent } from '../componentes/usuarios/registro/registr
 import { MatProgressBar } from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BienvenidaComponent } from '../componentes/bienvenida/bienvenida.component';
+import { MiPerfilComponent } from '../componentes/usuarios/mi-perfil/mi-perfil.component';
+import { SolicitarTurnosComponent } from '../componentes/turnos/solicitar-turnos/solicitar-turnos.component';
+
 
 @NgModule({
-  declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,
-    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent],
+  declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
+    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
     MatDatepickerModule,
     MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,MatProgressBar,
     MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,MatProgressSpinnerModule,
-    MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule
+    MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule, 
+    
   ]
 })
 export class AppModule { }

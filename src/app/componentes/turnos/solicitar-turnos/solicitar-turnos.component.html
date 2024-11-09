@@ -1,0 +1,47 @@
+
+    
+    <div class="container">
+        
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Especialidad</mat-label> 
+            <mat-select class="form-control" [(ngModel)]="especialidadActual" (selectionChange)="onEspecialidadSeleccionada()">
+                <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad.especialidad" >{{ especialidad.especialidad }}</mat-option>                        
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Especialista</mat-label> 
+            <mat-select class="form-control" [(ngModel)]="mailEspecialistaActual" (selectionChange)="onEspecialistaSeleccionado()">
+                <mat-option *ngFor="let especialista of usuarios" [value]="especialista.email">{{ especialista.apellido }} {{ especialista.nombre }}</mat-option>                        
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Agendas Especialista</mat-label> 
+            <mat-select class="form-control" [(ngModel)]="agendaActual" (selectionChange)="onAgendaSeleccionada()">
+                <mat-option *ngFor="let agenda of agendas" [value]="agenda">{{ agenda.tipoAtencion }} / {{ agenda.sector }}</mat-option>                        
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="container">        
+        <ng-container *ngIf="agendaActual">
+        <table>
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th *ngFor="let dia of agendaActual.diasSemana" class="columna"> {{dia}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let espacio of espaciosDisponibles">
+                    <td>{{espacio.hora}}:{{espacio.minutos | number: '2.0'}}</td>
+                    <td *ngFor="let dia of agendaActual.diasSemana"
+                    [ngClass]="{ 'disponible': estaDisponible(dia, espacio), 'asignado': estaAsignado(dia, espacio) }"
+                    (click)="onClickEspacio(dia, espacio)">                
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>  
+</div>

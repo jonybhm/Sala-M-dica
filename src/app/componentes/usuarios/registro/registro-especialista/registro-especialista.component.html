@@ -87,23 +87,44 @@
             </mat-form-field>    
         
             <mat-form-field appearance="fill" class="form-encuesta">
-                <mat-label>Especialidad</mat-label>
-                <input matInput  type="text" class="form-control" id="especialidad" formControlName="especialidad">
-                <mat-error *ngIf="especialidad?.hasError('pattern')">
-                    Especialidad invalida
-                </mat-error>
-                <mat-error *ngIf="especialidad?.hasError('required') && (especialidad?.touched || especialidad?.dirty)">
-                    Campo requerido
-                </mat-error>
+                
+                    <mat-label>Especialidad</mat-label> 
+                    <mat-select class="form-control" id="especialidad" formControlName="especialidad">
+                        <mat-option *ngFor="let opcion of opciones" [value]="opcion.especialidad">{{ opcion.especialidad }}</mat-option>                        
+                    </mat-select>
+                    <mat-error *ngIf="especialidad?.hasError('pattern')">
+                        Especialidad invalida
+                    </mat-error>
+                    <mat-error *ngIf="especialidad?.hasError('required') && (especialidad?.touched || especialidad?.dirty)">
+                        Campo requerido
+                    </mat-error>               
+                
             </mat-form-field>    
 
             
             
-            
         </div>
         
+
+
         
     </div>
+
+</form>
+
+<div class="container">
+
+    <mat-form-field appearance="fill" class="form-encuesta">
+        <mat-label>Nueva Especialidad</mat-label>
+        <input  matInput  type="text" [(ngModel)]="nuevaEspecialidad">
+        <button class="boton-agregar" type="button" (click)="agregarNuevaOpcion()">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+    </mat-form-field>   
+</div>
+<form [formGroup]="form" (ngSubmit)="onRegistrar()">
+    <div class="g-recaptcha" data-sitekey="6LfViHgqAAAAABYV1V_B0fueWlGs8zdG0CT1Q5Mp"></div>
+
     <div class="container"> 
         <button mat-flat-button color="primary" type="submit" class="boton"> Registrar Especialista</button>
         <button mat-raised-button color="primary" routerLink="/bienvenida" routerLinkActive="active-route" class="boton"> Cancelar </button>
