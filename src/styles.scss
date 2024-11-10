@@ -161,16 +161,30 @@ html {
 
 .disponible {
   background-color: rgb(148, 218, 148);
-  
+  cursor: pointer;
+
 }
 
-.asignado {
+.seleccionado {
   background-color: rgb(88, 143, 245);
+  cursor: pointer;
+
+}
+.disponible :hover{
+  background-color: rgb(122, 255, 122);
+  border-color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
+.seleccionado :hover{
+  background-color: rgb(142, 210, 255);
+  border-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
 .columna{
   width: 100px;
 }
+
 
 @font-face {
     font-family: 'Material Icons';

@@ -8,7 +8,10 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { enviromentConfig } from '../../enviromentConfig';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
-
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideAnimationsAsync(), 
@@ -17,5 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage()),
     provideHttpClient(),
+    { provide: LOCALE_ID, useValue: 'es' }
   ]
 };

@@ -1,10 +1,13 @@
 import { Component, OnInit} from '@angular/core';
+import { formatDate } from '@angular/common';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { Subscription } from 'rxjs';
 import { addDoc,query,collection, Firestore, orderBy, collectionData,where } from '@angular/fire/firestore';
-import { MatDialog } from '@angular/material/dialog';
-import { TurnoDialogComponent } from '../turno-dialog/turno-dialog.component';
+import { Router} from '@angular/router';
+import { ErrorService } from '../../../servicios/error.service';
+import { Timestamp } from 'firebase/firestore';
+
 @Component({
   selector: 'app-solicitar-turnos',
   templateUrl: './solicitar-turnos.component.html',
@@ -13,31 +16,53 @@ import { TurnoDialogComponent } from '../turno-dialog/turno-dialog.component';
 export class SolicitarTurnosComponent implements OnInit{
   sub!: Subscription;
   agendas: any[] = [];
-  usuarios: any[] = [];
+  especialistas: any[] = [];
   especialidades: any[] = [];
+  turnosAsignados: any[] = [];
+  fechasDisponible: any[] = [];
+  pacientes: any[] = [];
   agendaActual!:any;
+  usuarioActual!:any;
+  pacienteActual!:any;
   especialidadActual:string = "";
   mailEspecialistaActual:string = "";
-  espaciosDisponibles:any = [];
+  rolUsuarioActual:string = "";
 
+  espaciosDisponibles:any = [];
+  turnoSeleccionado:boolean = false;
+  fechaTurno!: Date; 
+  horaTurno!: { hora: number, minutos: number };
 
   constructor(
     public auth: Auth, 
     public logout:LogoutService,
     private firestore:Firestore,
-    private dialog: MatDialog
+    private router: Router,
+    private error:ErrorService
+  
   )
   {}
 
   ngOnInit(): void {
 
     this.obtenerDatosEspecialidadesDB();
-    console.log('ESPECIALIDADES: ',this.especialidades);  
-    
+    this.obtenerRolActual();
 
   }
 
   //====================SELECCIONAR ESPECIALIDAD, ESPECIALISTA y AGENDA==========================
+  obtenerDatosTurnosAsignadosDB()
+  {
+    const coleccion = collection(this.firestore, `turnosAsignados`);
+    const filteredQuery = query(coleccion, orderBy("horario", "asc"));
+    const observable = collectionData(filteredQuery);
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.turnosAsignados = respuesta;
+      console.log('TURNOS ASIGNADOS: ',respuesta);
+
+    });
+  }
+
   obtenerDatosEspecialidadesDB() 
   {
     const coleccion = collection(this.firestore, 'especialidades');
@@ -47,7 +72,7 @@ export class SolicitarTurnosComponent implements OnInit{
     this.sub = observable.subscribe((respuesta: any) => {
       this.especialidades = respuesta;
       
-      console.log('RESPUESTA: ',respuesta);
+      console.log('ESPECIALIDADES: ',respuesta);
     });
   }
 
@@ -57,8 +82,12 @@ export class SolicitarTurnosComponent implements OnInit{
     const filteredQuery = query(coleccion, where(`especialidad`, "==", `${this.especialidadActual}`));
     const observable = collectionData(filteredQuery);
     this.sub = observable.subscribe((respuesta: any) => {
-      this.usuarios = respuesta;
+      this.especialistas = respuesta;
     });
+
+    this.agendaActual = null;
+    this.mailEspecialistaActual = "";
+    this.agendaActual = null;
   }
 
   onEspecialistaSeleccionado() 
@@ -71,55 +100,199 @@ export class SolicitarTurnosComponent implements OnInit{
     this.sub = observable.subscribe((respuesta: any) => {
       this.agendas = respuesta;
     });
+
+    this.agendaActual = null;
   }
 
   onAgendaSeleccionada()
   {
+    this.espaciosDisponibles = [];
     for(let hora = this.agendaActual.horarioInicio; hora < this.agendaActual.horarioFinal; hora++  )
+    {
+      for(let minutos = 0; minutos < 60; minutos += this.agendaActual.duracionAtencionMinutos)
       {
-        for(let minutos = 0; minutos < 60; minutos += this.agendaActual.duracionAtencionMinutos)
-        {
-          this.espaciosDisponibles.push({hora,minutos});
-        }
+        this.espaciosDisponibles.push({hora,minutos});
       }
+    }
+
+    if(this.rolUsuarioActual === 'admin')
+    {
+      this.obtenerListadoPacientes();
+    }
+    else
+    {
+      this.obtenerPacienteActual();
+    }
+
+    this.obtenerDatosTurnosAsignadosDB();
+    this.calcularFechasTurnosDisponibles();
   }  
   
-
-  //====================DIALOG DETALLES TURNO==========================
-
-  onClickEspacio(dia: string, espacio: { hora: number, minutos: number }) 
+  onPacienteSeleccionado()
   {
-    const dialogRef = this.dialog.open(TurnoDialogComponent, {
-      data: { dia, espacio }
+    console.log("PACIENTE ACTUAL: ", this.pacienteActual);
+  }
+  //====================fechaLOG DETALLES TURNO==========================
+
+  onClickEspacio(fecha: Date, espacio: { hora: number, minutos: number }) 
+  {
+    if (this.estaDisponible(fecha, espacio)) {
+      this.fechaTurno = fecha;
+      this.horaTurno = espacio;
+      this.turnoSeleccionado = true;
+      this.error.Toast.fire(
+        {
+          title:`${fecha.toDateString()}/${espacio.hora}:${espacio.minutos} hs`,
+          icon:'info'
+        }
+      )
+    } 
+    else 
+    {
+      this.error.Toast.fire(
+        {
+          title:`${fecha.toDateString()}/${espacio.hora}:${espacio.minutos} hs (NO DISPONIBLE)`,
+          icon:'error'
+        }
+      )
+    }
+
+    console.log(this.turnosAsignados);
+  
+    
+  }
+
+  estaDisponible(fecha: Date, espacio: { hora: number, minutos: number })
+  {
+    const fechaNormalizada = new Date(fecha);
+    fechaNormalizada.setHours(0, 0, 0, 0);
+
+    const turnoOcupado = this.turnosAsignados.some((turno) => {
+      const fechaTurnoAsignado = new Date(turno.fecha.toDate());
+      fechaTurnoAsignado.setHours(0, 0, 0, 0); 
+
+      return (
+        fechaTurnoAsignado.getTime() === fechaNormalizada.getTime() &&
+        turno.horario.hora === espacio.hora &&
+        turno.horario.minutos === espacio.minutos
+      );
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const turnosCollection = collection(this.firestore, 'turnosAsignados');
-        addDoc(turnosCollection, {
-          dia,
-          espacio,
-        }).then(() => {
-          console.log("Turno asignado");
-        });
+    return !turnoOcupado;
+  }
+  
+  estaSeleccionado(fecha: Date, espacio: { hora: number, minutos: number })
+  {
+    let seleccionado = false;
+    if(fecha==this.fechaTurno && espacio == this.horaTurno)
+    {
+      seleccionado = true;
+    }
+    return seleccionado;
+  }
+
+  
+
+  confirmarTurno()
+  {
+    const fechaSinHora = new Date(this.fechaTurno);
+    fechaSinHora.setHours(0, 0, 0, 0);
+
+    const turnosCollection = collection(this.firestore, 'turnosAsignados');
+    addDoc(turnosCollection, {
+      "fecha": fechaSinHora,
+      "horario": this.horaTurno,
+      "pacienteMail": this.pacienteActual.email,
+      "pacienteNombre": this.pacienteActual.nombre,
+      "pacienteApellido": this.pacienteActual.apellido,
+      "sectorAtencion ": this.agendaActual.sector,
+      "tipoAtencion ": this.agendaActual.tipoAtencion,
+      "especialista": this.mailEspecialistaActual,
+    }).then(() => {
+      console.log("Turno asignado");
+    });
+
+    // this.turnosAsignados.push({
+    //   fecha: fechaSinHora,
+    //   horario: this.horaTurno,
+    //   pacienteMail: this.auth.currentUser?.email,
+    // });
+
+    this.error.Toast.fire(
+      {
+        title:'Turno asignado',
+        icon:'success'
       }
+    );
+    
+  }
+
+  
+
+  calcularFechasTurnosDisponibles()
+  {
+    const fechaInicio = (this.agendaActual.fechaInicio as Timestamp).toDate();
+    const fechaCierre = (this.agendaActual.fechaCierre as Timestamp).toDate();
+  
+    const hoy = new Date();
+    const fechaDosSemanas = new Date(hoy);
+    fechaDosSemanas.setDate(hoy.getDate() + 14);
+  
+    const fechaLimite = fechaDosSemanas < fechaCierre ? fechaDosSemanas : fechaCierre;
+  
+    const fechas: Date[] = [];
+    let fecha = new Date(hoy);
+    const diasSemana = this.agendaActual.diasSemana.map(dia => dia.toLowerCase());
+    
+    while (fecha <= fechaLimite) {
+      const nombreDia = formatDate(fecha, 'EEEE', 'es-ES').toLowerCase();
+      if (diasSemana.includes(nombreDia)) {
+        fechas.push(new Date(fecha));
+      }
+      fecha.setDate(fecha.getDate() + 1);
+    }
+    
+    this.fechasDisponible = fechas;
+    console.log("fechaS DISPONIBLES: ", this.fechasDisponible);
+  }
+
+  obtenerRolActual() 
+  {
+    const coleccion = collection(this.firestore, `usuarios`);
+    const filteredQuery = query(coleccion, where(`email`, "==", this.auth.currentUser?.email));
+    const observable = collectionData(filteredQuery);
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.usuarioActual = respuesta;
+      this.rolUsuarioActual = this.usuarioActual[0].rol;
+      
     });
+
+
   }
 
-  estaDisponible(dia: string, espacio: { hora: number, minutos: number }) 
+  obtenerListadoPacientes() 
   {
-    return true;  
+    const coleccion = collection(this.firestore, `usuarios`);
+    const filteredQuery = query(coleccion, where(`rol`, "==", 'paciente'));
+    const observable = collectionData(filteredQuery);
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.pacientes = respuesta;
+    });
+
   }
-  
-  estaAsignado(dia: string, espacio: { hora: number, minutos: number })
+
+  obtenerPacienteActual() 
   {
-    return false;
+    const coleccion = collection(this.firestore, `usuarios`);
+    const filteredQuery = query(coleccion, where(`email`, "==", this.auth.currentUser?.email));
+    const observable = collectionData(filteredQuery);
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.pacienteActual = respuesta;
+      console.log("PACIENTE ACTUAL: ", this.pacienteActual);
+    });
+
   }
-
-  
-
-
-
-  
 }
+  
+ 
 
