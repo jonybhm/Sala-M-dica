@@ -1,1 +1,54 @@
-<p>turnos-especialista works!</p>
+<div *ngIf="turno">
+    <p><strong>Nombre Apellido paciente:</strong> {{ turno.pacienteNombre  }} {{ turno.pacienteApellido }}</p>
+    <p><strong>Nombre Apellido especialista:</strong> {{ turno.especialistaNombre  }} {{ turno.especialistaApellido }}</p>
+    <p><strong>Especialidad:</strong> {{ turno.tipoAtencion}} en {{turno.sectorAtencion}}</p>
+    <p><strong>Fecha Turno:</strong> {{ formatearFecha(turno.fecha)}} a las {{turno.horario.hora}}:{{turno.horario.minutos}}</p>
+    <p><strong>Estado:</strong> {{ turno.estado}}</p>
+    
+    <div class="container-detalles">
+        
+        <div class="container-detalles">
+            <button mat-raised-button *ngIf="turno.estado !== 'Aceptado' && turno.estado !== 'Realizado' && turno.estado !== 'Rechazado'" (click)="cancelarTurno()">
+                <span class="material-symbols-outlined">cancel</span>
+                Cancelar Turno
+            </button>
+        </div>
+        <div class="container-detalles">
+            <button mat-raised-button *ngIf="turno.estado !== 'Aceptado' && turno.estado !== 'Realizado' && turno.estado !== 'Cancelado'" (click)="rechazarTurno()">
+                <span class="material-symbols-outlined">block</span>
+                Rechazar Turno
+            </button>
+        </div>
+        <div class="container-detalles">
+            <button mat-raised-button *ngIf="turno.estado !== 'Realizado' && turno.estado !== 'Cancelado' && turno.estado !== 'Rechazado'" (click)="aceptarTurno()">
+                <span class="material-symbols-outlined">check_circle</span>
+                Aceptar Turno
+            </button>
+        </div>
+        <div class="container-detalles">
+            <button mat-raised-button *ngIf="turno.estado === 'Aceptado'" (click)="finalizarTurno()">
+                <span class="material-symbols-outlined">done_all</span>
+                Finalizar Turno
+            </button>
+        </div>
+        <div class="container-detalles">
+            <button mat-raised-button *ngIf="turno.comentario && turno.comentario.length > 0" (click)="verComentario()">
+                <span class="material-symbols-outlined">preview</span>
+                Ver Comentario
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="mostrarComentario">
+        <div class="container">
+            <mat-form-field class="example-full-width">
+                <mat-label>Escribir un comentario...</mat-label>
+                <textarea matInput [(ngModel)]="comentario"></textarea>        
+            </mat-form-field>
+            <button mat-flat-button (click)="guardarComentario()">
+                <span class="material-symbols-outlined">save</span>
+                Guardar Comentario
+            </button>
+        </div>
+    </div>
+</div>

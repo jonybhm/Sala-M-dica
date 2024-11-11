@@ -39,15 +39,24 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BienvenidaComponent } from '../componentes/bienvenida/bienvenida.component';
 import { MiPerfilComponent } from '../componentes/usuarios/mi-perfil/mi-perfil.component';
 import { SolicitarTurnosComponent } from '../componentes/turnos/solicitar-turnos/solicitar-turnos.component';
-
+import { MisTurnosComponent } from '../componentes/turnos/mis-turnos/mis-turnos.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { TurnosAdminComponent } from '../componentes/turnos/turnos-admin/turnos-admin.component';
+import { TurnosEspecialistaComponent } from '../componentes/turnos/turnos-especialista/turnos-especialista.component';
+import { TurnosPacienteComponent } from '../componentes/turnos/turnos-paciente/turnos-paciente.component';
+import { TurnosComponent } from '../componentes/turnos/turnos/turnos.component';
+import { TablaTurnosEspecialistaComponent } from '../componentes/turnos/tabla-turnos-especialista/tabla-turnos-especialista.component';
+import { TablaTurnosPacienteComponent } from '../componentes/turnos/tabla-turnos-paciente/tabla-turnos-paciente.component';
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
-    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent],
+    PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent,
+  MisTurnosComponent, TurnosAdminComponent,TurnosEspecialistaComponent,TurnosPacienteComponent,TurnosComponent,
+  TablaTurnosEspecialistaComponent,TablaTurnosPacienteComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
-    MatDatepickerModule,
-    MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,MatProgressBar,
+    MatDatepickerModule,MatMenuModule,
+    MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,MatProgressBar,MatTableModule,
     MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,MatProgressSpinnerModule,
     MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule, 
     

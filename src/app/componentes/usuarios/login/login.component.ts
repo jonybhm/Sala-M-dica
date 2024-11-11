@@ -130,6 +130,10 @@ export class LoginComponent {
         this.usuario = "jonydecas@gmail.com";
         this.claveUsuario = "123456";
       break;
+      case 'paciente':
+        this.usuario = "jejenig588@opposir.com";
+        this.claveUsuario = "123456";
+      break;
     }
   }
 }

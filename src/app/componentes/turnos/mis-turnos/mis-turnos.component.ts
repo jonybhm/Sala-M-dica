@@ -1,12 +1,99 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import {Auth} from '@angular/fire/auth'
+import { LogoutService } from '../../../servicios/logout.service';
+import { Subscription } from 'rxjs';
+import { addDoc,query,collection, Firestore, orderBy, collectionData,where } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-mis-turnos',
-  standalone: true,
-  imports: [],
   templateUrl: './mis-turnos.component.html',
   styleUrl: './mis-turnos.component.scss'
 })
-export class MisTurnosComponent {
+export class MisTurnosComponent implements OnInit{
+  
+  subEsp!: Subscription;
+  subPac!: Subscription;
+  sub!: Subscription;
+  usuarioActual!:any;
+  rolUsuarioActual: string = '';
+  turnoSeleccionado!:any;
+  turnosEspecialista:any [] = [];
+  turnosPaciente:any [] = [];
+  turnos:any [] = [];
+  
+  constructor(
+    public auth: Auth, 
+    public logout:LogoutService,
+    private firestore:Firestore,
+  )
+  {}
+
+  ngOnInit(): void {
+    this.obtenerRolActual(); 
+    this.obtenerTurnosDB();
+  }  
+  
+  seleccionar(turno: any)
+  {
+    this.turnoSeleccionado = turno;
+  }
+  
+  obtenerTurnosDB() 
+  {
+    const coleccion = collection(this.firestore, `turnosAsignados`);
+    const filteredQuery = query(coleccion, orderBy(`fecha`, "asc"));
+    const observable = collectionData(filteredQuery);
+    this.subEsp = observable.subscribe((respuesta: any) => {
+      this.turnos = respuesta;
+      console.log("TURNOS:",this.turnos);
+      this.filtrarTurnos();
+    });   
+    
+  }
+  obtenerRolActual() 
+  {
+    const coleccion = collection(this.firestore, `usuarios`);
+    const filteredQuery = query(coleccion, where(`email`, "==", this.auth.currentUser?.email));
+    const observable = collectionData(filteredQuery);
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.usuarioActual = respuesta;
+      this.rolUsuarioActual = this.usuarioActual[0].rol;      
+    });
+  }
+
+  filtrarTurnos() {
+  
+    this.turnos.forEach(turno => {
+      if (turno.especialistaMail === this.auth.currentUser?.email) {
+        this.turnosEspecialista.push(turno);
+      }
+      if (turno.pacienteMail === this.auth.currentUser?.email) {
+        this.turnosPaciente.push(turno);
+      }
+    });
+  
+  }
 
 }
+
+  // obtenerTurnosEspecialistaDB() 
+  // {
+  //   const coleccion = collection(this.firestore, `turnosAsignados`);
+  //   const filteredQuery = query(coleccion, where(`especialistaMail`, "==", this.auth.currentUser?.email));
+  //   const observable = collectionData(filteredQuery);
+  //   this.subEsp = observable.subscribe((respuesta: any) => {
+  //     this.turnosEspecialista = respuesta;
+  //     console.log("TURNOS ESPECIALISTA:",respuesta);
+  //   });
+  // }
+  
+  // obtenerTurnosPacienteDB() 
+  // {
+  //   const coleccion = collection(this.firestore, `turnosAsignados`);
+  //   const filteredQuery = query(coleccion, where(`pacienteMail`, "==", this.auth.currentUser?.email));
+  //   const observable = collectionData(filteredQuery);
+  //   this.subPac = observable.subscribe((res: any) => {
+  //     this.turnosEspecialista = res;
+  //     console.log("TURNOS PACIENTE:",res);
+  //   });
+  // }

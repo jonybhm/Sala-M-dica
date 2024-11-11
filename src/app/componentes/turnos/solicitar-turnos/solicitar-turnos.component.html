@@ -14,8 +14,8 @@
         
         <mat-form-field appearance="fill" class="form-encuesta">
             <mat-label>Especialista</mat-label> 
-            <mat-select class="form-control" [(ngModel)]="mailEspecialistaActual" (selectionChange)="onEspecialistaSeleccionado()">
-                <mat-option *ngFor="let especialista of especialistas" [value]="especialista.email">{{ especialista.apellido }} {{ especialista.nombre }}</mat-option>                        
+            <mat-select class="form-control" [(ngModel)]="especialistaActual" (selectionChange)="onEspecialistaSeleccionado()">
+                <mat-option *ngFor="let especialista of especialistas" [value]="especialista">{{ especialista.apellido }} {{ especialista.nombre }}</mat-option>                        
             </mat-select>
         </mat-form-field>
 

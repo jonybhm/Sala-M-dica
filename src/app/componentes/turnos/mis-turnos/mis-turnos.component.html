@@ -1,1 +1,54 @@
-<p>mis-turnos works!</p>
+<ng-container [ngSwitch]="rolUsuarioActual">
+  <ng-container *ngSwitchCase="'especialista'">
+    <div class="container">
+      <h2>TURNOS ESPECIALISTA</h2>
+    </div>
+    <div class="container">
+      <div class="container-detalles">
+        <!-- TABLA TURNOS ESPECIALISTAS -->
+        <app-tabla-turnos-especialista 
+          [turnos]="turnosEspecialista" 
+          (turnoSeleccionado)="seleccionar($event)">
+        </app-tabla-turnos-especialista>
+      </div>
+    </div>
+
+    <div class="container">
+      <mat-card appearance="outlined" class="carta-detalle">
+        <mat-card-header>
+          <mat-card-title> <strong>Detalle turno</strong> </mat-card-title>              
+        </mat-card-header>
+        
+        <mat-card-content>
+          <app-turnos-especialista [turno]="turnoSeleccionado"></app-turnos-especialista>
+        </mat-card-content>        
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'paciente'">
+    <div class="container">
+      <h2>TURNOS PACIENTE</h2>
+    </div>
+    <div class="container">
+      <div class="container-detalles">
+        <app-tabla-turnos-paciente 
+          [turnos]="turnosPaciente" 
+          (turnoSeleccionado)="seleccionar($event)">
+        </app-tabla-turnos-paciente>
+      </div>
+    </div>
+
+    <div class="container">
+      <mat-card appearance="outlined" class="carta-detalle">
+        <mat-card-header>
+          <mat-card-title> <strong>Detalle turno</strong> </mat-card-title>              
+        </mat-card-header>
+        
+        <mat-card-content>
+          <app-turnos-paciente [turno]="turnoSeleccionado"></app-turnos-paciente>
+        </mat-card-content>        
+      </mat-card>
+    </div>
+  </ng-container>
+</ng-container>

@@ -3,7 +3,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from './servicios/logout.service';
 import { CommonModule } from '@angular/common';
-
+import {MatMenuModule} from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +13,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,CommonModule,RouterLink,
-    MatToolbarModule,MatButtonModule,MatCardModule, MatProgressBar, MatSidenavModule
+    MatToolbarModule,MatButtonModule,MatCardModule, MatProgressBar, MatSidenavModule,MatMenuModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

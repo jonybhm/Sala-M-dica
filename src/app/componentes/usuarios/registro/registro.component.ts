@@ -1,7 +1,7 @@
 import { Component,signal , OnInit} from '@angular/core';
 import {Auth, createUserWithEmailAndPassword, sendEmailVerification} from '@angular/fire/auth'
 import { Router} from '@angular/router';
-import { addDoc,collection, Firestore } from '@angular/fire/firestore';
+import { addDoc,collection, Firestore,updateDoc } from '@angular/fire/firestore';
 import { LogoutService } from '../../../servicios/logout.service';
 import { ErrorService } from '../../../servicios/error.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -61,7 +61,16 @@ export class RegistroComponent implements OnInit {
           especialidad: especialistaForm.value.especialidad,
           habilitado: false,
           imagenPerfil1: especialistaForm.value.imagenPerfil1
-        });  
+        })
+        .then((docRef) => {
+          updateDoc(docRef, { id: docRef.id }).then(() => {
+            console.log("ID usuario agregado al documento");
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        }
+      );  
 
       sendEmailVerification(res.user)
       .then(() => {
@@ -146,7 +155,15 @@ export class RegistroComponent implements OnInit {
           imagenPerfil2: pacienteForm.value.imagenPerfil2,
           habilitado: true,
 
-        });  
+        }).then((docRef) => {
+          updateDoc(docRef, { id: docRef.id }).then(() => {
+            console.log("ID usuario agregado al documento");
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        }
+      );
 
       sendEmailVerification(res.user)
       .then(() => {
@@ -228,7 +245,15 @@ export class RegistroComponent implements OnInit {
           dni: especialistaForm.value.documento,
           imagenPerfil1: especialistaForm.value.imagenPerfil1,
           habilitado: true,
-        });  
+        }).then((docRef) => {
+          updateDoc(docRef, { id: docRef.id }).then(() => {
+            console.log("ID usuario agregado al documento");
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        }
+      );    
 
       sendEmailVerification(res.user)
       .then(() => {

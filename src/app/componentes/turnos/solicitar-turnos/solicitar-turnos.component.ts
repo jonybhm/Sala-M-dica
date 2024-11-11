@@ -3,7 +3,7 @@ import { formatDate } from '@angular/common';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { Subscription } from 'rxjs';
-import { addDoc,query,collection, Firestore, orderBy, collectionData,where } from '@angular/fire/firestore';
+import { addDoc,query,collection, Firestore, orderBy, collectionData,where,updateDoc } from '@angular/fire/firestore';
 import { Router} from '@angular/router';
 import { ErrorService } from '../../../servicios/error.service';
 import { Timestamp } from 'firebase/firestore';
@@ -26,6 +26,7 @@ export class SolicitarTurnosComponent implements OnInit{
   pacienteActual!:any;
   especialidadActual:string = "";
   mailEspecialistaActual:string = "";
+  especialistaActual!:any;
   rolUsuarioActual:string = "";
 
   espaciosDisponibles:any = [];
@@ -92,6 +93,7 @@ export class SolicitarTurnosComponent implements OnInit{
 
   onEspecialistaSeleccionado() 
   {
+    this.mailEspecialistaActual = this.especialistaActual.email;
     console.log('mail especialista: ',this.mailEspecialistaActual);
 
     const coleccion = collection(this.firestore, `agendas`);
@@ -205,25 +207,31 @@ export class SolicitarTurnosComponent implements OnInit{
       "pacienteMail": this.pacienteActual.email,
       "pacienteNombre": this.pacienteActual.nombre,
       "pacienteApellido": this.pacienteActual.apellido,
-      "sectorAtencion ": this.agendaActual.sector,
-      "tipoAtencion ": this.agendaActual.tipoAtencion,
-      "especialista": this.mailEspecialistaActual,
-    }).then(() => {
-      console.log("Turno asignado");
+      "sectorAtencion": this.agendaActual.sector,
+      "tipoAtencion": this.agendaActual.tipoAtencion,
+      "especialistaNombre": this.especialistaActual.nombre,
+      "especialistaApellido": this.especialistaActual.apellido,
+      "especialistaMail": this.especialistaActual.email,
+      "estado": "Pendiente",
+      "comentario": "",
+      "calificacionAtencion": null
+    }).then((docRef) => {
+      console.log("Turno asignado con ID:", docRef.id);
+      this.error.Toast.fire(
+        {
+          title:'Turno asignado',
+          icon:'success'
+        }
+      );
+      // Ahora que tenemos el ID, lo añadimos al documento.
+      updateDoc(docRef, { id: docRef.id }).then(() => {
+        console.log("ID agregado al documento");
+      });
+    }).catch((error) => {
+      console.error("Error al asignar el turno:", error);
     });
 
-    // this.turnosAsignados.push({
-    //   fecha: fechaSinHora,
-    //   horario: this.horaTurno,
-    //   pacienteMail: this.auth.currentUser?.email,
-    // });
-
-    this.error.Toast.fire(
-      {
-        title:'Turno asignado',
-        icon:'success'
-      }
-    );
+    
     
   }
 

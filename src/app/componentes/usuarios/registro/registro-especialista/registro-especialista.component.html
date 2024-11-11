@@ -68,7 +68,7 @@
                 <mat-label>Edad</mat-label>
                 <input matInput  type="text" class="form-control" id="edad" formControlName="edad">
                 <mat-error *ngIf="edad?.hasError('min') || edad?.hasError('max')">
-                    Debe estar entre 19 y 99.
+                    Debe estar entre 21 y 65.
                 </mat-error>
                 <mat-error *ngIf="edad?.hasError('required') && (edad?.touched || edad?.dirty)">
                     Campo requerido
