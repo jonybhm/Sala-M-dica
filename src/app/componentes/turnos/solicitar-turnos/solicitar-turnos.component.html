@@ -58,7 +58,7 @@
                 <tr *ngFor="let espacio of espaciosDisponibles">
                     <td>{{espacio.hora}}:{{espacio.minutos | number: '2.0'}}</td>
                     <td *ngFor="let fecha of fechasDisponible"
-                        [ngClass]="{ 'disponible': estaDisponible(fecha, espacio), 'seleccionado': estaSeleccionado(fecha, espacio) }"
+                        [ngClass]="{ 'disponible': estaDisponible(fecha, espacio,especialistaActual.email), 'seleccionado': estaSeleccionado(fecha, espacio) }"
                         (click)="onClickEspacio(fecha, espacio)">
                     </td>
                     </tr>

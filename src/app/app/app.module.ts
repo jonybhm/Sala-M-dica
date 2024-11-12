@@ -48,19 +48,20 @@ import { TurnosComponent } from '../componentes/turnos/turnos/turnos.component';
 import { TablaTurnosEspecialistaComponent } from '../componentes/turnos/tabla-turnos-especialista/tabla-turnos-especialista.component';
 import { TablaTurnosPacienteComponent } from '../componentes/turnos/tabla-turnos-paciente/tabla-turnos-paciente.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { RegistroAgendaComponent } from '../componentes/usuarios/registro-agenda/registro-agenda.component';
 
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
     PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent,
   MisTurnosComponent, TurnosAdminComponent,TurnosEspecialistaComponent,TurnosPacienteComponent,TurnosComponent,
-  TablaTurnosEspecialistaComponent,TablaTurnosPacienteComponent],
+  TablaTurnosEspecialistaComponent,TablaTurnosPacienteComponent,RegistroAgendaComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
     MatDatepickerModule,MatMenuModule,NgxCaptchaModule,
     MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,MatProgressBar,MatTableModule,
     MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,MatProgressSpinnerModule,
-    MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule, 
+    MatRadioModule,MatSelectModule,MatSliderModule,MatToolbarModule,MatAutocompleteModule,MatCheckboxModule, MatDatepickerModule
     
   ]
 })

@@ -89,11 +89,11 @@
             <mat-form-field appearance="fill" class="form-encuesta">
                 
                     <mat-label>Especialidad</mat-label> 
-                    <mat-select class="form-control" id="especialidad" formControlName="especialidad">
+                    <mat-select class="form-control" id="especialidad" formControlName="especialidad" multiple>
                         <mat-option *ngFor="let opcion of opciones" [value]="opcion.especialidad">{{ opcion.especialidad }}</mat-option>                        
                     </mat-select>
-                    <mat-error *ngIf="especialidad?.hasError('pattern')">
-                        Especialidad invalida
+                    <mat-error *ngIf="especialidad?.hasError('minLength')">
+                        Debe seleccionar por lo menos una
                     </mat-error>
                     <mat-error *ngIf="especialidad?.hasError('required') && (especialidad?.touched || especialidad?.dirty)">
                         Campo requerido

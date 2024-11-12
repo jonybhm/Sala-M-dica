@@ -1,0 +1,115 @@
+<form [formGroup]="form" (ngSubmit)="onRegistrar()">
+    <p>Completar datos del Especialista</p>
+        
+    <div class="container">           
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Días de la semana</mat-label> 
+                <mat-select class="form-control" id="diasSemana" formControlName="diasSemana" multiple>
+                    <mat-option [value]="'Lunes'">Lunes</mat-option>                        
+                    <mat-option [value]="'Martes'">Martes</mat-option>                        
+                    <mat-option [value]="'Miércoles'">Miércoles</mat-option>                        
+                    <mat-option [value]="'Jueves'">Jueves</mat-option>                        
+                    <mat-option [value]="'Viernes'">Viernes</mat-option>                        
+                </mat-select>                
+                <mat-error *ngIf="diasSemana?.hasError('minLength')">
+                    Debe seleccionar por lo menos un dia
+                </mat-error>
+                <mat-error *ngIf="diasSemana?.hasError('required') && (diasSemana?.touched || diasSemana?.dirty)">
+                    Campo requerido
+                </mat-error>    
+        </mat-form-field>    
+
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Duración atención</mat-label> 
+                <mat-select class="form-control" id="duracionAtencionMinutos" formControlName="duracionAtencionMinutos">
+                    <mat-option [value]="10">10</mat-option>                        
+                    <mat-option [value]="15">15</mat-option>                        
+                    <mat-option [value]="20">20</mat-option>                        
+                    <mat-option [value]="25">25</mat-option>                        
+                    <mat-option [value]="30">30</mat-option>                        
+                </mat-select>
+                <mat-error *ngIf="duracionAtencionMinutos?.hasError('required') && (duracionAtencionMinutos?.touched || duracionAtencionMinutos?.dirty)">
+                    Campo requerido
+                </mat-error>    
+        </mat-form-field>    
+
+
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Horario Inicio</mat-label>
+            <input matInput  type="number" class="form-control" id="horarioInicio" formControlName="horarioInicio">
+            <mat-error *ngIf="horarioInicio?.hasError('pattern') || horarioInicio?.hasError('maxLength')">
+                Sólo debe contener numeros
+            </mat-error>
+            <mat-error *ngIf="horarioInicio?.hasError('min') || horarioInicio?.hasError('max')">
+                Debe estar entre 7 y 18.
+            </mat-error>
+            <mat-error *ngIf="horarioInicio?.hasError('required') && (horarioInicio?.touched || horarioInicio?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Horario Final</mat-label>
+            <input matInput  type="number" class="form-control" id="horarioFinal" formControlName="horarioFinal">
+            <mat-error *ngIf="horarioFinal?.hasError('pattern') || horarioFinal?.hasError('maxLength')">
+                Sólo debe contener numeros
+            </mat-error>
+            <mat-error *ngIf="horarioFinal?.hasError('min') || horarioFinal?.hasError('max')">
+                Debe estar entre 7 y 18.
+            </mat-error>
+            <mat-error *ngIf="horarioFinal?.hasError('required') && (horarioFinal?.touched || horarioFinal?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field appearance="fill" class="form-encuesta">                
+            <mat-label>Sector especialidad</mat-label> 
+            <mat-select class="form-control" id="sector" formControlName="sector">
+                <mat-option *ngFor="let sector of usuario.especialidad" [value]="sector">{{ sector }}</mat-option>                        
+            </mat-select>
+            <mat-error *ngIf="sector?.hasError('required') && (sector?.touched || sector?.dirty)">
+                Campo requerido
+            </mat-error>                       
+        </mat-form-field>    
+    
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Tipo de atención</mat-label>
+            <input matInput  type="text" class="form-control" id="tipoAtencion" formControlName="tipoAtencion">
+            <mat-error *ngIf="tipoAtencion?.hasError('pattern') && (tipoAtencion?.touched || tipoAtencion?.dirty)">
+                Sólo puede contener letras o numeros
+            </mat-error>
+            <mat-error *ngIf="tipoAtencion?.hasError('required') && (tipoAtencion?.touched || tipoAtencion?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>    
+        
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Fecha de inicio agenda</mat-label>
+            <input matInput [matDatepicker]="pickerInicio" class="form-control" id="fechaInicio" formControlName="fechaInicio">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicio></mat-datepicker>
+            <mat-error *ngIf="fechaInicio?.hasError('required') && (fechaInicio?.touched || fechaInicio?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Fecha de cierre agenda</mat-label>
+            <input matInput [matDatepicker]="picker" class="form-control" id="fechaCierre" formControlName="fechaCierre">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="fechaCierre?.hasError('required') && (fechaCierre?.touched || fechaCierre?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+          
+    </div>
+
+    <div class="container"> 
+        <button mat-flat-button color="primary" type="submit" class="boton"> Registrar Agenda</button>
+    </div>
+
+</form>

@@ -3,6 +3,8 @@ import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { Subscription } from 'rxjs';
 import { addDoc,query,collection, Firestore, orderBy, collectionData,where } from '@angular/fire/firestore';
+import { Timestamp } from 'firebase/firestore';
+
 
 @Component({
   selector: 'app-tabla-turnos-especialista',
@@ -39,5 +41,14 @@ export class TablaTurnosEspecialistaComponent {
   seleccionar(turno: any) 
   {
     this.turnoSeleccionado.emit(turno);
+  }
+
+  formatearFecha(timestamp: Timestamp)
+  {
+    const date = timestamp.toDate();
+    const dia = date.getDate().toString().padStart(2, '0');
+    const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+    const año = date.getFullYear();
+    return `${dia}/${mes}/${año}`;
   }
 }

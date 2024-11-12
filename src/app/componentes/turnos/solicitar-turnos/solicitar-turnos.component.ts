@@ -80,7 +80,7 @@ export class SolicitarTurnosComponent implements OnInit{
   onEspecialidadSeleccionada() 
   {
     const coleccion = collection(this.firestore, `usuarios`);
-    const filteredQuery = query(coleccion, where(`especialidad`, "==", `${this.especialidadActual}`));
+    const filteredQuery = query(coleccion, where(`especialidad`, "array-contains", `${this.especialidadActual}`));
     const observable = collectionData(filteredQuery);
     this.sub = observable.subscribe((respuesta: any) => {
       this.especialistas = respuesta;
@@ -138,7 +138,7 @@ export class SolicitarTurnosComponent implements OnInit{
 
   onClickEspacio(fecha: Date, espacio: { hora: number, minutos: number }) 
   {
-    if (this.estaDisponible(fecha, espacio)) {
+    if (this.estaDisponible(fecha, espacio,this.especialistaActual.email)) {
       this.fechaTurno = fecha;
       this.horaTurno = espacio;
       this.turnoSeleccionado = true;
@@ -164,7 +164,7 @@ export class SolicitarTurnosComponent implements OnInit{
     
   }
 
-  estaDisponible(fecha: Date, espacio: { hora: number, minutos: number })
+  estaDisponible(fecha: Date, espacio: { hora: number, minutos: number }, especialistaMail : string)
   {
     const fechaNormalizada = new Date(fecha);
     fechaNormalizada.setHours(0, 0, 0, 0);
@@ -176,7 +176,10 @@ export class SolicitarTurnosComponent implements OnInit{
       return (
         fechaTurnoAsignado.getTime() === fechaNormalizada.getTime() &&
         turno.horario.hora === espacio.hora &&
-        turno.horario.minutos === espacio.minutos
+        turno.horario.minutos === espacio.minutos && 
+        turno.especialistaMail  === especialistaMail  && 
+        turno.estado !== "Cancelado" &&            
+        turno.estado !== "Rechazado"
       );
     });
 

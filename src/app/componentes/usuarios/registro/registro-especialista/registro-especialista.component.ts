@@ -57,11 +57,11 @@ export class RegistroEspecialistaComponent implements OnInit{
       apellido: new FormControl('',[Validators.pattern('^[a-zA-Z]+$'),Validators.required]),
       edad: new FormControl('',[Validators.min(21),Validators.max(65),Validators.required]),
       documento: new FormControl('',[Validators.pattern('^[0-9]+$'),Validators.maxLength(8),Validators.required]),
-      especialidad: new FormControl('',[Validators.pattern('^[a-zA-Z]+$'),Validators.required]),
+      especialidad: new FormControl([],[Validators.required,Validators.minLength(1)]),
       mail: new FormControl('',[Validators.email,Validators.required]),
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
-      recaptcha:new FormControl('',[Validators.required]),
+      //recaptcha:new FormControl('',[Validators.required]),
 
       });
 

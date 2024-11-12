@@ -11,9 +11,12 @@ import { routes } from './app.routes';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import {provideNativeDateAdapter} from '@angular/material/core';
 registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
+  providers: [
+    provideNativeDateAdapter(),
+    provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideAnimationsAsync(), 
     provideFirebaseApp(() => initializeApp(enviromentConfig)), 
     provideAuth(() => getAuth()), 
