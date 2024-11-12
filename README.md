@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/GITHUB_USERNAME/REPO_SLUG">
-    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/caja-medica.png?alt=media&token=94721211-7ae3-4289-9b67-083398f8e525" alt="Logo" width="700" height="100">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/caja-medica.png?alt=media&token=94721211-7ae3-4289-9b67-083398f8e525" alt="Logo" width="100" height="100">
   </a>
 </h1>
 
