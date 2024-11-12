@@ -41,9 +41,10 @@ export class RegistroPacienteComponent implements OnInit{
   imagenPerfilUrl: string | null = null;
   imagenFile1!:any;
   imagenFile2!:any;
-
+  siteKey:string = "6LfViHgqAAAAABYV1V_B0fueWlGs8zdG0CT1Q5Mp";
   ngOnInit(): void {
-  
+
+    
     this.form = new FormGroup({
       nombre: new FormControl('',[Validators.pattern('^[a-zA-Z]+$'),Validators.required]),
       apellido: new FormControl('',[Validators.pattern('^[a-zA-Z]+$'),Validators.required]),
@@ -54,6 +55,7 @@ export class RegistroPacienteComponent implements OnInit{
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
       imagenPerfil2: new FormControl(null,[Validators.required]),
+      recaptcha:new FormControl('',[Validators.required]),
       })
 }
 
@@ -155,6 +157,8 @@ get nombre()
     }
     
 
-   
+    executeRecaptchaVisible(captchaResponse: any){
+      this.form.patchValue({recaptcha: captchaResponse});
+    }
 
 }

@@ -127,7 +127,7 @@ export class LoginComponent {
         this.claveUsuario = "123456";
       break;
       case 'especialista2':
-        this.usuario = "jony.bhm@gmail.com";
+        this.usuario = "fefigi5993@operades.com";
         this.claveUsuario = "123456";
       break;
       case 'admin':

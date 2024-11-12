@@ -101,6 +101,14 @@
                 
             </mat-form-field>    
 
+            <div class="row mb-1 mt-3">
+                <ngx-recaptcha2 #captchaElem
+                                [siteKey]="siteKey"
+                                (success)="executeRecaptchaVisible($event)"
+                                formControlName="recaptcha">
+                </ngx-recaptcha2>
+            </div>
+
             
             
         </div>

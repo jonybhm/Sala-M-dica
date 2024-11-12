@@ -35,6 +35,8 @@ export class RegistroEspecialistaComponent implements OnInit{
   sub!: Subscription;
   mostrarInputNuevaOpcion = false;
   nuevaEspecialidad:string="";
+  siteKey:string = "6LfViHgqAAAAABYV1V_B0fueWlGs8zdG0CT1Q5Mp";
+
   //================REGISTRO USUARIOS NUEVOS================
   
   
@@ -59,7 +61,8 @@ export class RegistroEspecialistaComponent implements OnInit{
       mail: new FormControl('',[Validators.email,Validators.required]),
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
-      
+      recaptcha:new FormControl('',[Validators.required]),
+
       });
 
       this.obtenerOpciones();
@@ -191,5 +194,9 @@ get nombre()
           especialidad: nuevaOpcion
         });  
   }
-    
+
+  executeRecaptchaVisible(captchaResponse: any){
+    this.form.patchValue({recaptcha: captchaResponse});
+  }
+
 }
