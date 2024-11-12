@@ -61,7 +61,7 @@ export class RegistroEspecialistaComponent implements OnInit{
       mail: new FormControl('',[Validators.email,Validators.required]),
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
-      //recaptcha:new FormControl('',[Validators.required]),
+      recaptcha:new FormControl('',[Validators.required]),
 
       });
 
