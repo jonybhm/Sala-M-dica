@@ -122,7 +122,11 @@ export class LoginComponent {
   {
     switch(rol)
     {
-      case 'especialista':
+      case 'especialista1':
+        this.usuario = "jony.bhm@gmail.com";
+        this.claveUsuario = "123456";
+      break;
+      case 'especialista2':
         this.usuario = "jony.bhm@gmail.com";
         this.claveUsuario = "123456";
       break;
@@ -130,8 +134,16 @@ export class LoginComponent {
         this.usuario = "jonydecas@gmail.com";
         this.claveUsuario = "123456";
       break;
-      case 'paciente':
+      case 'paciente1':
         this.usuario = "jejenig588@opposir.com";
+        this.claveUsuario = "123456";
+      break;
+      case 'paciente2':
+        this.usuario = "yimane7824@opposir.com";
+        this.claveUsuario = "123456";
+      break;
+      case 'paciente3':
+        this.usuario = "deral40583@inikale.com";
         this.claveUsuario = "123456";
       break;
     }

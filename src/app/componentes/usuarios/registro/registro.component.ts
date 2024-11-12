@@ -320,5 +320,8 @@ export class RegistroComponent implements OnInit {
       this.hide.set(!this.hide());
       event.stopPropagation();
     }
-  
+    
+    seleccionarRol(rol: string) {
+      this.rolUsuario = rol;
+    }
 }

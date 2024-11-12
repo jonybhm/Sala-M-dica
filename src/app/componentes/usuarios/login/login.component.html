@@ -30,17 +30,8 @@
     </mat-form-field>
 </div>
 
-<div style="display: flex; justify-content: center;">
-    <button mat-raised-button color="primary" (click)="Autocompletar('especialista')" class="boton">
-        AUTOCOMPLETAR ESPECIALISTA 
-    </button>
-    <button mat-raised-button color="primary" (click)="Autocompletar('admin')" class="boton">
-        AUTOCOMPLETAR ADMIN
-    </button>    
-    <button mat-raised-button color="primary" (click)="Autocompletar('paciente')" class="boton">
-        AUTOCOMPLETAR PACIENTE
-    </button>
-</div>
+
+
 <div class="container"> 
     <button mat-flat-button color="primary" (click)="IniciarSesion('/home')" class="boton">
         <span class="material-symbols-outlined">login</span>
@@ -50,5 +41,20 @@
         <span class="material-symbols-outlined">id_card</span>
         REGISTRARSE
     </button>
+</div>
+
+<div style="display: flex; justify-content: center;">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilpaciente%2Fhappy-woman-thinking-looking-at-side-at-home_jpg.png?alt=media&token=f56ce8ff-1361-47a5-b0ee-26754bb72b83" 
+    alt="Inicio sesion paciente" class="boton-login-usuario" (click)="Autocompletar('paciente1')">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilpaciente%2Flionel-messi-fue-a-la-cancha-y-sorprendio-a-todos-HDDKI5EXMRDABESAGAD2FMPUOQ_png.png?alt=media&token=276cc4ce-9af7-4232-a0b8-76a6377c55af" 
+    alt="Inicio sesion paciente" class="boton-login-usuario" (click)="Autocompletar('paciente2')">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilpaciente%2Fconcept-of-suffering-from-terrible-pain-beautiful-sad-upset-unhappy-troubled-weak-woman-with_jpg.png?alt=media&token=90f0b858-8a8e-44e5-9b17-314cba3ceb7e"
+    alt="Inicio sesion paciente" class="boton-login-usuario" (click)="Autocompletar('paciente3')">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilEspecialista%2Fcv.jpg?alt=media&token=97028fa5-de42-494b-b6ba-867f9b3e2741" 
+    alt="Inicio sesion Especialista" class="boton-login-usuario" (click)="Autocompletar('especialista1')">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilEspecialista%2F1000_F_560133026_FjpSMbdH973S3IZW4IqaWkTsCYuGvInJ_jpg.png?alt=media&token=0a0b34b2-9d60-43d3-85a7-458cae818f9e"
+    alt="Inicio sesion Especialista" class="boton-login-usuario" (click)="Autocompletar('especialista2')">
+    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/fotoPerfilAdmin%2FJRDC.jpg?alt=media&token=a2f288ba-d6ee-42f5-b4b6-cfac95861960" 
+    alt="Inicio sesion admin" class="boton-login-usuario" (click)="Autocompletar('admin')">    
 </div>
 

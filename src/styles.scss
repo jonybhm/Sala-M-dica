@@ -44,6 +44,29 @@ $theme: mat.define-theme((
   border-radius: 50%;
   object-fit: cover;
 }
+
+.boton-icono {
+  height: 120px;
+  width: 120px;
+  margin: 3px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 5px solid;
+  border-color: #005CBB;
+}
+
+.boton-login-usuario {
+  height: 60px;
+  width: 60px;
+  margin: 2px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid;
+  border-color: #005CBB;
+}
+
 .carta{
   
   margin: 10px;
@@ -73,6 +96,13 @@ $theme: mat.define-theme((
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  padding: 20px;
+}
+
+.container-botones-registro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
 }
 body {
