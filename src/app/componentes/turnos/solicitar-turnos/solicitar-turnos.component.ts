@@ -46,7 +46,8 @@ export class SolicitarTurnosComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.obtenerDatosEspecialidadesDB();
+    // this.obtenerDatosEspecialidadesDB();
+    this.obtenerDatosEspecialistasDB();
     this.obtenerRolActual();
 
   }
@@ -64,76 +65,131 @@ export class SolicitarTurnosComponent implements OnInit{
     });
   }
 
-  obtenerDatosEspecialidadesDB() 
-  {
-    const coleccion = collection(this.firestore, 'especialidades');
-    const filteredQuery = query(coleccion, orderBy("especialidad", "asc"));
-    const observable = collectionData(filteredQuery);
+  // obtenerDatosEspecialidadesDB() 
+  // {
+  //   const coleccion = collection(this.firestore, 'especialidades');
+  //   const filteredQuery = query(coleccion, orderBy("especialidad", "asc"));
+  //   const observable = collectionData(filteredQuery);
   
-    this.sub = observable.subscribe((respuesta: any) => {
-      this.especialidades = respuesta;
+  //   this.sub = observable.subscribe((respuesta: any) => {
+  //     this.especialidades = respuesta;
       
-      console.log('ESPECIALIDADES: ',respuesta);
-    });
-  }
+  //     console.log('ESPECIALIDADES: ',respuesta);
+  //   });
+  // }
 
-  onEspecialidadSeleccionada() 
+  obtenerDatosEspecialistasDB() 
   {
     const coleccion = collection(this.firestore, `usuarios`);
-    const filteredQuery = query(coleccion, where(`especialidad`, "array-contains", `${this.especialidadActual}`));
+    const filteredQuery = query(coleccion, where(`rol`, "==", `especialista`));
     const observable = collectionData(filteredQuery);
     this.sub = observable.subscribe((respuesta: any) => {
       this.especialistas = respuesta;
     });
 
-    this.agendaActual = null;
-    this.mailEspecialistaActual = "";
-    this.agendaActual = null;
+    // this.agendaActual = null;
+    // this.mailEspecialistaActual = "";
+    // this.agendaActual = null;
   }
 
-  onEspecialistaSeleccionado() 
+  seleccionarEspecialista(especialista: any) 
   {
-    this.mailEspecialistaActual = this.especialistaActual.email;
-    console.log('mail especialista: ',this.mailEspecialistaActual);
-
+    this.especialistaActual = especialista;
+    this.mailEspecialistaActual = especialista.email;
+  
     const coleccion = collection(this.firestore, `agendas`);
     const filteredQuery = query(coleccion, where(`usuarioMail`, "==", `${this.mailEspecialistaActual}`));
     const observable = collectionData(filteredQuery);
     this.sub = observable.subscribe((respuesta: any) => {
       this.agendas = respuesta;
     });
-
+  
     this.agendaActual = null;
   }
-
-  onAgendaSeleccionada()
-  {
+  
+  seleccionarAgenda(agenda: any) {
+    this.agendaActual = agenda;
+  
     this.espaciosDisponibles = [];
-    for(let hora = this.agendaActual.horarioInicio; hora < this.agendaActual.horarioFinal; hora++  )
+    for (let hora = agenda.horarioInicio; hora < agenda.horarioFinal; hora++) 
     {
-      for(let minutos = 0; minutos < 60; minutos += this.agendaActual.duracionAtencionMinutos)
+      for (let minutos = 0; minutos < 60; minutos += agenda.duracionAtencionMinutos) 
       {
-        this.espaciosDisponibles.push({hora,minutos});
+        this.espaciosDisponibles.push({ hora, minutos });
       }
     }
-
-    if(this.rolUsuarioActual === 'admin')
+  
+    if (this.rolUsuarioActual === 'admin') 
     {
       this.obtenerListadoPacientes();
-    }
-    else if(this.rolUsuarioActual === 'paciente')
+    } 
+    else if (this.rolUsuarioActual === 'paciente') 
     {
       this.pacienteActual = this.usuarioActual[0];
-      //console.log("PACIENTE ACTUAL: ", this.pacienteActual);
-
-      console.log("pacienteMail", this.pacienteActual.email,
-      "pacienteNombre", this.pacienteActual.nombre,
-      "pacienteApellido", this.pacienteActual.apellido,)
     }
-
+  
     this.obtenerDatosTurnosAsignadosDB();
     this.calcularFechasTurnosDisponibles();
-  }  
+  }
+  
+
+  // onEspecialidadSeleccionada() 
+  // {
+  //   const coleccion = collection(this.firestore, `usuarios`);
+  //   const filteredQuery = query(coleccion, where(`especialidad`, "array-contains", `${this.especialidadActual}`));
+  //   const observable = collectionData(filteredQuery);
+  //   this.sub = observable.subscribe((respuesta: any) => {
+  //     this.especialistas = respuesta;
+  //   });
+
+  //   this.agendaActual = null;
+  //   this.mailEspecialistaActual = "";
+  //   this.agendaActual = null;
+  // }
+
+  // onEspecialistaSeleccionado() 
+  // {
+  //   this.mailEspecialistaActual = this.especialistaActual.email;
+  //   console.log('mail especialista: ',this.mailEspecialistaActual);
+
+  //   const coleccion = collection(this.firestore, `agendas`);
+  //   const filteredQuery = query(coleccion, where(`usuarioMail`, "==", `${this.mailEspecialistaActual}`));
+  //   const observable = collectionData(filteredQuery);
+  //   this.sub = observable.subscribe((respuesta: any) => {
+  //     this.agendas = respuesta;
+  //   });
+
+  //   this.agendaActual = null;
+  // }
+
+  // onAgendaSeleccionada()
+  // {
+  //   this.espaciosDisponibles = [];
+  //   for(let hora = this.agendaActual.horarioInicio; hora < this.agendaActual.horarioFinal; hora++  )
+  //   {
+  //     for(let minutos = 0; minutos < 60; minutos += this.agendaActual.duracionAtencionMinutos)
+  //     {
+  //       this.espaciosDisponibles.push({hora,minutos});
+  //     }
+  //   }
+
+  //   if(this.rolUsuarioActual === 'admin')
+  //   {
+  //     this.obtenerListadoPacientes();
+  //   }
+  //   else if(this.rolUsuarioActual === 'paciente')
+  //   {
+  //     this.pacienteActual = this.usuarioActual[0];
+  //     //console.log("PACIENTE ACTUAL: ", this.pacienteActual);
+
+  //     console.log("pacienteMail", this.pacienteActual.email,
+  //     "pacienteNombre", this.pacienteActual.nombre,
+  //     "pacienteApellido", this.pacienteActual.apellido,)
+  //   }
+
+  //   this.obtenerDatosTurnosAsignadosDB();
+  //   this.calcularFechasTurnosDisponibles();
+  // }  
   
   onPacienteSeleccionado()
   {
@@ -309,6 +365,13 @@ export class SolicitarTurnosComponent implements OnInit{
   //   });
 
   // }
+
+  calcularHoraCompleta(espacio: any)
+  {
+    const fecha = new Date();
+    fecha.setHours(espacio.hora, espacio.minutos, 0, 0); 
+    return fecha;
+  }
 }
   
  

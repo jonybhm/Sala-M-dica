@@ -191,7 +191,8 @@ get nombre()
   {
     const userDocRef = collection(this.firestore, 'especialidades');
         addDoc(userDocRef, {
-          especialidad: nuevaOpcion
+          especialidad: nuevaOpcion,
+          imagen:"https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/logosEspecialidades%2FlogoGeneral.png?alt=media&token=eb25387a-df42-44b6-a20c-63f6ef8d448c",
         });  
   }
 

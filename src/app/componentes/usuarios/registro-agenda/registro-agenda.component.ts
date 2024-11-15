@@ -1,7 +1,7 @@
 import { Component,OnInit,Input } from '@angular/core';
 
 import {Auth} from '@angular/fire/auth'
-import { addDoc,collection, Firestore, updateDoc,query, orderBy, collectionData,} from '@angular/fire/firestore';
+import { addDoc,collection, Firestore, updateDoc,query, orderBy, collectionData,where} from '@angular/fire/firestore';
 import { LogoutService } from '../../../servicios/logout.service';
 import { ErrorService } from '../../../servicios/error.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +22,8 @@ import { Router} from '@angular/router';
 export class RegistroAgendaComponent implements OnInit{
   @Input() usuario: any;
   form!: FormGroup;
-
+  sub!: Subscription;
+  imagenSector:string="";
   constructor(
     public auth:Auth,
     public logout:LogoutService,
@@ -86,6 +87,8 @@ export class RegistroAgendaComponent implements OnInit{
   {
     if (this.form.valid)
     {    
+      this.obtenerImagenEspecialidad(this.form.value.sector);
+
       const userDocRef = collection(this.firestore, 'agendas');
         addDoc(userDocRef, {
          
@@ -98,6 +101,7 @@ export class RegistroAgendaComponent implements OnInit{
           fechaInicio:this.form.value.fechaInicio,
           fechaCierre:this.form.value.fechaCierre,
           diasSemana:this.form.value.diasSemana,
+          imagen:this.imagenSector
         })
         .then((docRef) => {
           updateDoc(docRef, { id: docRef.id }).then(() => {
@@ -128,4 +132,17 @@ export class RegistroAgendaComponent implements OnInit{
     }
   }
   
+
+  obtenerImagenEspecialidad(nombreEspecialidad:string) 
+  {
+    const coleccion = collection(this.firestore, `especialidades`);
+    const filteredQuery = query(coleccion, where(`especialidad`, "==", nombreEspecialidad));
+    const observable = collectionData(filteredQuery);
+    this.sub = observable.subscribe((respuesta: any) => {
+      this.imagenSector = respuesta.especialidad;     
+      
+    });
+
+
+  }
 }
