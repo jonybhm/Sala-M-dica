@@ -55,7 +55,7 @@ export class RegistroPacienteComponent implements OnInit{
       contrasena: new FormControl('',[Validators.pattern('^[a-zA-Z0-9*]+$'),Validators.required]),
       imagenPerfil1: new FormControl(null,[Validators.required]),
       imagenPerfil2: new FormControl(null,[Validators.required]),
-      recaptcha:new FormControl('',[Validators.required]),
+      //recaptcha:new FormControl('',[Validators.required]),
       })
 }
 

@@ -19,10 +19,8 @@ export class SubirImagenesService implements OnInit{
     return new Promise((resolve, reject) => {
       const imgRef = ref(this.storage, `${carpetaNombre}/${file.name}`);
       
-      //Subir la imagen
       uploadBytes(imgRef, file)
         .then(async response => {
-          //Obtener el URL de descarga
           const url = await getDownloadURL(response.ref);
           console.log('URL de descarga:', url);
           resolve(url);

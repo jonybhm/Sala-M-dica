@@ -121,9 +121,14 @@ export class SolicitarTurnosComponent implements OnInit{
     {
       this.obtenerListadoPacientes();
     }
-    else
+    else if(this.rolUsuarioActual === 'paciente')
     {
-      this.obtenerPacienteActual();
+      this.pacienteActual = this.usuarioActual[0];
+      //console.log("PACIENTE ACTUAL: ", this.pacienteActual);
+
+      console.log("pacienteMail", this.pacienteActual.email,
+      "pacienteNombre", this.pacienteActual.nombre,
+      "pacienteApellido", this.pacienteActual.apellido,)
     }
 
     this.obtenerDatosTurnosAsignadosDB();
@@ -133,6 +138,7 @@ export class SolicitarTurnosComponent implements OnInit{
   onPacienteSeleccionado()
   {
     console.log("PACIENTE ACTUAL: ", this.pacienteActual);
+    
   }
   //====================fechaLOG DETALLES TURNO==========================
 
@@ -292,17 +298,17 @@ export class SolicitarTurnosComponent implements OnInit{
 
   }
 
-  obtenerPacienteActual() 
-  {
-    const coleccion = collection(this.firestore, `usuarios`);
-    const filteredQuery = query(coleccion, where(`email`, "==", this.auth.currentUser?.email));
-    const observable = collectionData(filteredQuery);
-    this.sub = observable.subscribe((respuesta: any) => {
-      this.pacienteActual = respuesta;
-      console.log("PACIENTE ACTUAL: ", this.pacienteActual);
-    });
+  // obtenerPacienteActual() 
+  // {
+  //   const coleccion = collection(this.firestore, `usuarios`);
+  //   const filteredQuery = query(coleccion, where(`email`, "==", this.auth.currentUser?.email));
+  //   const observable = collectionData(filteredQuery);
+  //   this.sub = observable.subscribe((respuesta: any) => {
+  //     this.pacienteActual = respuesta;
+  //     console.log("PACIENTE ACTUAL: ", this.pacienteActual);
+  //   });
 
-  }
+  // }
 }
   
  
