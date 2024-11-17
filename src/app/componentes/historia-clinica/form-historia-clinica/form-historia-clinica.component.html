@@ -1,0 +1,82 @@
+<form [formGroup]="form" (ngSubmit)="onRegistrar()">
+    <p>Completar datos de la Atencion en la Historia Clinica</p>
+        
+    <div class="container">                 
+
+
+
+        <mat-form-field appearance="fill" class="form-encuesta">
+            <mat-label>Altura</mat-label>
+            <input matInput  type="number" class="form-control" id="altura" formControlName="altura">
+            <mat-error *ngIf="altura?.hasError('pattern') || altura?.hasError('maxLength')">
+                Sólo debe contener numeros
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('min') || altura?.hasError('max')">
+                Debe estar entre 1 y 300.
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('required') && (altura?.touched || altura?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field appearance="fill">
+            <mat-label>Peso</mat-label>
+            <input matInput type="number" formControlName="peso" />
+            <mat-error *ngIf="altura?.hasError('pattern') || altura?.hasError('maxLength')">
+                Sólo debe contener numeros
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('min') || altura?.hasError('max')">
+                Debe estar entre 1 y 500.
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('required') && (altura?.touched || altura?.dirty)">
+                Campo requerido
+            </mat-error>          
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Temperatura</mat-label>
+            <input matInput type="number" formControlName="temperatura" />
+            <mat-error *ngIf="altura?.hasError('pattern') || altura?.hasError('maxLength')">
+                Sólo debe contener numeros
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('min') || altura?.hasError('max')">
+                Debe estar entre 30 y 45.
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('required') && (altura?.touched || altura?.dirty)">
+                Campo requerido
+            </mat-error>          
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Presión</mat-label>
+            <input matInput type="number" formControlName="presion" />
+            <mat-error *ngIf="altura?.hasError('pattern') || altura?.hasError('maxLength')">
+                Sólo debe contener numeros
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('min') || altura?.hasError('max')">
+                Debe estar entre 60 y 180.
+            </mat-error>
+            <mat-error *ngIf="altura?.hasError('required') && (altura?.touched || altura?.dirty)">
+                Campo requerido
+            </mat-error>
+        </mat-form-field>
+        
+        <p>Datos Adicionales</p>
+        <ng-container *ngFor="let index of [1, 2, 3]">
+            <mat-form-field appearance="fill">
+                <mat-label>Dato {{ index }}</mat-label>
+                <input matInput [formControlName]="'clave' + index" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Valor {{ index }}</mat-label>
+                <input matInput [formControlName]="'valor' + index" />
+            </mat-form-field>
+        </ng-container>
+          
+    </div>
+
+    <div class="container"> 
+        <button mat-flat-button color="primary" type="submit" class="boton"> Guardar Historia</button>
+    </div>
+
+</form>

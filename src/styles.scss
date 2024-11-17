@@ -73,6 +73,18 @@ $theme: mat.define-theme((
   padding: 10px;
   cursor: pointer;
 }
+
+.container-app{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -80,6 +92,7 @@ $theme: mat.define-theme((
     align-items: center;
     padding: 20px;
     width: 100%;
+    
 }
 .container2 {
   display: flex;
@@ -161,13 +174,18 @@ card-paises{
 }
 
   .sidenav-container {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
     height: 50vh;
+    width: 100%;
+    background-color: #d7d7d7;
   }
   
   .bottom-sidenav {
     position: absolute;
     bottom: 0;
-    height: 100%; /* Ajusta la altura según lo necesites */
+    height: 100%;
     width: 100%;
   }
   

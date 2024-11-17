@@ -3,6 +3,8 @@ import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { Subscription } from 'rxjs';
 import { addDoc,query,collection, Firestore, orderBy, collectionData,where } from '@angular/fire/firestore';
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
 
 @Component({
   selector: 'app-usuarios',
@@ -42,6 +44,35 @@ export class UsuariosComponent implements OnInit{
   seleccionar(usuario: any)
   {
     this.usuarioSeleccionado = usuario;
+  }
+
+  descargarExcel() {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet('Usuarios');
+
+    worksheet.columns = [
+      { header: 'Email', key: 'email'},
+      { header: 'Apellido', key: 'apellido'},
+      { header: 'Nombre', key: 'nombre'},
+      { header: 'Documento', key: 'dni'},
+      { header: 'Edad', key: 'edad'},
+      { header: 'Rol', key: 'rol'},
+    ];
+
+    this.usuarios.forEach((usuario) => {
+      worksheet.addRow({
+        email: usuario.email,
+        apellido: usuario.apellido,
+        nombre: usuario.nombre,
+        dni: usuario.dni,
+        edad: usuario.edad,
+        rol: usuario.rol,
+      });
+    });    
+
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      fs.saveAs(new Blob([buffer]), 'usuarios.xlsx');
+    });
   }
 
  

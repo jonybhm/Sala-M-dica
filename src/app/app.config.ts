@@ -12,6 +12,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage()),
     provideHttpClient(),
+    provideAnimations(),
     { provide: LOCALE_ID, useValue: 'es' }
   ]
 };

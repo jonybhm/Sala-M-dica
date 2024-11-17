@@ -49,13 +49,16 @@ import { TablaTurnosEspecialistaComponent } from '../componentes/turnos/tabla-tu
 import { TablaTurnosPacienteComponent } from '../componentes/turnos/tabla-turnos-paciente/tabla-turnos-paciente.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { RegistroAgendaComponent } from '../componentes/usuarios/registro-agenda/registro-agenda.component';
+import { HistoriaClinicaComponent } from '../componentes/historia-clinica/historia-clinica.component';
+import { ListaAtencionesAnterioresComponent } from '../componentes/historia-clinica/lista-atenciones-anteriores/lista-atenciones-anteriores.component';
+import { FormHistoriaClinicaComponent } from '../componentes/historia-clinica/form-historia-clinica/form-historia-clinica.component';
 
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
     PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent,
-  MisTurnosComponent, TurnosAdminComponent,TurnosEspecialistaComponent,TurnosPacienteComponent,TurnosComponent,
-  TablaTurnosEspecialistaComponent,TablaTurnosPacienteComponent,RegistroAgendaComponent],
+    MisTurnosComponent, TurnosAdminComponent,TurnosEspecialistaComponent,TurnosPacienteComponent,TurnosComponent, HistoriaClinicaComponent,ListaAtencionesAnterioresComponent,
+    FormHistoriaClinicaComponent,TablaTurnosEspecialistaComponent,TablaTurnosPacienteComponent,RegistroAgendaComponent],
   imports: [
     CommonModule, RouterLink,FormsModule,BrowserModule,BrowserAnimationsModule,ReactiveFormsModule,
     MatDatepickerModule,MatMenuModule,NgxCaptchaModule,

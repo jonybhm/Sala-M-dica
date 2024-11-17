@@ -6,10 +6,9 @@
     </div>
     <div class="container">
     <div class="container-detalles">
-
       <mat-card appearance="outlined" class="carta-detalle">
         <mat-card-header>
-            <mat-card-title> <strong>Lista usuarios</strong> </mat-card-title>
+          <mat-card-title> <strong>Lista usuarios</strong> </mat-card-title>
             
         </mat-card-header>
         
@@ -25,7 +24,10 @@
             </ng-container>
           </table>
         </mat-card-content>
-        
+        <mat-card-actions>
+          <button mat-flat-button color="primary" (click)="descargarExcel()">Descargar Excel</button>
+        </mat-card-actions>
+
     </mat-card>
     
     <br>

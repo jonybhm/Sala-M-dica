@@ -13,18 +13,24 @@ import { MiPerfilComponent } from './componentes/usuarios/mi-perfil/mi-perfil.co
 import { SolicitarTurnosComponent } from './componentes/turnos/solicitar-turnos/solicitar-turnos.component';
 import { MisTurnosComponent } from './componentes/turnos/mis-turnos/mis-turnos.component';
 import { TurnosComponent } from './componentes/turnos/turnos/turnos.component';
+import { AnimationComponent } from './componentes/animations/animation/animation.component';
+import { AnimationListComponent } from './componentes/animations/animation-list/animation-list.component';
+import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'bienvenida', pathMatch: "full"},
-    {path: 'login', component: LoginComponent},
-    {path: 'bienvenida', component: BienvenidaComponent},
-    {path: 'miPerfil', component: MiPerfilComponent, canActivate: [authLoginGuard]},
-    {path: 'solicitarTurnos', component: SolicitarTurnosComponent, canActivate: [authLoginGuard]},
-    {path: 'misTurnos', component: MisTurnosComponent, canActivate: [authLoginGuard]},
-    {path: 'turnos', component: TurnosComponent, canActivate: [authLoginGuard,authAdminGuard]},
-    {path: 'registro', component: RegistroComponent},
-    {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard,authHabilitadoGuard]},
-    {path: 'prueba', component: PruebaComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authHabilitadoGuard]},
-    {path: 'usuarios', component: UsuariosComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authAdminGuard,authHabilitadoGuard]},
+    {path: 'animation', component: AnimationComponent, data: { animation: 'animation' }},
+    {path: 'listAnimation', component: AnimationListComponent, data: { animation: 'listAnimation' } },
+    {path: 'login', component: LoginComponent, data: { animation: 'login' }},
+    {path: 'bienvenida', component: BienvenidaComponent, data: { animation: 'bienvenida' }},
+    {path: 'miPerfil', component: MiPerfilComponent, canActivate: [authLoginGuard], data: { animation: 'miPerfil' }},
+    {path: 'solicitarTurnos', component: SolicitarTurnosComponent, canActivate: [authLoginGuard], data: { animation: 'solicitarTurnos' }},
+    {path: 'misTurnos', component: MisTurnosComponent, canActivate: [authLoginGuard], data: { animation: 'misTurnos' }},
+    {path: 'historiaClinica', component: HistoriaClinicaComponent, canActivate: [authLoginGuard], data: { animation: 'historiaClinica' }},
+    {path: 'turnos', component: TurnosComponent, canActivate: [authLoginGuard,authAdminGuard], data: { animation: 'turnos' }},
+    {path: 'registro', component: RegistroComponent, data: { animation: 'registro' }},
+    {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard,authHabilitadoGuard], data: { animation: 'home' }},
+    {path: 'prueba', component: PruebaComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authHabilitadoGuard], data: { animation: 'prueba' }},
+    {path: 'usuarios', component: UsuariosComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authAdminGuard,authHabilitadoGuard], data: { animation: 'usuarios' }},
     
 ];

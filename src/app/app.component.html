@@ -83,24 +83,25 @@
 </ng-container>
 
 
-<div class="container">
-
-    <mat-card class="carta-router" appearance="outlined">      
-      <mat-card-content>
-          <router-outlet />        
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <mat-sidenav-container class="sidenav-container">
-    
-    <div class="main-content">
-
-        
+<div class="main-layout">
+    <!-- Animación del contenido principal -->
+    <div class="container-app" [@routeAnimations]="getRouteAnimationData()">
+      <mat-card class="carta-router" appearance="outlined">      
+        <mat-card-content>
+          <router-outlet></router-outlet>        
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <!-- Sidenav inferior -->
+    <mat-sidenav-container class="sidenav-container">
+      <div class="main-content">        
         <h3>Información de Contacto</h3>
         <p>Teléfono: +123456789</p>
         <p>Email: .com</p>
-    </div>
-  </mat-sidenav-container>
-
+      </div>
+    </mat-sidenav-container>
+  </div>
+  
+        
 

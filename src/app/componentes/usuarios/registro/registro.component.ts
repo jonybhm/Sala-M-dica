@@ -7,12 +7,13 @@ import { ErrorService } from '../../../servicios/error.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BuscarDatosUsuariosService } from '../../../servicios/buscar-datos-usuarios.service';
 import { RolUsuarioActualService } from '../../../servicios/rol-usuario.service';
-
+import { hideAnimation } from '../../../animations/animations';
 @Component({
   selector: 'app-registro',
 
   templateUrl: './registro.component.html',
-  styleUrl: './registro.component.scss'
+  styleUrl: './registro.component.scss',
+  animations: [hideAnimation]
 })
 export class RegistroComponent implements OnInit {
   constructor(
@@ -26,7 +27,7 @@ export class RegistroComponent implements OnInit {
   )
   {}
   //================REGISTRO USUARIOS NUEVOS================
-  
+  isShown = false;
   rolUsuarioActual!:string;
 
   rolUsuario: string = "";
@@ -323,5 +324,6 @@ export class RegistroComponent implements OnInit {
     
     seleccionarRol(rol: string) {
       this.rolUsuario = rol;
+      this.isShown = !this.isShown;
     }
 }

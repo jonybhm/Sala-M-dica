@@ -6,8 +6,8 @@ import { Timestamp } from 'firebase/firestore';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { ComentarioService } from '../../../servicios/comentario.service';
 import { ErrorService } from '../../../servicios/error.service';
-
-
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { FormHistoriaClinicaComponent } from '../../historia-clinica/form-historia-clinica/form-historia-clinica.component';
 @Component({
   selector: 'app-turnos-especialista',
   templateUrl: './turnos-especialista.component.html',
@@ -25,6 +25,7 @@ export class TurnosEspecialistaComponent {
     private firestore: Firestore,
     private comentarioService:ComentarioService,
     private error:ErrorService,
+    private _bottomSheet:MatBottomSheet 
 
   )
   {}
@@ -61,6 +62,8 @@ export class TurnosEspecialistaComponent {
   {
     this.mostrarComentario = true;
     this.turno.estado = 'Realizado';
+    this._bottomSheet.open(FormHistoriaClinicaComponent);
+   
   }
   
   verComentario()

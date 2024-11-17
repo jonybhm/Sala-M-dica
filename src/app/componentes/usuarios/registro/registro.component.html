@@ -30,7 +30,9 @@
     
 </div>
 
-<div class="container">
+
+
+<div [@simpleFadeToggle]="isShown ? 'shown' : 'hidden'" class="container">
 
 
         <ng-container *ngIf="rolUsuario === 'especialista'">     
