@@ -1,4 +1,4 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { collection, Firestore,  where,query,collectionData} from '@angular/fire/firestore';
@@ -25,11 +25,33 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
   {}
 
   ngOnInit(): void {
-    this.obtenerAtencionesAnteriores();  
+
+    if(this.usuario)
+    {
+      console.log("USUARIO PARA H.C.:",this.usuario);
+      this.obtenerAtencionesAnteriores();  
+    }
+    else
+    {
+      console.log("NO SE SELECCIONO USUARIO");
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['usuario'] && changes['usuario'].currentValue) 
+    {
+      this.isLoading = true; 
+      this.obtenerAtencionesAnteriores();
+    }
   }
 
   obtenerAtencionesAnteriores() 
   {
+    if (!this.usuario || !this.usuario.email)
+    {
+      this.isLoading = false;
+      return;
+    }
     const coleccion = collection(this.firestore, 'historiasClinicas');
     const consulta = query(coleccion, where('usuarioMail', '==', this.usuario.email));
   
