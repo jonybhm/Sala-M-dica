@@ -325,5 +325,6 @@ export class RegistroComponent implements OnInit {
     seleccionarRol(rol: string) {
       this.rolUsuario = rol;
       this.isShown = !this.isShown;
+      
     }
 }

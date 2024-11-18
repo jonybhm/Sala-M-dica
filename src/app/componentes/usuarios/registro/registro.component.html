@@ -16,15 +16,21 @@
         </mat-select>
     </mat-form-field> -->
 
-    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/doctor.png?alt=media&token=614e0872-66e2-4c1a-a72e-1bcfc982d78e" 
-    alt="Registro Especialista" class="boton-icono" (click)="seleccionarRol('especialista')">
+    <button class="registro-boton" (click)="seleccionarRol('especialista')" [class.selected]="rolUsuario === 'especialista'">
+        <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/doctor.png?alt=media&token=614e0872-66e2-4c1a-a72e-1bcfc982d78e" 
+        alt="Registro Especialista" class="registro-imagen" >        
+    </button>
 
-    <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/paciente.png?alt=media&token=f02551c7-80e2-4f8c-8770-f45b0ae86e76"
-    alt="Registro Paciente" class="boton-icono" (click)="seleccionarRol('paciente')">
+    <button class="registro-boton" (click)="seleccionarRol('paciente')" [class.selected]="rolUsuario === 'paciente'">
+        <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/paciente.png?alt=media&token=f02551c7-80e2-4f8c-8770-f45b0ae86e76" 
+        alt="Registro Paciente" class="registro-imagen" >        
+    </button>
     
     <ng-container *ngIf="rolUsuarioActual === 'admin'">     
-        <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/admin.png?alt=media&token=c9e6b650-4841-4367-ba0b-a66d96a95be6" 
-        alt="Registro Admin" class="boton-icono" (click)="seleccionarRol('admin')">
+        <button class="registro-boton" (click)="seleccionarRol('admin')" [class.selected]="rolUsuario === 'admin'">
+            <img src="https://firebasestorage.googleapis.com/v0/b/sala-medica.firebasestorage.app/o/admin.png?alt=media&token=c9e6b650-4841-4367-ba0b-a66d96a95be6" 
+            alt="Registro Admin" class="registro-imagen" >        
+        </button>
     </ng-container>
 
     

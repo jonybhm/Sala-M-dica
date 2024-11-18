@@ -10,6 +10,7 @@ import { Router} from '@angular/router';
 import { routes } from '../../../app.routes';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Inject } from '@angular/core';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 @Component({
   selector: 'app-form-historia-clinica',
   templateUrl: './form-historia-clinica.component.html',
@@ -27,7 +28,7 @@ export class FormHistoriaClinicaComponent implements OnInit {
     private error:ErrorService,
     private firestore:Firestore, 
     private router: Router,
-
+    private bottomSheetRef: MatBottomSheetRef<FormHistoriaClinicaComponent>
   )
   {}
 
@@ -98,8 +99,9 @@ export class FormHistoriaClinicaComponent implements OnInit {
         .then((docRef) => {
           updateDoc(docRef, { id: docRef.id });
           console.log("Historia guardada con éxito.");
-
+          
           this.router.navigate(['/home']);
+          this.bottomSheetRef.dismiss();
 
         })
         .catch((error) => {

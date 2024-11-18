@@ -8,7 +8,18 @@
         <table mat-list class="lista-detalle">
             <ng-container *ngFor="let atencion of atencionesAnteriores">
                 <mat-list-item>
-                    <span matListItemLine>{{ atencion.fecha.toDate() | date }} - {{ atencion.altura }} cm - {{ atencion.peso }} kg</span>       
+                    <span matListItemLine><strong>{{ atencion.fecha.toDate() | date }}</strong></span>
+                    <br>     
+                    <span > {{ atencion.altura }} cm - {{ atencion.peso }} kg</span>
+                    <br>     
+                    <span > {{ atencion.temperatura }} °C - {{ atencion.presion }}</span>
+                    <br>     
+                    <ng-container *ngFor="let datoDinamico of atencion.datosDinamicos">
+                        <mat-list-item>
+                            <span matListItemLine>{{ datoDinamico.clave }}: {{ datoDinamico.valor }} </span>
+                            <br>       
+                        </mat-list-item>
+                    </ng-container>  
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </ng-container>

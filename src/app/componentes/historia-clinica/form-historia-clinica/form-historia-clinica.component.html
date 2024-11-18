@@ -7,6 +7,7 @@
         <mat-form-field appearance="fill" class="form-encuesta">
             <mat-label>Altura</mat-label>
             <input matInput type="number" class="form-control" id="altura" formControlName="altura">
+            <span matSuffix> [cm] </span>
             <mat-error *ngIf="altura?.hasError('pattern') || altura?.hasError('maxLength')">
                 Sólo debe contener números
             </mat-error>
@@ -21,6 +22,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Peso</mat-label>
             <input matInput type="number" formControlName="peso" />
+            <span matSuffix> [kg] </span>
             <mat-error *ngIf="peso?.hasError('pattern') || peso?.hasError('maxLength')">
                 Sólo debe contener números
             </mat-error>
@@ -35,6 +37,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Temperatura</mat-label>
             <input matInput type="number" formControlName="temperatura" />
+            <span matSuffix> [°C] </span>
             <mat-error *ngIf="temperatura?.hasError('pattern') || temperatura?.hasError('maxLength')">
                 Sólo debe contener números
             </mat-error>
@@ -49,6 +52,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Presión</mat-label>
             <input matInput type="number" formControlName="presion" />
+            <span matSuffix> [mm Hg] </span>
             <mat-error *ngIf="presion?.hasError('pattern') || presion?.hasError('maxLength')">
                 Sólo debe contener números
             </mat-error>
@@ -64,7 +68,7 @@
         <ng-container formGroupName="datosDinamicos">
             <ng-container *ngFor="let index of [1, 2, 3]">
                 <mat-form-field appearance="fill">
-                    <mat-label>Clave {{ index }}</mat-label>
+                    <mat-label>Dato {{ index }}</mat-label>
                     <input matInput [formControlName]="'clave' + index" />
                 </mat-form-field>
                 <mat-form-field appearance="fill">
