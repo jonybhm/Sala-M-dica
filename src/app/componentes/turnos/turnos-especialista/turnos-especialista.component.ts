@@ -8,8 +8,18 @@ import { ComentarioService } from '../../../servicios/comentario.service';
 import { ErrorService } from '../../../servicios/error.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { FormHistoriaClinicaComponent } from '../../historia-clinica/form-historia-clinica/form-historia-clinica.component';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { MatInput } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-turnos-especialista',
+  standalone:true,
+  imports:[CommonModule,MatCardModule,MatFormFieldModule,MatLabel,FormsModule,ReactiveFormsModule,MatListModule,MatInput,MatButtonModule],
   templateUrl: './turnos-especialista.component.html',
   styleUrl: './turnos-especialista.component.scss'
 })
@@ -58,12 +68,15 @@ export class TurnosEspecialistaComponent {
     this.actualizarTurno();
   }
   
-  finalizarTurno()
-  {
+  finalizarTurno() {
     this.mostrarComentario = true;
     this.turno.estado = 'Realizado';
-    this._bottomSheet.open(FormHistoriaClinicaComponent);
-   
+
+    this._bottomSheet.open(FormHistoriaClinicaComponent, {
+      data: { usuarioPacienteMail: this.turno.pacienteMail,
+        usuarioEspecialistaMail: this.turno.especialistaMail,
+       }, 
+    });
   }
   
   verComentario()

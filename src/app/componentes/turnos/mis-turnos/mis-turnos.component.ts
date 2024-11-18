@@ -3,9 +3,21 @@ import { Auth } from '@angular/fire/auth';
 import { LogoutService } from '../../../servicios/logout.service';
 import { Subscription } from 'rxjs';
 import { query, collection, Firestore, orderBy, collectionData, where } from '@angular/fire/firestore';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { TurnosEspecialistaComponent } from '../turnos-especialista/turnos-especialista.component';
+import { TurnosPacienteComponent } from '../turnos-paciente/turnos-paciente.component';
+import { TablaTurnosEspecialistaComponent } from '../tabla-turnos-especialista/tabla-turnos-especialista.component';
+import { TablaTurnosPacienteComponent } from '../tabla-turnos-paciente/tabla-turnos-paciente.component';
 
 @Component({
   selector: 'app-mis-turnos',
+  standalone:true,
+  imports:[CommonModule,MatCardModule,MatFormFieldModule,FormsModule,ReactiveFormsModule,MatListModule,
+    TurnosEspecialistaComponent,TurnosPacienteComponent,TablaTurnosEspecialistaComponent,TablaTurnosPacienteComponent],
   templateUrl: './mis-turnos.component.html',
   styleUrls: ['./mis-turnos.component.scss']
 })

@@ -6,9 +6,21 @@ import { Timestamp } from 'firebase/firestore';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { ComentarioService } from '../../../servicios/comentario.service';
 import { ErrorService } from '../../../servicios/error.service';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatDivider } from '@angular/material/divider';
+import { MatInput } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-turnos-paciente',
+  standalone:true,
+  imports:[CommonModule,MatCardModule,MatFormFieldModule,MatLabel,FormsModule,ReactiveFormsModule,MatListModule,MatInput,MatButtonModule],
   templateUrl: './turnos-paciente.component.html',
   styleUrl: './turnos-paciente.component.scss'
 })

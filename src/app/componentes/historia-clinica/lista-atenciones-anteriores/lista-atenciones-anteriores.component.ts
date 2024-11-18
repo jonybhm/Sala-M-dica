@@ -1,7 +1,7 @@
 import { Component,OnInit,Input } from '@angular/core';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
-import { addDoc,collection, Firestore, updateDoc, where,query,orderBy,collectionData} from '@angular/fire/firestore';
+import { collection, Firestore,  where,query,collectionData} from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 
 
@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class ListaAtencionesAnterioresComponent implements OnInit{
   @Input() usuario: any;
+  isLoading = true;
+
   sub!: Subscription;
   atencionesAnteriores: any[] = [];
 
@@ -23,18 +25,20 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
   {}
 
   ngOnInit(): void {
-
-    this.obtenerAtencionesAnteriores();
+    this.obtenerAtencionesAnteriores();  
   }
 
   obtenerAtencionesAnteriores() 
   {
     const coleccion = collection(this.firestore, 'historiasClinicas');
-    const consulta = query(coleccion, where('usuario', '==', this.usuario.id), orderBy('fecha', 'desc'));
+    const consulta = query(coleccion, where('usuarioMail', '==', this.usuario.email));
   
     collectionData(consulta).subscribe((historias) => {
       this.atencionesAnteriores = historias;
+      this.isLoading = false;
+
     });
   }
 
+  
 }

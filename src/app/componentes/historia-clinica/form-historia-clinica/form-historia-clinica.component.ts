@@ -8,17 +8,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router} from '@angular/router';
 import { routes } from '../../../app.routes';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { Inject } from '@angular/core';
 @Component({
   selector: 'app-form-historia-clinica',
   templateUrl: './form-historia-clinica.component.html',
   styleUrl: './form-historia-clinica.component.scss'
 })
 export class FormHistoriaClinicaComponent implements OnInit {
-  @Input() usuario: any;
+  usuarioPaciente!: any;
   form!: FormGroup;
   sub!: Subscription;
-
+  
   constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     public auth:Auth,
     public logout:LogoutService,
     private error:ErrorService,
@@ -29,6 +32,8 @@ export class FormHistoriaClinicaComponent implements OnInit {
   {}
 
   ngOnInit(): void {
+    console.log(this.data.usuarioPacienteMail);
+    console.log(this.data.usuarioEspecialistaMail);
 
     
     this.form = new FormGroup({
@@ -64,10 +69,12 @@ export class FormHistoriaClinicaComponent implements OnInit {
   }
   get datosDinamicos() 
   {
-    return this.form.get('altura');
+    return this.form.get('datosDinamicos') as FormGroup;
   }
+  
 
   onRegistrar() {
+    console.log(this.usuarioPaciente);
     if (this.form.valid) 
     {
       const userDocRef = collection(this.firestore, 'historiasClinicas');
@@ -84,7 +91,8 @@ export class FormHistoriaClinicaComponent implements OnInit {
         temperatura: Number(this.form.value.temperatura),
         presion: Number(this.form.value.presion),
         datosDinamicos: datosDinamicos,
-        usuario: this.usuario.id,
+        usuarioMail: this.data.usuarioPacienteMail,
+        especialistaMail:this.data.usuarioEspecialistaMail,
         fecha: new Date()
       })
         .then((docRef) => {
@@ -112,5 +120,17 @@ export class FormHistoriaClinicaComponent implements OnInit {
       });
     }
   }
+
+  // obtenerUsuarioPacienteDB() 
+  // {
+  //   const coleccion = collection(this.firestore, 'usuarios');
+  //   const filteredQuery = query(coleccion, where("email", "==", this.data.usuarioPacienteMail));
+  //   const observable = collectionData(filteredQuery);
+  
+  //   this.sub = observable.subscribe((respuesta: any) => {
+  //     this.usuarioPaciente = respuesta;
+  //     console.log(respuesta);
+  //   });
+  // }
   
 }

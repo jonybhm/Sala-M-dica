@@ -25,7 +25,7 @@ export const routes: Routes = [
     {path: 'bienvenida', component: BienvenidaComponent, data: { animation: 'bienvenida' }},
     {path: 'miPerfil', component: MiPerfilComponent, canActivate: [authLoginGuard], data: { animation: 'miPerfil' }},
     {path: 'solicitarTurnos', component: SolicitarTurnosComponent, canActivate: [authLoginGuard], data: { animation: 'solicitarTurnos' }},
-    {path: 'misTurnos', component: MisTurnosComponent, canActivate: [authLoginGuard], data: { animation: 'misTurnos' }},
+    {path: 'misTurnos', component: MisTurnosComponent, canActivate: [authLoginGuard]},
     {path: 'historiaClinica', component: HistoriaClinicaComponent, canActivate: [authLoginGuard], data: { animation: 'historiaClinica' }},
     {path: 'turnos', component: TurnosComponent, canActivate: [authLoginGuard,authAdminGuard], data: { animation: 'turnos' }},
     {path: 'registro', component: RegistroComponent, data: { animation: 'registro' }},

@@ -24,19 +24,10 @@
             <p><strong>DNI:</strong> {{ usuario.dni }}</p>
             <p><strong>Obra Social:</strong> {{ usuario.obraSocial }}</p>
 
-            <!-- HISTORIA CLINICA -->
-            <div class="container">
-                <mat-card appearance="outlined" class="carta-detalle">
-                  <mat-card-header>
-                    <mat-card-title> <strong>HISTORIA CLINICA</strong> </mat-card-title>              
-                  </mat-card-header>
-                  
-                  <mat-card-content>
-                    <app-lista-atenciones-anteriores [usuario]="usuario"></app-lista-atenciones-anteriores>
-                  </mat-card-content>        
-                </mat-card>
-            </div>
+            
+        
         </div>
+        
         <div *ngIf="usuario.rol === 'admin'">
             <p>Detalle Admin</p>
             <div class="containerfoto">
@@ -46,6 +37,8 @@
             <p><strong>Edad:</strong> {{ usuario.edad }}</p>
             <p><strong>DNI:</strong> {{ usuario.dni }}</p>
         </div>
+
+        <!-- REGISTRO AGENDA -->
         <div *ngIf="usuario.rol === 'especialista'">
             <mat-card  appearance="outlined">      
                 <mat-card-content>
@@ -53,5 +46,15 @@
                 </mat-card-content>
             </mat-card>
         </div>
+
+        <!-- HISTORIA CLINICA -->
+        <div *ngIf="usuario.rol === 'paciente'">
+            <mat-card appearance="outlined" class="carta-detalle">
+              <mat-card-content>
+                <app-lista-atenciones-anteriores [usuario]="usuario"></app-lista-atenciones-anteriores>
+              </mat-card-content>        
+            </mat-card>
+        </div>
+        
     </div>
 </ng-container>
