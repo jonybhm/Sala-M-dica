@@ -22,7 +22,7 @@ import { slideInAnimation } from './animations/animations';
   animations:[slideInAnimation]
 })
 export class AppComponent {
-  title = 'primer-parcial-DeCastroJonathan';
+  title = 'Sala Médica';
   isLoading = true;
   constructor(
     public auth: Auth, 

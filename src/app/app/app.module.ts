@@ -52,12 +52,13 @@ import { HistoriaClinicaComponent } from '../componentes/historia-clinica/histor
 import { ListaAtencionesAnterioresComponent } from '../componentes/historia-clinica/lista-atenciones-anteriores/lista-atenciones-anteriores.component';
 import { FormHistoriaClinicaComponent } from '../componentes/historia-clinica/form-historia-clinica/form-historia-clinica.component';
 import { TurnosModule } from '../modulos/turnos/turnos.module';
+import { PacientesComponent } from '../componentes/historia-clinica/pacientes/pacientes.component';
 
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
     PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent,
-    TurnosAdminComponent,TurnosComponent, HistoriaClinicaComponent,ListaAtencionesAnterioresComponent,
+    TurnosAdminComponent,TurnosComponent, HistoriaClinicaComponent,ListaAtencionesAnterioresComponent,PacientesComponent,
     FormHistoriaClinicaComponent,RegistroAgendaComponent],
   imports: [
     TurnosModule,

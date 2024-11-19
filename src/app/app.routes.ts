@@ -16,6 +16,8 @@ import { TurnosComponent } from './componentes/turnos/turnos/turnos.component';
 import { AnimationComponent } from './componentes/animations/animation/animation.component';
 import { AnimationListComponent } from './componentes/animations/animation-list/animation-list.component';
 import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
+import { PacientesComponent } from './componentes/historia-clinica/pacientes/pacientes.component';
+import { authEspecialistaGuard } from './guards/auth-especialista.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'bienvenida', pathMatch: "full"},
@@ -28,6 +30,7 @@ export const routes: Routes = [
     {path: 'misTurnos', component: MisTurnosComponent, canActivate: [authLoginGuard]},
     {path: 'historiaClinica', component: HistoriaClinicaComponent, canActivate: [authLoginGuard], data: { animation: 'historiaClinica' }},
     {path: 'turnos', component: TurnosComponent, canActivate: [authLoginGuard,authAdminGuard], data: { animation: 'turnos' }},
+    {path: 'pacientes', component: PacientesComponent, canActivate: [authLoginGuard,authEspecialistaGuard], data: { animation: 'pacientes' }},
     {path: 'registro', component: RegistroComponent, data: { animation: 'registro' }},
     {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard,authHabilitadoGuard], data: { animation: 'home' }},
     {path: 'prueba', component: PruebaComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authHabilitadoGuard], data: { animation: 'prueba' }},

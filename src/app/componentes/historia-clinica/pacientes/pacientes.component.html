@@ -1,0 +1,43 @@
+<div class="container-detalles">
+
+    <mat-card appearance="outlined" class="carta-detalle">
+
+        <mat-card-header>
+            <mat-card-title> <strong>Lista usuarios</strong> </mat-card-title>
+        </mat-card-header>
+      
+        <mat-card-content>
+            <table mat-list>
+                <ng-container *ngFor="let paciente of pacientesFiltrados; let i = index">
+                <mat-list-item>
+                <span matListItemLine>{{ paciente.email }}/{{ paciente.apellido }} {{ paciente.nombre }}</span>
+                <span class="spacer"></span>
+                <button mat-button (click)="seleccionar(paciente)" class="btn-detalles">Ver detalles</button>
+                <mat-divider></mat-divider>
+                </mat-list-item>
+            </ng-container>
+            </table>
+        </mat-card-content>
+    
+    </mat-card>
+  
+    <br>
+  
+    <mat-card appearance="outlined" class="carta-detalle">
+     
+        <mat-card-header>
+           <mat-card-title> <strong>Detalle paciente</strong> </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+            <app-detalle-usuarios [usuario]="pacienteSeleccionado"></app-detalle-usuarios>
+            <ng-container *ngIf="mostrarListaAtenciones">
+                <app-lista-atenciones-anteriores [paciente]="pacienteSeleccionado" (historiasPrevias)="actualizarMostrarLista($event)"></app-lista-atenciones-anteriores>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+  
+    <br>
+
+</div>
+  
