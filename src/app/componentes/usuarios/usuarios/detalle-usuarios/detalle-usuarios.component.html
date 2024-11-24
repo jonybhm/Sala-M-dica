@@ -4,12 +4,13 @@
         <div class="containerfoto">
             <img class="foto" src="{{usuario.imagenPerfil1}}" alt="{{usuario.email}}" >
         </div>
-        <p><strong>Nombre Apellido:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
+        <p><strong>Nombre Apellido:</strong> {{ usuario.nombre | tituloMedico}} {{ usuario.apellido }}</p>
         <p><strong>Edad:</strong> {{ usuario.edad }}</p>
         <p><strong>DNI:</strong> {{ usuario.dni }}</p>
         <p><strong>Especialidad:</strong> {{ usuario.especialidad }}</p>
         <p><strong>Habilitado:</strong>           
             <mat-checkbox [(ngModel)]="usuario.habilitado" (change)="onHabilitadoChange()"></mat-checkbox>
+            {{ usuario.habilitado | habilitado }}
         </p>
         
     </div>

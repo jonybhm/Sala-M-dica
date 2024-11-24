@@ -1,9 +1,7 @@
 <ng-container *ngIf="!isLoading">
 
     <div class="container">
-        <p><strong>
-            Historia Clinica Paciente
-        </strong></p>
+        <mat-card-title> <strong>Historia Clínica Paciente</strong> </mat-card-title>
         
         <table mat-list class="lista-detalle">
             <ng-container *ngFor="let atencion of atencionesAnteriores">
@@ -28,14 +26,12 @@
 
     <div *ngIf="atencionesAnteriores.length > 0">
         <mat-label for="profesionalSelect">Selecciona el profesional:</mat-label>
-        <mat-select id="profesionalSelect" #profesionalEmail>
-          <mat-option *ngFor="let atencion of atencionesAnteriores" [value]="atencion.especialistaMail">
+        <mat-select class="form-control" id="profesionalSelect" #profesionalEmail>
+          <mat-option *ngFor="let atencion of atencionesAnteriores | filtro:'especialistaMail' " [value]="atencion.especialistaMail">
             {{ atencion.especialistaApellido }} {{ atencion.especialistaNombre }}
           </mat-option>
         </mat-select>
-        <button mat-button color="primary" (click)="descargarHistoriaClinicaPorEspecialista(profesionalEmail.value)">
-          Descargar Historia Clínica
-        </button>
+        <button mat-flat-button color="primary" (click)="descargarHistoriaClinicaPorEspecialista(profesionalEmail.value)">Descargar Historia Clínica</button>
       </div>
       
 </ng-container>

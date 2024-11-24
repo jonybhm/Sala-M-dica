@@ -53,6 +53,9 @@ import { ListaAtencionesAnterioresComponent } from '../componentes/historia-clin
 import { FormHistoriaClinicaComponent } from '../componentes/historia-clinica/form-historia-clinica/form-historia-clinica.component';
 import { TurnosModule } from '../modulos/turnos/turnos.module';
 import { PacientesComponent } from '../componentes/historia-clinica/pacientes/pacientes.component';
+import { HabilitadoPipe } from '../pipes/habilitado.pipe';
+import { TituloMedicoPipe } from '../pipes/titulo-medico.pipe';
+import { FiltroPipe } from '../pipes/filtro.pipe';
 
 
 @NgModule({
@@ -61,7 +64,7 @@ import { PacientesComponent } from '../componentes/historia-clinica/pacientes/pa
     TurnosAdminComponent,TurnosComponent, HistoriaClinicaComponent,ListaAtencionesAnterioresComponent,PacientesComponent,
     FormHistoriaClinicaComponent,RegistroAgendaComponent],
   imports: [
-    TurnosModule,
+    TurnosModule,HabilitadoPipe,TituloMedicoPipe,FiltroPipe,
     CommonModule, RouterLink,FormsModule,ReactiveFormsModule,MatDatepickerModule,MatMenuModule,NgxCaptchaModule,
     MatButtonModule,MatIconModule,MatDividerModule,MatFormFieldModule,MatInputModule,MatProgressBar,MatTableModule,
     MatCardModule,MatListModule,MatTableModule, MatButtonToggleModule,MatLabel,MatProgressBarModule,MatProgressSpinnerModule,
