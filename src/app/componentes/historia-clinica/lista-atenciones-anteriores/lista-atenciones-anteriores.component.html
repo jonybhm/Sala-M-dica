@@ -25,6 +25,19 @@
             </ng-container>
         </table>
     </div>
+
+    <div *ngIf="atencionesAnteriores.length > 0">
+        <mat-label for="profesionalSelect">Selecciona el profesional:</mat-label>
+        <mat-select id="profesionalSelect" #profesionalEmail>
+          <mat-option *ngFor="let atencion of atencionesAnteriores" [value]="atencion.especialistaMail">
+            {{ atencion.especialistaApellido }} {{ atencion.especialistaNombre }}
+          </mat-option>
+        </mat-select>
+        <button mat-button color="primary" (click)="descargarHistoriaClinicaPorEspecialista(profesionalEmail.value)">
+          Descargar Historia Clínica
+        </button>
+      </div>
+      
 </ng-container>
 
 <ng-container *ngIf="isLoading">

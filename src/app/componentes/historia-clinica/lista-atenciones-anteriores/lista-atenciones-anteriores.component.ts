@@ -3,7 +3,8 @@ import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { collection, Firestore,  where,query,collectionData} from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
-
+import { jsPDF } from 'jspdf';
+import { FormatearFechaService } from '../../../servicios/formatear-fecha.service';
 
 @Component({
   selector: 'app-lista-atenciones-anteriores',
@@ -24,6 +25,8 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
     public auth:Auth,
     public logout:LogoutService,
     private firestore:Firestore, 
+    public fechaFormato:FormatearFechaService
+
   )
   {}
 
@@ -40,7 +43,7 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
 
     if(this.paciente)
       {
-        this.obtenerAtencionesAnterioresEspecialista();  
+        this.obtenerAtencionesAnterioresEspecialista(this.auth.currentUser?.email ?? "");  
       }
       else
       {
@@ -73,14 +76,14 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
     });
   }
 
-  obtenerAtencionesAnterioresEspecialista() 
+  obtenerAtencionesAnterioresEspecialista(especialistaMail:string) 
   {
     if (!this.paciente || !this.paciente.email)
     {
       this.isLoading = false;
       return;
     }
-    const especialistaMailActual = this.auth.currentUser?.email;
+    const especialistaMailActual = especialistaMail;
 
     if (!especialistaMailActual) 
     {
@@ -101,4 +104,60 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
       this.historiasPrevias.emit(historias);
     });
   }
+
+  descargarHistoriaClinicaPorEspecialista(profesionalEmail: string) {
+    this.obtenerAtencionesAnterioresEspecialista(profesionalEmail);
+  
+    const doc = new jsPDF();
+  
+    const logoUrl = '/caja-medica.png';
+    const img = new Image();
+    img.src = logoUrl;
+  
+    img.onload = () => {
+      doc.addImage(img, 'PNG', 10, 10, 30, 30);
+  
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.text(`Informe Médico-${this.usuario.apellido} ${this.usuario.nombre}`, 105, 20, { align: 'center' });
+  
+      const fechaEmision = new Date().toLocaleDateString();
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(12);
+      doc.text(`Fecha de emisión: ${fechaEmision}`, 105, 30, { align: 'center' });
+  
+      
+      let y = 60;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(12);
+      this.atencionesAnteriores.forEach((atencion, index) => {
+
+        doc.setFont('helvetica', 'bold');
+        doc.text(`Atención ${this.fechaFormato.formatearFecha(atencion.fecha)}:`, 20, y);
+        y += 10;
+  
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Altura: ${atencion.altura} cm - Peso: ${atencion.peso} kg`, 20, y);
+        y += 7;
+        doc.text(`Temperatura: ${atencion.temperatura} °C - Presión: ${atencion.presion}`, 20, y);
+        y += 7;
+  
+        atencion.datosDinamicos.forEach(datoDinamico => {
+          doc.text(`${datoDinamico.clave}: ${datoDinamico.valor}`, 20, y);
+          y += 7; 
+        });
+  
+        y += 10;
+      });
+  
+      doc.save(`informe_medico_${this.usuario.apellido}_${this.usuario.nombre}.pdf`);
+    };
+  
+    img.onerror = (error) => {
+      console.error('Error al cargar la imagen:', error);
+      alert('No se pudo cargar la imagen. Verifica que el archivo exista en la carpeta public.');
+    };
+  }
+  
 }

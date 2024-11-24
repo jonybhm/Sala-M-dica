@@ -94,6 +94,8 @@ export class FormHistoriaClinicaComponent implements OnInit {
         datosDinamicos: datosDinamicos,
         usuarioMail: this.data.usuarioPacienteMail,
         especialistaMail:this.data.usuarioEspecialistaMail,
+        especialistaNombre:this.data.usuarioEspecialistaNombre,
+        especialistaApellido:this.data.usuarioEspecialistaApellido,
         fecha: new Date()
       })
         .then((docRef) => {

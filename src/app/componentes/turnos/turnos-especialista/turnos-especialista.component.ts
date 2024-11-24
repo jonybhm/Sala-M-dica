@@ -75,6 +75,8 @@ export class TurnosEspecialistaComponent {
     this._bottomSheet.open(FormHistoriaClinicaComponent, {
       data: { usuarioPacienteMail: this.turno.pacienteMail,
         usuarioEspecialistaMail: this.turno.especialistaMail,
+        usuarioEspecialistaNombre: this.turno.especialistaNombre,
+        usuarioEspecialistaApellido: this.turno.especialistaApellido,
        }, 
     });
   }
