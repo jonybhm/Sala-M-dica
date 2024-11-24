@@ -283,6 +283,85 @@ card-paises{
     color: #000000;
   }
 
+  .menu-item-paciente {
+    display: flex;
+    align-items: center;
+  }
+  
+  .paciente-imagen {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+
+  }
+  
+  .container-detalles {
+    position: relative;
+    padding: 20px;
+  }
+  
+  .carta-detalle {
+    margin-top: 20px;
+  }
+  
+  .mat-menu-panel {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .custom-fab {
+    width: 60px; 
+    height: 60px; 
+    line-height: 60px;
+    border-radius: 50%; 
+    color: #3f51b5;
+    background-color: #CBDDFF;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .tarjetas-usuarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  
+  .tarjeta-usuario {
+    max-width: 300px;
+  }
+
+  .lista-usuarios-con-scroll {
+    max-height: 400px; 
+    overflow-y: auto;
+    padding: 16px;
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    background-color: #f9f9f9; 
+  }
+
+  .clickable-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; 
+  }
+  
+  .clickable-card:hover {
+    transform: scale(1.02); 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+  }
+  
+  
+  .tarjetas-usuarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .tarjeta-usuario {
+    max-width: 300px;
+  }
+  
 html {
   @include mat.all-component-themes($theme);
 }

@@ -63,4 +63,6 @@ export class PacientesComponent implements OnInit {
   {
     this.mostrarListaAtenciones = historias.length > 0;
   }
+
+
 }

@@ -1,58 +1,42 @@
-<div>
-    
-  
-    <div class="container">
-      <h2>USUARIO</h2>
-    </div>
-    <div class="container">
-    <div class="container-detalles">
-      <mat-card appearance="outlined" class="carta-detalle">
-        <mat-card-header>
-          <mat-card-title> <strong>Lista usuarios</strong> </mat-card-title>
-            
-        </mat-card-header>
-        
-        <mat-card-content>
-          <table mat-list>
-            <ng-container *ngFor="let usuario of usuarios; let i = index">
-              <mat-list-item>
-                <span matListItemLine>{{ usuario.email }}/{{ usuario.apellido }} {{ usuario.nombre }}</span>
-                <span class="spacer"></span>
-                <button mat-button (click)="seleccionar(usuario)" class="btn-detalles">Ver detalles</button>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-            </ng-container>
-          </table>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-flat-button color="primary" (click)="descargarExcel()">Descargar Excel</button>
-        </mat-card-actions>
 
-    </mat-card>
-    
-    <br>
 
-      <mat-card appearance="outlined" class="carta-detalle">
+ <div class="container">
+  <h2>USUARIO</h2>
+</div>
+
+<div class="container">
+  <div class="container-detalles">
+
+    <div class="lista-usuarios-con-scroll">
+      <h3>Lista usuarios</h3>
+      <div class="tarjetas-usuarios">
+        <mat-card *ngFor="let usuario of usuarios; let i = index" appearance="outlined" class="tarjeta-usuario clickable-card" (click)="seleccionar(usuario)" >
           <mat-card-header>
-              <mat-card-title> <strong>Detalle usuario</strong> </mat-card-title>              
+            <mat-card-title>{{ usuario.nombre }} {{ usuario.apellido }}</mat-card-title>
+            <mat-card-subtitle>{{ usuario.email }}</mat-card-subtitle>
           </mat-card-header>
-          
+
           <mat-card-content>
-            <app-detalle-usuarios [usuario]="usuarioSeleccionado"></app-detalle-usuarios>
-            <app-lista-atenciones-anteriores [usuario]="usuarioSeleccionado"></app-lista-atenciones-anteriores>
+            <p>Rol: {{ usuario.rol || 'No especificado' }}</p>
           </mat-card-content>
-          
-      </mat-card>
-      
-      <br>
-      
-      
+        </mat-card>
+      </div>
+    </div>
+
+    <mat-card appearance="outlined" class="carta-detalle">
+      <mat-card-header>
+        <mat-card-title> <strong>Detalle usuario</strong> </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <app-detalle-usuarios [usuario]="usuarioSeleccionado"></app-detalle-usuarios>
+        <app-lista-atenciones-anteriores [usuario]="usuarioSeleccionado"></app-lista-atenciones-anteriores>
+      </mat-card-content>
+    </mat-card>
+    <br />
   </div>
-  
 </div>
 
 <div class="container">
   <app-registro></app-registro>
 </div>
-
-

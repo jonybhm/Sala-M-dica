@@ -23,6 +23,23 @@
         <p><strong>Edad:</strong> {{ usuario.edad }}</p>
         <p><strong>DNI:</strong> {{ usuario.dni }}</p>
         <p><strong>Obra Social:</strong> {{ usuario.obraSocial }}</p>
+
+        <br>
+
+        <mat-card-title> <strong>Turnos</strong> </mat-card-title>
+        <ng-container *ngFor="let turno of turnosUsuario; let i = index">
+            <mat-list-item>
+              <p><strong>Fecha: </strong>{{ fechaFormato.formatearFecha(turno.fecha)}} | {{turno.horario.hora}}:{{turno.horario.minutos}} </p>
+              
+              <p><strong>Estado: </strong>{{ turno.estado}} </p>
+
+              <p *ngIf="turno.comentario"><em>Comentario Médico: </em>{{ turno.comentario}} </p>
+              
+              <p *ngIf="turno.calificacionAtencion"><em>Reseña Paciente: </em>{{ turno.calificacionAtencion}} </p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </ng-container>
+          <br>
     </div>
     <div *ngIf="usuario.rol === 'admin'">
         <p>Detalle Admin</p>
