@@ -65,18 +65,6 @@ export class SolicitarTurnosComponent implements OnInit{
     });
   }
 
-  // obtenerDatosEspecialidadesDB() 
-  // {
-  //   const coleccion = collection(this.firestore, 'especialidades');
-  //   const filteredQuery = query(coleccion, orderBy("especialidad", "asc"));
-  //   const observable = collectionData(filteredQuery);
-  
-  //   this.sub = observable.subscribe((respuesta: any) => {
-  //     this.especialidades = respuesta;
-      
-  //     console.log('ESPECIALIDADES: ',respuesta);
-  //   });
-  // }
 
   obtenerDatosEspecialistasDB() 
   {
@@ -87,9 +75,7 @@ export class SolicitarTurnosComponent implements OnInit{
       this.especialistas = respuesta;
     });
 
-    // this.agendaActual = null;
-    // this.mailEspecialistaActual = "";
-    // this.agendaActual = null;
+    
   }
 
   seleccionarEspecialista(especialista: any) 
@@ -133,64 +119,6 @@ export class SolicitarTurnosComponent implements OnInit{
   }
   
 
-  // onEspecialidadSeleccionada() 
-  // {
-  //   const coleccion = collection(this.firestore, `usuarios`);
-  //   const filteredQuery = query(coleccion, where(`especialidad`, "array-contains", `${this.especialidadActual}`));
-  //   const observable = collectionData(filteredQuery);
-  //   this.sub = observable.subscribe((respuesta: any) => {
-  //     this.especialistas = respuesta;
-  //   });
-
-  //   this.agendaActual = null;
-  //   this.mailEspecialistaActual = "";
-  //   this.agendaActual = null;
-  // }
-
-  // onEspecialistaSeleccionado() 
-  // {
-  //   this.mailEspecialistaActual = this.especialistaActual.email;
-  //   console.log('mail especialista: ',this.mailEspecialistaActual);
-
-  //   const coleccion = collection(this.firestore, `agendas`);
-  //   const filteredQuery = query(coleccion, where(`usuarioMail`, "==", `${this.mailEspecialistaActual}`));
-  //   const observable = collectionData(filteredQuery);
-  //   this.sub = observable.subscribe((respuesta: any) => {
-  //     this.agendas = respuesta;
-  //   });
-
-  //   this.agendaActual = null;
-  // }
-
-  // onAgendaSeleccionada()
-  // {
-  //   this.espaciosDisponibles = [];
-  //   for(let hora = this.agendaActual.horarioInicio; hora < this.agendaActual.horarioFinal; hora++  )
-  //   {
-  //     for(let minutos = 0; minutos < 60; minutos += this.agendaActual.duracionAtencionMinutos)
-  //     {
-  //       this.espaciosDisponibles.push({hora,minutos});
-  //     }
-  //   }
-
-  //   if(this.rolUsuarioActual === 'admin')
-  //   {
-  //     this.obtenerListadoPacientes();
-  //   }
-  //   else if(this.rolUsuarioActual === 'paciente')
-  //   {
-  //     this.pacienteActual = this.usuarioActual[0];
-  //     //console.log("PACIENTE ACTUAL: ", this.pacienteActual);
-
-  //     console.log("pacienteMail", this.pacienteActual.email,
-  //     "pacienteNombre", this.pacienteActual.nombre,
-  //     "pacienteApellido", this.pacienteActual.apellido,)
-  //   }
-
-  //   this.obtenerDatosTurnosAsignadosDB();
-  //   this.calcularFechasTurnosDisponibles();
-  // }  
-  
   onPacienteSeleccionado()
   {
     console.log("PACIENTE ACTUAL: ", this.pacienteActual);
@@ -288,7 +216,6 @@ export class SolicitarTurnosComponent implements OnInit{
           icon:'success'
         }
       );
-      // Ahora que tenemos el ID, lo añadimos al documento.
       updateDoc(docRef, { id: docRef.id }).then(() => {
         console.log("ID agregado al documento");
       });
@@ -354,17 +281,6 @@ export class SolicitarTurnosComponent implements OnInit{
 
   }
 
-  // obtenerPacienteActual() 
-  // {
-  //   const coleccion = collection(this.firestore, `usuarios`);
-  //   const filteredQuery = query(coleccion, where(`email`, "==", this.auth.currentUser?.email));
-  //   const observable = collectionData(filteredQuery);
-  //   this.sub = observable.subscribe((respuesta: any) => {
-  //     this.pacienteActual = respuesta;
-  //     console.log("PACIENTE ACTUAL: ", this.pacienteActual);
-  //   });
-
-  // }
 
   calcularHoraCompleta(espacio: any)
   {

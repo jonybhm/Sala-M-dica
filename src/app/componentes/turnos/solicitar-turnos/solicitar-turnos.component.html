@@ -8,7 +8,7 @@
         <div class="container">
             <h3>Selecciona un especialista</h3>
             <div class="especialistas-grid">
-              <button *ngFor="let especialista of especialistas" class="especialista-boton" (click)="seleccionarEspecialista(especialista)" [class.selected]="especialistaActual === especialista">
+              <button *ngFor="let especialista of especialistas" class="especialista-boton" (click)="seleccionarEspecialista(especialista)" [class.selected]="especialistaActual === especialista" appHoverZoom>
                 <img [src]="especialista.imagenPerfil1" alt="Imagen especialista" class="especialista-imagen">
                 <strong>{{ especialista.apellido }} {{ especialista.nombre }}</strong>
               </button>
@@ -18,7 +18,7 @@
           <div *ngIf="especialistaActual" class="container">
             <h3>Selecciona una especialidad</h3>
             <div class="agendas-grid">
-              <button *ngFor="let agenda of agendas" class="agenda-boton" (click)="seleccionarAgenda(agenda)" [class.selected]="agendaActual === agenda">
+              <button *ngFor="let agenda of agendas" class="agenda-boton" (click)="seleccionarAgenda(agenda)" [class.selected]="agendaActual === agenda" appHoverZoom>
                 <img [src]="agenda.imagen" alt="Imagen especialidad" class="agenda-imagen">
                 <div class="agenda-detalle">
                   <p>{{ agenda.tipoAtencion }}</p>
@@ -27,27 +27,7 @@
               </button>
             </div>
           </div>
-        
-        <!-- <mat-form-field appearance="fill" class="form-encuesta">
-            <mat-label>Especialidad</mat-label> 
-            <mat-select class="form-control" [(ngModel)]="especialidadActual" (selectionChange)="onEspecialidadSeleccionada()">
-                <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad.especialidad" >{{ especialidad.especialidad }}</mat-option>                        
-            </mat-select>
-        </mat-form-field>
-        
-        <mat-form-field appearance="fill" class="form-encuesta">
-            <mat-label>Especialista</mat-label> 
-            <mat-select class="form-control" [(ngModel)]="especialistaActual" (selectionChange)="onEspecialistaSeleccionado()">
-                <mat-option *ngFor="let especialista of especialistas" [value]="especialista">{{ especialista.apellido }} {{ especialista.nombre }}</mat-option>                        
-            </mat-select>
-        </mat-form-field>
 
-        <mat-form-field appearance="fill" class="form-encuesta">
-            <mat-label>Agendas Especialista</mat-label> 
-            <mat-select class="form-control" [(ngModel)]="agendaActual" (selectionChange)="onAgendaSeleccionada()">
-                <mat-option *ngFor="let agenda of agendas" [value]="agenda">{{ agenda.tipoAtencion }} / {{ agenda.sector }}</mat-option>                        
-            </mat-select>
-        </mat-form-field> -->
 
         <ng-container *ngIf="rolUsuarioActual === 'admin'">
             <mat-form-field appearance="fill" class="form-encuesta">
@@ -81,7 +61,7 @@
                         <td>{{i+1}}</td>
                         <td *ngFor="let fecha of fechasDisponible"
                             [ngClass]="{ 'disponible': estaDisponible(fecha, espacio, especialistaActual.email), 'seleccionado': estaSeleccionado(fecha, espacio) }"
-                            (click)="onClickEspacio(fecha, espacio)">
+                            (click)="onClickEspacio(fecha, espacio)" appHoverZoom>
                             <span>
                                 {{ fecha | date: 'yyyy/MM/dd' }} {{ calcularHoraCompleta(espacio) | date: 'hh:mm a' }}
                             </span>
@@ -97,30 +77,3 @@
     </div>
     
 
-    <!-- <div class="container">        
-        <ng-container *ngIf="agendaActual">
-        <table>
-            <thead>
-                <tr>
-                    <th>Hora</th>
-                    <th *ngFor="let fecha of fechasDisponible" class="cuadrado-turno"> 
-                        {{fecha | date: 'EEEE yyyy/MM/dd'}}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let espacio of espaciosDisponibles" class="cuadrado-turno">
-                    <td>{{espacio.hora}}:{{espacio.minutos | number: '2.0'}}</td>
-                    <td *ngFor="let fecha of fechasDisponible"
-                        [ngClass]="{ 'disponible': estaDisponible(fecha, espacio,especialistaActual.email), 'seleccionado': estaSeleccionado(fecha, espacio) }"
-                        (click)="onClickEspacio(fecha, espacio)">
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
-        </ng-container>  
-        <button mat-flat-button (click)="confirmarTurno()" class="boton" [disabled]="!turnoSeleccionado">
-            <span class="material-symbols-outlined">send</span>
-            CONFIRMAR
-        </button> 
-    </div> -->

@@ -17,7 +17,7 @@
           </mat-card-header>
 
           <mat-card-content>
-            <p>Rol: {{ usuario.rol || 'No especificado' }}</p>
+            <p appRolColor="{{ usuario.rol }}">Rol: {{ usuario.rol || 'No especificado' }}</p>
           </mat-card-content>
         </mat-card>
       </div>

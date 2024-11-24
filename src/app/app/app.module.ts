@@ -56,13 +56,18 @@ import { PacientesComponent } from '../componentes/historia-clinica/pacientes/pa
 import { HabilitadoPipe } from '../pipes/habilitado.pipe';
 import { TituloMedicoPipe } from '../pipes/titulo-medico.pipe';
 import { FiltroPipe } from '../pipes/filtro.pipe';
+import { HoverZoomDirective } from '../directivas/hover-zoom.directive';
+import { ZoomFotosDirective } from '../directivas/zoom-fotos.directive';
+import { RolColorDirective } from '../directivas/rol-color.directive';
 
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
     PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent,
     TurnosAdminComponent,TurnosComponent, HistoriaClinicaComponent,ListaAtencionesAnterioresComponent,PacientesComponent,
-    FormHistoriaClinicaComponent,RegistroAgendaComponent],
+    FormHistoriaClinicaComponent,RegistroAgendaComponent,
+    HoverZoomDirective,ZoomFotosDirective,RolColorDirective
+  ],
   imports: [
     TurnosModule,HabilitadoPipe,TituloMedicoPipe,FiltroPipe,
     CommonModule, RouterLink,FormsModule,ReactiveFormsModule,MatDatepickerModule,MatMenuModule,NgxCaptchaModule,

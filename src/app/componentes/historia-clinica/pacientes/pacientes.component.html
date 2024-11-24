@@ -9,7 +9,7 @@
     <mat-menu #menuPacientes="matMenu">
       <div *ngFor="let paciente of pacientesFiltrados" class="menu-item-paciente">
         <button mat-menu-item (click)="seleccionar(paciente)">
-          <img mat-icon-button [src]="paciente.imagenPerfil1" alt="{{ paciente.nombre }}" class="paciente-imagen">
+          <img mat-icon-button [src]="paciente.imagenPerfil1" alt="{{ paciente.nombre }}" class="paciente-imagen" appZoomFotos>
           <span>{{ paciente.nombre }} {{ paciente.apellido }}</span>
         </button>
       </div>
