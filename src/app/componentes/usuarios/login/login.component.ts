@@ -1,7 +1,7 @@
 import { Component,signal } from '@angular/core';
 import {Auth, signInWithEmailAndPassword} from '@angular/fire/auth'
 import { Router} from '@angular/router';
-import { addDoc,collection, Firestore } from '@angular/fire/firestore';
+import { addDoc,collection, Firestore,updateDoc } from '@angular/fire/firestore';
 import { LogoutService } from '../../../servicios/logout.service';
 import { ErrorService } from '../../../servicios/error.service';
 
@@ -48,6 +48,21 @@ export class LoginComponent {
         }
       )
       this.router.navigate([path]);
+
+      const turnosCollection = collection(this.firestore, 'ingresosUsuarios');
+      addDoc(turnosCollection, {
+        "fechaIngreso":new Date(),
+        "usuario": this.auth.currentUser?.email,
+      }).then((docRef) => {
+        console.log("Ingreso registrado:", docRef.id);
+        
+        updateDoc(docRef, { id: docRef.id }).then(() => {
+          console.log("ID agregado al documento");
+        });
+      }).catch((error) => {
+        console.error("Error al registrar el ingreso:", error);
+      });
+
 
     }).catch((e) => {
       this.errorLogeo = true;

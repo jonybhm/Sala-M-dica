@@ -59,13 +59,14 @@ import { FiltroPipe } from '../pipes/filtro.pipe';
 import { HoverZoomDirective } from '../directivas/hover-zoom.directive';
 import { ZoomFotosDirective } from '../directivas/zoom-fotos.directive';
 import { RolColorDirective } from '../directivas/rol-color.directive';
+import { EstadisticasComponent } from '../componentes/estadisticas/estadisticas.component';
 
 
 @NgModule({
   declarations: [LoginComponent, RegistroComponent,HomeComponent,RegistroEspecialistaComponent,RegistroPacienteComponent,SolicitarTurnosComponent,
     PruebaComponent,UsuariosComponent,DetalleUsuariosComponent,TablaUsuariosComponent,RegistroAdminComponent, BienvenidaComponent,MiPerfilComponent,
     TurnosAdminComponent,TurnosComponent, HistoriaClinicaComponent,ListaAtencionesAnterioresComponent,PacientesComponent,
-    FormHistoriaClinicaComponent,RegistroAgendaComponent,
+    FormHistoriaClinicaComponent,RegistroAgendaComponent,EstadisticasComponent,
     HoverZoomDirective,ZoomFotosDirective,RolColorDirective
   ],
   imports: [

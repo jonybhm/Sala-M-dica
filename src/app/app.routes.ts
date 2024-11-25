@@ -18,6 +18,7 @@ import { AnimationListComponent } from './componentes/animations/animation-list/
 import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
 import { PacientesComponent } from './componentes/historia-clinica/pacientes/pacientes.component';
 import { authEspecialistaGuard } from './guards/auth-especialista.guard';
+import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'bienvenida', pathMatch: "full"},
@@ -35,5 +36,6 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent, canActivate: [authVerifyMailGuard,authHabilitadoGuard], data: { animation: 'home' }},
     {path: 'prueba', component: PruebaComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authHabilitadoGuard], data: { animation: 'prueba' }},
     {path: 'usuarios', component: UsuariosComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authAdminGuard,authHabilitadoGuard], data: { animation: 'usuarios' }},
+    {path: 'estadisticas', component: EstadisticasComponent, canActivate: [authLoginGuard,authVerifyMailGuard,authAdminGuard,authHabilitadoGuard], data: { animation: 'estadisticas' }},
     
 ];

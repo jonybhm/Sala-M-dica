@@ -1,0 +1,40 @@
+<div class="container">
+    <mat-form-field appearance="fill" class="form-encuesta">
+        <mat-label>Fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="fechaInicio" class="form-control">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-encuesta">
+        <mat-label>Fecha de final</mat-label>
+        <input matInput [matDatepicker]="pickerFinal" [(ngModel)]="fechaFinal" class="form-control">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFinal></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="filtrarPorFecha()">Aplicar Filtro</button>
+
+    <h3>Registro de Ingresos al Sistema</h3>
+    <table>
+        <tr *ngFor="let registro of registroIngreso">
+            <td>{{ registro.fechaIngreso.toDate() | date: 'dd/MM/yyyy hh:mm a' }}</td>
+            <td>{{ registro.usuario }}</td>
+        </tr>
+    </table>
+
+    <h3>Turnos por Especialidad</h3>
+    <canvas id="graficoEspecialidad"></canvas>
+
+    <h3>Turnos por Día</h3>
+    <canvas id="graficoDia"></canvas>
+
+    <h3>Turnos Solicitados</h3>
+    <canvas id="graficoSolicitados"></canvas>
+
+    <h3>Turnos Finalizados</h3>
+    <canvas id="graficoFinalizados"></canvas>
+    
+    <button mat-flat-button color="primary" (click)="descargarEstadisticas()">Descargar Estadisticas</button>
+
+</div>

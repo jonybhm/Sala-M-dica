@@ -163,6 +163,8 @@ body {
 .lista-detalle{
   overflow-y: auto;
   justify-content: center;
+  max-height: 300px;
+  overflow-y: auto;
 }
 card-paises{
   flex: 1;

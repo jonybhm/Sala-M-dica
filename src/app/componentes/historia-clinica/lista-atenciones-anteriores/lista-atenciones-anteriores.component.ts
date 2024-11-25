@@ -105,7 +105,8 @@ export class ListaAtencionesAnterioresComponent implements OnInit{
     });
   }
 
-  descargarHistoriaClinicaPorEspecialista(profesionalEmail: string) {
+  descargarHistoriaClinicaPorEspecialista(profesionalEmail: string) 
+  {
     this.obtenerAtencionesAnterioresEspecialista(profesionalEmail);
   
     const doc = new jsPDF();
