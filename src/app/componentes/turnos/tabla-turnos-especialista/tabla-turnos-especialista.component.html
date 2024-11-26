@@ -10,6 +10,11 @@
         <input matInput (input)="filtrarTurnosEspecialista()" [(ngModel)]="filtroPaciente" >
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>Buscar por datos de la historia clínica</mat-label>
+        <input matInput (input)="filtrarTurnosEspecialista()" [(ngModel)]="filtroHistoriaClinica">
+      </mat-form-field>
+    
     <mat-card-header>
         <mat-card-title> <strong>FECHA | HORA | PACIENTE</strong> </mat-card-title>
         

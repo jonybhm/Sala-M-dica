@@ -96,6 +96,7 @@ export class FormHistoriaClinicaComponent implements OnInit {
         especialistaMail:this.data.usuarioEspecialistaMail,
         especialistaNombre:this.data.usuarioEspecialistaNombre,
         especialistaApellido:this.data.usuarioEspecialistaApellido,
+        turnoId:this.data.turnoId,
         fecha: new Date()
       })
         .then((docRef) => {
@@ -125,16 +126,5 @@ export class FormHistoriaClinicaComponent implements OnInit {
     }
   }
 
-  // obtenerUsuarioPacienteDB() 
-  // {
-  //   const coleccion = collection(this.firestore, 'usuarios');
-  //   const filteredQuery = query(coleccion, where("email", "==", this.data.usuarioPacienteMail));
-  //   const observable = collectionData(filteredQuery);
-  
-  //   this.sub = observable.subscribe((respuesta: any) => {
-  //     this.usuarioPaciente = respuesta;
-  //     console.log(respuesta);
-  //   });
-  // }
   
 }

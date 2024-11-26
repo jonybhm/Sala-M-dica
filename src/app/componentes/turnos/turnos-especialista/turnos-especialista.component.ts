@@ -1,4 +1,4 @@
-import { Component,Input} from '@angular/core';
+import { Component,Input,SimpleChanges} from '@angular/core';
 import {Auth} from '@angular/fire/auth'
 import { LogoutService } from '../../../servicios/logout.service';
 import { ActualizarDatosService } from '../../../servicios/actualizar-datos.service';
@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { collection, where,query,collectionData} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-turnos-especialista',
@@ -27,7 +28,8 @@ export class TurnosEspecialistaComponent {
   @Input() turno: any;
   public comentario: string = '';
   public mostrarComentario: boolean = false;
-  
+  atencionesAnteriores: any[] = [];
+  isLoading = true;
 
   constructor(
     public auth: Auth, 
@@ -39,7 +41,17 @@ export class TurnosEspecialistaComponent {
 
   )
   {}
+  ngOnInit(): void {
+    this.obtenerAtencionesAnteriores();
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['turno'] && changes['turno'].currentValue) 
+    {
+      this.isLoading = true; 
+      this.obtenerAtencionesAnteriores();
+    }
+  }
 
   formatearFecha(timestamp: Timestamp)
   {
@@ -77,6 +89,7 @@ export class TurnosEspecialistaComponent {
         usuarioEspecialistaMail: this.turno.especialistaMail,
         usuarioEspecialistaNombre: this.turno.especialistaNombre,
         usuarioEspecialistaApellido: this.turno.especialistaApellido,
+        turnoId: this.turno.id,
        }, 
     });
   }
@@ -117,5 +130,20 @@ export class TurnosEspecialistaComponent {
       console.error('Error al actualizar el turno:', error);
     });
   }
+  obtenerAtencionesAnteriores() 
+  {
+    if (!this.turno || !this.turno.pacienteMail)
+    {
+      this.isLoading = false;
+      return;
+    }
+    const coleccion = collection(this.firestore, 'historiasClinicas');
+    const consulta = query(coleccion, where('turnoId', '==', this.turno.id));
+  
+    collectionData(consulta).subscribe((historias) => {
+      this.atencionesAnteriores = historias;
+      this.isLoading = false;
 
+    });
+  }
 }

@@ -26,9 +26,11 @@ export class TablaTurnosPacienteComponent implements OnInit{
   @Output() turnoSeleccionado = new EventEmitter<any>();
   
   turnosFiltrados:any[]=[];
+  historias:any[]=[];
   sub!: Subscription;
   filtroEspecialidad: string = '';
   filtroEspecialista: string = '';
+  filtroHistoriaClinica: string = '';
 
   constructor(
     public auth: Auth, 
@@ -40,28 +42,69 @@ export class TablaTurnosPacienteComponent implements OnInit{
   ngOnInit() 
   {
     this.turnosFiltrados = [...this.turnos];
+    this.obtenerHistoriasDB();
   }
 
-  filtrarTurnosPaciente() 
-  {
-    if (!this.filtroEspecialidad && !this.filtroEspecialista) 
-    {
+  filtrarTurnosPaciente() {
+    if (!this.filtroEspecialidad && !this.filtroEspecialista && !this.filtroHistoriaClinica) {
       this.turnosFiltrados = [...this.turnos];
-      console.log("TURNOS:", this.turnosFiltrados)
-    } 
-    else 
-    {
+    } else {
       this.turnosFiltrados = this.turnos.filter(turno => {
-        const coincideEspecialidad = turno.sectorAtencion.toLowerCase().includes(this.filtroEspecialidad.toLowerCase());
-        const coincideEspecialista = `${turno.especialistaNombre} ${turno.especialistaApellido}`.toLowerCase().includes(this.filtroEspecialista.toLowerCase());
-        return coincideEspecialidad && coincideEspecialista;
+        // Filtrar por especialidad y especialista
+        const coincideEspecialidad = this.filtroEspecialidad
+          ? turno.sectorAtencion.toLowerCase().includes(this.filtroEspecialidad.toLowerCase())
+          : true;
+        const coincideEspecialista = this.filtroEspecialista
+          ? `${turno.especialistaNombre} ${turno.especialistaApellido}`.toLowerCase().includes(this.filtroEspecialista.toLowerCase())
+          : true;
+  
+        // Relacionar turno con historia clínica
+        const historiaAsociada = this.historias.find(historia => historia.turnoId === turno.id);
+        const coincideHistoriaClinica = this.filtroHistoriaClinica
+          ? historiaAsociada && (
+              Object.values(historiaAsociada).some(value =>
+                typeof value === 'string' && value.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+              ) ||
+              historiaAsociada.datosDinamicos.some(dato =>
+                dato.valor.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+              )
+            )
+          : true;
+  
+        return coincideEspecialidad && coincideEspecialista && coincideHistoriaClinica;
       });
     }
   }
+  
+  
+
+  filtrarHistorias() 
+  {
+    const correosPacientes = this.turnosFiltrados.map((t) => t.pacienteMail);
+    this.historias = this.historias.filter((historia) =>
+      correosPacientes.includes(historia.turno.pacienteMail)
+    );
+  }
+
+  obtenerHistoriasDB() {
+    const coleccion = collection(this.firestore, "historiasClinicas");
+    const observable = collectionData(coleccion);
+  
+    this.sub = observable.subscribe((respuesta: any[]) => {
+      this.historias = respuesta.map(historia => ({
+        ...historia,
+        datosDinamicos: historia.datosDinamicos || []
+      }));
+      console.log("HISTORIAS CARGADAS:", this.historias);
+    });
+  }
+  
+  
+  
+  
   seleccionar(turno: any) 
   {
     this.turnoSeleccionado.emit(turno);
   }
-
   
 }

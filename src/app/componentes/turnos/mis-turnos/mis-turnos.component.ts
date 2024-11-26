@@ -12,6 +12,7 @@ import { TurnosEspecialistaComponent } from '../turnos-especialista/turnos-espec
 import { TurnosPacienteComponent } from '../turnos-paciente/turnos-paciente.component';
 import { TablaTurnosEspecialistaComponent } from '../tabla-turnos-especialista/tabla-turnos-especialista.component';
 import { TablaTurnosPacienteComponent } from '../tabla-turnos-paciente/tabla-turnos-paciente.component';
+import { ListaAtencionesAnterioresComponent } from '../../historia-clinica/lista-atenciones-anteriores/lista-atenciones-anteriores.component';
 
 @Component({
   selector: 'app-mis-turnos',

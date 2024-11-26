@@ -1,32 +1,36 @@
 <mat-card appearance="outlined" class="carta-detalle">
 
-    <mat-form-field>
-        <mat-label>Buscar por especialidad</mat-label>
-        <input matInput (input)="filtrarTurnosPaciente()" [(ngModel)]="filtroEspecialidad" >
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Buscar por especialista</mat-label>
-        <input matInput (input)="filtrarTurnosPaciente()" [(ngModel)]="filtroEspecialista" >
-      </mat-form-field>
+  <mat-form-field>
+    <mat-label>Buscar por especialidad</mat-label>
+    <input matInput (input)="filtrarTurnosPaciente()" [(ngModel)]="filtroEspecialidad">
+  </mat-form-field>
 
-    <mat-card-header>
-        <mat-card-title> <strong>FECHA | HORA | ESPECIALISTA | SECTOR</strong> </mat-card-title>
-        
-    </mat-card-header>
-    
+  <mat-form-field>
+    <mat-label>Buscar por especialista</mat-label>
+    <input matInput (input)="filtrarTurnosPaciente()" [(ngModel)]="filtroEspecialista">
+  </mat-form-field>
 
-    <mat-card-content>
-        <table mat-list class="lista-detalle">
-          <ng-container *ngFor="let turno of turnosFiltrados; let i = index">
-            <mat-list-item>
-              <span matListItemLine>{{ fechaFormato.formatearFecha(turno.fecha)}} | {{turno.horario.hora}}:{{turno.horario.minutos}} | {{ turno.especialistaApellido }} {{ turno.especialistaNombre }} | {{ turno.sectorAtencion }}</span>
-              <span class="spacer"></span>
-              <button mat-button (click)="seleccionar(turno)" class="btn-detalles">Abrir</button>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-          </ng-container>
-        </table>
-      </mat-card-content>
-    
-  </mat-card>
+  <mat-form-field>
+    <mat-label>Buscar por datos de la historia clínica</mat-label>
+    <input matInput (input)="filtrarTurnosPaciente()" [(ngModel)]="filtroHistoriaClinica">
+  </mat-form-field>
+
+  <mat-card-header>
+    <mat-card-title><strong>FECHA | HORA | ESPECIALISTA | SECTOR</strong></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <table mat-list class="lista-detalle">
+      <ng-container *ngFor="let turno of turnosFiltrados; let i = index">
+        <mat-list-item>
+          <span matListItemLine>{{ fechaFormato.formatearFecha(turno.fecha)}} | {{ turno.horario.hora }}:{{ turno.horario.minutos }} | {{ turno.especialistaApellido }} {{ turno.especialistaNombre }} | {{ turno.sectorAtencion }}</span>
+          <span class="spacer"></span>
+          <button mat-button (click)="seleccionar(turno)" class="btn-detalles">Abrir</button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </table>
+  </mat-card-content>
+
+</mat-card>
+

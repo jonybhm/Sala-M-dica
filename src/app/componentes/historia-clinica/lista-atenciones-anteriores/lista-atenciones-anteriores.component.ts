@@ -14,6 +14,7 @@ import { FormatearFechaService } from '../../../servicios/formatear-fecha.servic
 export class ListaAtencionesAnterioresComponent implements OnInit{
   @Input() usuario: any;
   @Input() paciente: any;
+  @Input() turno: any;
   @Output() historiasPrevias = new EventEmitter<any>();
 
   isLoading = true;
