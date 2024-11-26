@@ -6,6 +6,8 @@ import { FormatearFechaService } from '../../servicios/formatear-fecha.service';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { Timestamp } from '@angular/fire/firestore';
+import { LoadingService } from '../../servicios/loading.service';
+
 @Component({
   selector: 'app-estadisticas',
   templateUrl: './estadisticas.component.html',
@@ -25,6 +27,7 @@ export class EstadisticasComponent implements OnInit {
   constructor(
     private firestore: Firestore,
     public fechaFormato: FormatearFechaService,
+    private loadingService: LoadingService
   ) {
     Chart.register(...registerables);
   }
@@ -230,5 +233,8 @@ export class EstadisticasComponent implements OnInit {
       alert('No se pudo cargar la imagen. Verifica que el archivo exista en la carpeta public.');
     };
   }
+
+  
+  
 }
 

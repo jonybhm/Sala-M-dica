@@ -1,3 +1,4 @@
+
 <div class="container">
     <mat-form-field appearance="fill" class="form-encuesta">
         <mat-label>Fecha de inicio</mat-label>
@@ -15,13 +16,17 @@
 
     <button mat-raised-button color="primary" (click)="filtrarPorFecha()">Aplicar Filtro</button>
 
-    <h3>Registro de Ingresos al Sistema</h3>
-    <table>
-        <tr *ngFor="let registro of registroIngreso">
-            <td>{{ registro.fechaIngreso.toDate() | date: 'dd/MM/yyyy hh:mm a' }}</td>
-            <td>{{ registro.usuario }}</td>
-        </tr>
-    </table>
+
+    <!-- Agregar scroll -->
+    <div  class="lista-detalle">
+        <h3>Registro de Ingresos al Sistema</h3>
+        <table >
+            <tr *ngFor="let registro of registroIngreso">
+                <td>{{ registro.fechaIngreso.toDate() | date: 'dd/MM/yyyy hh:mm a' }}</td>
+                <td>{{ registro.usuario }}</td>
+            </tr>
+        </table>
+    </div>
 
     <h3>Turnos por Especialidad</h3>
     <canvas id="graficoEspecialidad"></canvas>

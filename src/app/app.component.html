@@ -1,6 +1,7 @@
-@if(isLoading){
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
+<div *ngIf="loading" class="spinner-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
+  <router-outlet></router-outlet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <ng-container *ngIf="auth.currentUser">        

@@ -45,12 +45,12 @@ export class TablaTurnosPacienteComponent implements OnInit{
     this.obtenerHistoriasDB();
   }
 
-  filtrarTurnosPaciente() {
+  filtrarTurnosPaciente() 
+  {
     if (!this.filtroEspecialidad && !this.filtroEspecialista && !this.filtroHistoriaClinica) {
       this.turnosFiltrados = [...this.turnos];
     } else {
       this.turnosFiltrados = this.turnos.filter(turno => {
-        // Filtrar por especialidad y especialista
         const coincideEspecialidad = this.filtroEspecialidad
           ? turno.sectorAtencion.toLowerCase().includes(this.filtroEspecialidad.toLowerCase())
           : true;
@@ -58,15 +58,20 @@ export class TablaTurnosPacienteComponent implements OnInit{
           ? `${turno.especialistaNombre} ${turno.especialistaApellido}`.toLowerCase().includes(this.filtroEspecialista.toLowerCase())
           : true;
   
-        // Relacionar turno con historia clínica
+
         const historiaAsociada = this.historias.find(historia => historia.turnoId === turno.id);
+  
         const coincideHistoriaClinica = this.filtroHistoriaClinica
           ? historiaAsociada && (
-              Object.values(historiaAsociada).some(value =>
-                typeof value === 'string' && value.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+              // Búsqueda en los datos estáticos de la historia clínica
+              Object.entries(historiaAsociada).some(([key, value]) =>
+                ['temperatura', 'presion', 'altura', 'peso'].includes(key) && value != null
+                  ? value.toString().toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+                  : typeof value === 'string' && value.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
               ) ||
+              // Búsqueda en los datos dinámicos de la historia clínica
               historiaAsociada.datosDinamicos.some(dato =>
-                dato.valor.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+                dato.valor != null && dato.valor.toString().toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
               )
             )
           : true;
@@ -75,6 +80,8 @@ export class TablaTurnosPacienteComponent implements OnInit{
       });
     }
   }
+  
+  
   
   
 

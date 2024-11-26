@@ -46,10 +46,10 @@ export class UsuariosComponent implements OnInit{
   seleccionar(usuario: any)
   {
     this.usuarioSeleccionado = usuario;
-    this.obtenerTurnosDB();
+    this.obtenerTurnosPacienteAdminDB();
   }
 
-  obtenerTurnosDB() 
+  obtenerTurnosPacienteAdminDB() 
   {
     const coleccion = collection(this.firestore, 'turnosAsignados');
     const filteredQuery = query(coleccion, where("pacienteMail","==",this.usuarioSeleccionado.email ));

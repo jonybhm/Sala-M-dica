@@ -11,11 +11,14 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { ChildrenOutletContexts } from '@angular/router';
 import { slideInAnimation } from './animations/animations';
+import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,CommonModule,RouterLink,
-    MatToolbarModule,MatButtonModule,MatCardModule, MatProgressBar, MatSidenavModule,MatMenuModule
+    MatToolbarModule,MatButtonModule,MatCardModule,  MatSidenavModule,MatMenuModule,MatProgressSpinnerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -23,16 +26,26 @@ import { slideInAnimation } from './animations/animations';
 })
 export class AppComponent {
   title = 'Sala Médica';
-  isLoading = true;
+  loading = false;
   constructor(
     public auth: Auth, 
     public logout:LogoutService,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private router: Router
   )
   {
-    setTimeout(()=>{
-      this.isLoading = false;
-    }, 3000)
+   
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.loading = true; 
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.loading = false;
+      }
+    });
   }
 
   getRouteAnimationData() {

@@ -15,21 +15,25 @@
     <input matInput (input)="filtrarTurnosPaciente()" [(ngModel)]="filtroHistoriaClinica">
   </mat-form-field>
 
+
   <mat-card-header>
     <mat-card-title><strong>FECHA | HORA | ESPECIALISTA | SECTOR</strong></mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <table mat-list class="lista-detalle">
-      <ng-container *ngFor="let turno of turnosFiltrados; let i = index">
-        <mat-list-item>
-          <span matListItemLine>{{ fechaFormato.formatearFecha(turno.fecha)}} | {{ turno.horario.hora }}:{{ turno.horario.minutos }} | {{ turno.especialistaApellido }} {{ turno.especialistaNombre }} | {{ turno.sectorAtencion }}</span>
-          <span class="spacer"></span>
-          <button mat-button (click)="seleccionar(turno)" class="btn-detalles">Abrir</button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </ng-container>
-    </table>
+    <div class="lista-detalle">
+
+      <table mat-list>
+        <ng-container *ngFor="let turno of turnosFiltrados; let i = index">
+          <mat-list-item>
+            <span matListItemLine>{{ fechaFormato.formatearFecha(turno.fecha)}} | {{ turno.horario.hora }}:{{ turno.horario.minutos }} | {{ turno.especialistaApellido }} {{ turno.especialistaNombre }} | {{ turno.sectorAtencion }}</span>
+            <span class="spacer"></span>
+            <button mat-button (click)="seleccionar(turno)" class="btn-detalles">Abrir</button>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </table>
+    </div>
   </mat-card-content>
 
 </mat-card>

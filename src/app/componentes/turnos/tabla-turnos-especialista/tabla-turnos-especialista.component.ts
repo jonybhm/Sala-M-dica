@@ -66,16 +66,22 @@ export class TablaTurnosEspecialistaComponent implements OnInit{
   
         // Relacionar turno con historia clínica
         const historiaAsociada = this.historias.find(historia => historia.turnoId === turno.id);
+  
         const coincideHistoriaClinica = this.filtroHistoriaClinica
           ? historiaAsociada && (
-              Object.values(historiaAsociada).some(value =>
-                typeof value === 'string' && value.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+              // Búsqueda en los datos estáticos de la historia clínica
+              Object.entries(historiaAsociada).some(([key, value]) =>
+                ['temperatura', 'presion', 'altura', 'peso'].includes(key) && value != null
+                  ? value.toString().toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+                  : typeof value === 'string' && value.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
               ) ||
+              // Búsqueda en los datos dinámicos de la historia clínica
               historiaAsociada.datosDinamicos.some(dato =>
-                dato.valor.toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
+                dato.valor != null && dato.valor.toString().toLowerCase().includes(this.filtroHistoriaClinica.toLowerCase())
               )
             )
           : true;
+  
   
         return coincideEspecialidad && coincidePaciente && coincideHistoriaClinica;
       });
@@ -109,6 +115,8 @@ export class TablaTurnosEspecialistaComponent implements OnInit{
   {
     this.turnoSeleccionado.emit(turno);
   }
+
+  //AGREGAR BUSQUEDA POR OTROS VALORES
 
 
 }

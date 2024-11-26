@@ -161,10 +161,13 @@ body {
   width: 100%;
 }
 .lista-detalle{
-  overflow-y: auto;
-  justify-content: center;
-  max-height: 300px;
-  overflow-y: auto;
+  max-height: 400px; 
+    overflow-y: auto;
+    padding: 16px;
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    background-color: #f9f9f9; 
+
 }
 card-paises{
   flex: 1;
@@ -191,6 +194,18 @@ card-paises{
     width: 100%;
   }
   
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7); 
+    z-index: 1000; 
+  }
   .main-content {
     display: flex;
     flex-direction: column;
@@ -304,9 +319,7 @@ card-paises{
     padding: 20px;
   }
   
-  .carta-detalle {
-    margin-top: 20px;
-  }
+
   
   .mat-menu-panel {
     max-height: 300px;
@@ -369,8 +382,12 @@ html {
 }
 
 .scroll {
-  max-height: 300px;
-  overflow-y: auto; 
+  max-height: 400px; 
+    overflow-y: auto;
+    padding: 16px;
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    background-color: #f9f9f9; 
 }
 
 .disponible {

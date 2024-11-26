@@ -21,8 +21,9 @@
     </mat-card-header>
     
 
-    <mat-card-content>
-        <table mat-list class="lista-detalle" >
+    <mat-card-content >
+      <div class="lista-detalle">
+        <table mat-list  >
           <ng-container *ngFor="let turno of turnosFiltrados; let i = index" >
             <mat-list-item >
               <span matListItemLine>{{ fechaFormato.formatearFecha(turno.fecha)}} | {{turno.horario.hora}}:{{turno.horario.minutos}} | {{ turno.pacienteApellido }} {{ turno.pacienteNombre }} </span>
@@ -32,6 +33,7 @@
             <mat-divider></mat-divider>
           </ng-container>
         </table>
+      </div>
       </mat-card-content>
     
   </mat-card>
