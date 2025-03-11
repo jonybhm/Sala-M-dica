@@ -23,21 +23,32 @@
 <summary>Tabla de Contenidos</summary>
 
   - [Sobre / About](#sobre--about)
-  - [Capturas de Pantalla](#capturas-de-pantalla--screenshots)
-  - [Hecho con / Built With](#hecho-con--built-with)
+  - [Características / Features](#características--features)
+- [Capturas de Pantalla / Screenshots](#capturas-de-pantalla--screenshots)
+- [Hecho con / Built With](#hecho-con--built-with)
+- [Empezando / Getting Started](#empezando--getting-started)
+  - [Requisitos previos / Prerequisites](#requisitos-previos--prerequisites)
+  - [Instalación / Installation](#instalación--installation)
+  - [Deploy](#deploy)
+- [Contribuciones / Contributing](#contribuciones--contributing)
+- [Autores y contribuyentes / Authors & contributors](#autores-y-contribuyentes--authors--contributors)
+- [Licencia / License](#licencia--license)
+- [Reconocimientos / Acknowledgments](#reconocimientos--acknowledgments)
+  
+
 
 </details>
 
 ---
 
-## Sobre / About(#sobre--about)
+## Sobre / About
 > Este proyecto es un sistema de gestión para una clínica desarrollado en Angular. Permite el registro, administración de usuarios, gestión de turnos y almacenamiento de historias clínicas, entre otras funcionalidades. La aplicación está optimizada para una experiencia fluida y cuenta con validaciones, animaciones y generación de informes.
 
 
 
 ---
 
-## [Funcionalidades Principales](#funcionalidades-principales)
+## Características / Features
 
 ### [Página de Bienvenida](#página-de-bienvenida)
 - Acceso al [Login](#login) y [Registro](#registro-de-usuarios).
@@ -109,9 +120,7 @@
 - Búsqueda en turnos por cualquier campo, incluyendo historia clínica.
 
 ---
-
----
-## Capturas de Pantalla
+## Capturas de Pantalla / Screenshots
 <br>
 
 
@@ -139,16 +148,18 @@
 
 </details>
 ---
+## Empezando / Getting Started
 
-## [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- **Angular 17**
+
+### Hecho con / Built With
+- **Angular 18**
 - **Firebase Authentication y Firestore** para autenticación y almacenamiento de datos.
-- **Angular Material y Tailwind CSS** para la interfaz de usuario.
+- **Angular Material para la interfaz de usuario.
 - **ExcelJS y jsPDF** para generación de reportes.
 
 ---
 
-## [Instalación y Ejecución](#instalación-y-ejecución)
+### Instalación / Installation
 1. Clonar el repositorio:
    ```sh
    git clone <URL_DEL_REPO>
@@ -165,10 +176,36 @@
 
 ---
 
-## [Deploy](#deploy)
+## Deploy
 La aplicación está desplegada en línea y accesible en: `<https://sala-medica.web.app>`.
 
+---
+
+## Contribuciones / Contributing
+
+Si deseas contribuir, por favor revisa las [pautas de contribución](docs/CONTRIBUTING.md). Cualquier tipo de aporte es **bienvenido**.
+
+---
+
+## Autores y contribuyentes / Authors & contributors
+
+El desarrollo de esta API fue realizado por [Tu Nombre](https://github.com/TU_GITHUB).
+
+Lista de [contribuyentes](https://github.com/GITHUB_USERNAME/REPO_SLUG/contributors).
+
+---
+
+## Licencia / License
+
+Este proyecto está autorizado bajo la **Licencia MIT**.
+
+Consulta [LICENCIA](LICENSE) para obtener más información.
+
+---
+
+## Reconocimientos / Acknowledgments
+
+Agradecimientos a todas las herramientas y tecnologías utilizadas en el desarrollo de esta API.
 
 
-> Hecho en en Angular 18, hosteado en Firebase. 
 
