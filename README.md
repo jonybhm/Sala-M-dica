@@ -162,7 +162,7 @@
 ### Instalación / Installation
 1. Clonar el repositorio:
    ```sh
-   git clone <URL_DEL_REPO>
+   git clone https://github.com/jonybhm/Sala-M-dica.git
    ```
 2. Instalar dependencias:
    ```sh
@@ -176,7 +176,7 @@
 
 ---
 
-## Deploy
+### Deploy
 La aplicación está desplegada en línea y accesible en: `<https://sala-medica.web.app>`.
 
 ---
@@ -189,9 +189,9 @@ Si deseas contribuir, por favor revisa las [pautas de contribución](docs/CONTRI
 
 ## Autores y contribuyentes / Authors & contributors
 
-El desarrollo de esta API fue realizado por [Tu Nombre](https://github.com/TU_GITHUB).
+El desarrollo de esta API fue realizado por [Jonathan De Castro](https://github.com/jonybhm).
 
-Lista de [contribuyentes](https://github.com/GITHUB_USERNAME/REPO_SLUG/contributors).
+Lista de [contribuyentes](https://github.com/jonybhm/REPO_SLUG/contributors).
 
 ---
 
@@ -205,7 +205,6 @@ Consulta [LICENCIA](LICENSE) para obtener más información.
 
 ## Reconocimientos / Acknowledgments
 
-Agradecimientos a todas las herramientas y tecnologías utilizadas en el desarrollo de esta API.
-
+Agradecimientos a los docentes de la Universidad Teconológica Nacional FRA.
 
 
