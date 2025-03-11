@@ -177,7 +177,7 @@
 ---
 
 ### Deploy
-La aplicación está desplegada en línea y accesible en: `<https://sala-medica.web.app>`.
+La aplicación está desplegada en línea y accesible en: https://sala-medica.web.app.
 
 ---
 
