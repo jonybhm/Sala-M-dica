@@ -6,7 +6,6 @@
 
 <div align="center">
   SALA MEDICA
-https://sala-medica.web.app
   
   <br />
  
@@ -23,19 +22,93 @@ https://sala-medica.web.app
 <details open="open">
 <summary>Tabla de Contenidos</summary>
 
-- [Sobre](#sobre--about)
+  - [Sobre / About](#sobre--about)
   - [Capturas de Pantalla](#capturas-de-pantalla--screenshots)
-  - [Hecho con](#hecho-con--built-with)
+  - [Hecho con / Built With](#hecho-con--built-with)
 
 </details>
 
 ---
 
-## Sobre 
+## Sobre / About(#sobre--about)
+> Este proyecto es un sistema de gestión para una clínica desarrollado en Angular. Permite el registro, administración de usuarios, gestión de turnos y almacenamiento de historias clínicas, entre otras funcionalidades. La aplicación está optimizada para una experiencia fluida y cuenta con validaciones, animaciones y generación de informes.
 
-> Este proyecto es una herramiento web para la gestion y administración de atención médica en hospitales y Salas. En la misma se pueden registrar usuarios Especialistas y Pacientes, asi como registrar agendas de turnos para los especialistas y solicitar turnos como pacientes.
 
-> 
+
+---
+
+## [Funcionalidades Principales](#funcionalidades-principales)
+
+### [Página de Bienvenida](#página-de-bienvenida)
+- Acceso al [Login](#login) y [Registro](#registro-de-usuarios).
+
+### [Registro de Usuarios](#registro-de-usuarios)
+- **Pacientes:**
+  - Nombre, Apellido, Edad, DNI, Obra Social, Mail, Contraseña.
+  - Subida de 2 imágenes para el perfil.
+- **Especialistas:**
+  - Nombre, Apellido, Edad, DNI, Especialidad (selección o creación), Mail, Contraseña.
+  - Imagen de perfil.
+- **Administradores:**
+  - Nombre, Apellido, Edad, DNI, Mail, Contraseña, Imagen de perfil.
+- Validaciones en los formularios.
+- Registro de usuarios con Firebase Authentication.
+
+### [Login](#login)
+- Acceso al sistema con verificación de email.
+- Botones de acceso rápido.
+- Solo los especialistas aprobados por un administrador pueden ingresar.
+
+### [Administración de Usuarios](#administración-de-usuarios)
+- Acceso exclusivo para administradores.
+- Habilitación/Inhabilitación de especialistas.
+- Creación de nuevos usuarios.
+- Administración de datos en Firestore.
+
+### [Gestión de Turnos](#gestión-de-turnos)
+- **Pacientes:**
+  - Visualización de turnos solicitados con filtros por especialidad y especialista.
+  - Cancelación de turnos con comentario.
+  - Visualización de reseñas y encuestas.
+  - Calificación de la atención recibida.
+- **Especialistas:**
+  - Visualización de turnos asignados con filtros.
+  - Aceptación, rechazo o cancelación de turnos.
+  - Finalización de turnos con diagnóstico y reseña.
+- **Administrador:**
+  - Visualización de todos los turnos con filtros.
+  - Cancelación de turnos con comentario.
+- **Solicitud de Turno:**
+  - Pacientes y Administradores pueden solicitar turnos.
+  - Selección de especialidad, especialista, día y horario.
+  - Disponibilidad basada en la agenda del especialista.
+
+### [Mi Perfil](#mi-perfil)
+- Visualización y edición de datos personales.
+- **Especialistas:** Gestión de disponibilidad horaria.
+
+### [Historia Clínica](#historia-clínica)
+- **Disponible para:**
+  - Pacientes en su perfil.
+  - Administradores en la sección de usuarios.
+  - Especialistas que han atendido al paciente al menos una vez.
+- **Datos registrados:**
+  - Fijos: Altura, Peso, Temperatura, Presión.
+  - Dinámicos: Clave-Valor (hasta 3 datos adicionales).
+  - Datos adicionales con controles específicos:
+    - Rango (0-100), cuadro numérico y switch (Sí/No).
+
+### [Reportes y Estadísticas](#reportes-y-estadísticas)
+- **Para Administradores:**
+  - Log de ingresos al sistema.
+  - Cantidad de turnos por especialidad y día.
+  - Turnos solicitados y finalizados por médico en un período.
+  - Exportación de informes en Excel o PDF.
+
+### [Filtros Avanzados](#filtros-avanzados)
+- Búsqueda en turnos por cualquier campo, incluyendo historia clínica.
+
+---
 
 ---
 ## Capturas de Pantalla
@@ -65,8 +138,36 @@ https://sala-medica.web.app
 
 
 </details>
+---
 
-### Hecho con 
+## [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- **Angular 17**
+- **Firebase Authentication y Firestore** para autenticación y almacenamiento de datos.
+- **Angular Material y Tailwind CSS** para la interfaz de usuario.
+- **ExcelJS y jsPDF** para generación de reportes.
+
+---
+
+## [Instalación y Ejecución](#instalación-y-ejecución)
+1. Clonar el repositorio:
+   ```sh
+   git clone <URL_DEL_REPO>
+   ```
+2. Instalar dependencias:
+   ```sh
+   npm install
+   ```
+3. Ejecutar el servidor de desarrollo:
+   ```sh
+   ng serve
+   ```
+4. Acceder a la aplicación en: `http://localhost:4200/`
+
+---
+
+## [Deploy](#deploy)
+La aplicación está desplegada en línea y accesible en: `<https://sala-medica.web.app>`.
+
 
 
 > Hecho en en Angular 18, hosteado en Firebase. 
