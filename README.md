@@ -25,9 +25,8 @@
   - [Sobre / About](#sobre--about)
   - [Características / Features](#características--features)
 - [Capturas de Pantalla / Screenshots](#capturas-de-pantalla--screenshots)
-- [Hecho con / Built With](#hecho-con--built-with)
 - [Empezando / Getting Started](#empezando--getting-started)
-  - [Requisitos previos / Prerequisites](#requisitos-previos--prerequisites)
+  - [Hecho con / Built With](#hecho-con--built-with)
   - [Instalación / Installation](#instalación--installation)
   - [Deploy](#deploy)
 - [Contribuciones / Contributing](#contribuciones--contributing)
@@ -148,6 +147,7 @@
 
 </details>
 ---
+
 ## Empezando / Getting Started
 
 
